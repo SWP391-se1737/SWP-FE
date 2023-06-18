@@ -1,0 +1,59 @@
+.login{
+    width: 430px;
+    height: 380px;
+    border: 1px solid grey;
+    border-radius: 30px;
+    text-align: center;
+    background-color: white
+    
+    
+}
+.container{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+body{
+    background-color: rgb(255, 182, 79);
+}
+h2{
+    font-family: 'Script';
+    font-size: 20px;
+}
+input{
+    width: 300px;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    padding-left: 20px;
+    font-size: 15px;
+}
+button{
+    width: 320px;
+    height: 40px;
+    margin-bottom: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: orange;
+    font-size: 15px;
+}
+button:hover{
+    font-size: 20px;
+}
+.container-fluid a{
+    color: aliceblue;
+    margin-left: 30px;
+}
+
+.header a{
+    text-decoration: none;
+    color: white;
+    font-size: 30px;
+    font-weight:600;
+    padding-left: 100px;
+    
+}
+
+

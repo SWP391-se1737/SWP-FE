@@ -40,7 +40,7 @@
 // }
 
 async function getProduct() {
-    const response = await axios.get('http://localhost:8080/Campus/listCampus');
+    const response = await axios.get('http://localhost:8080/product/getListProduct');
     const data = response.data;
     const div = document.createElement("div");
     const [person] = data;
