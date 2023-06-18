@@ -266,6 +266,12 @@
      color: #212529;
      text-decoration: none;
  }
+ .imgProduct{
+    width: 200px;
+ }
+ .listProduct{
+    width: 100%;
+ }
  /*  END PRODUCT DETAILS */
  
  /* search  */
