@@ -266,11 +266,30 @@
      color: #212529;
      text-decoration: none;
  }
- .imgProduct{
-    width: 200px;
+
+ .detail img{
+    width: 300px;
+    height: 260px;
+    display: inline-block;
+  transition: transform 0.3s ease;
  }
- .listProduct{
-    width: 100%;
+ .detail img:hover{
+    transform: scale(1.2) rotate(10deg);
+ }
+ 
+.listProduct{
+    display: flex; /* Sử dụng flexbox để xếp các phần tử con theo hàng ngang */
+  flex-wrap: wrap; /* Cho phép các phần tử con xuống dòng khi không đủ không gian */
+  justify-content: center; /* Căn giữa các phần tử con theo chiều ngang */
+}
+ .detail{
+    width: 400px;
+    height: 380px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    background-color: white;
+    margin: 10px; /* Tạo khoảng cách giữa các phần tử con */
  }
  /*  END PRODUCT DETAILS */
  
