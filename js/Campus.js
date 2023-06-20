@@ -1,23 +1,3 @@
-// var list = document.getElementsByClassName('list');
-
-// getProductByAPI();
-
-// async function getProductByAPI(){
-//     const responseAPI = await fetch('http://localhost:8080/Campus/listCampus');
-//     const { results } = await responseAPI.json();
-//     list.innerHTML = '';
-//     results.array.forEach(result => {
-//         const divProduct = document.createElement('div');
-//         divProduct.innerHTML = `
-//         <div class="detail">
-//         <h2>${result.name}</h2>
-//         </div>
-//         `;
-//         list.appendChild(divProduct);
-//     });
-// }
-
-
 async function getCampus() {
     const response = await axios.get('http://localhost:8080/Campus/listCampus');
     const data = response.data;
