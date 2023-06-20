@@ -75,41 +75,59 @@
 // getProduct();
 
 
-async function getProduct() {
+// async function getProduct() {
   
-    const list = document.getElementById('listProduct');
-    const response = await axios.get('http://localhost:8080/product/getListProduct');
-    const data = response.data;
+//     const list = document.getElementById('listProduct');
+//     const response = await axios.get('http://localhost:8080/product/getListProduct');
+//     const data = response.data;
   
-    data.forEach(result => {
-      const divItem = document.createElement('div');
-      divItem.classList.add('detail'); // Thêm class "detail" vào div
+//     data.forEach(result => {
+//       const divItem = document.createElement('div');
+//       divItem.classList.add('detail'); // Thêm class "detail" vào div
 
-      const img = document.createElement('img');
-      img.src = result.image;
+//       const img = document.createElement('img');
+//       img.src = result.image;
   
-      const h2 = document.createElement('h2');
-      h2.innerText = result.name; // Gán giá trị "name" vào phần tử h2
+//       const h2 = document.createElement('h2');
+//       h2.innerText = result.name; // Gán giá trị "name" vào phần tử h2
 
-      const h3 = document.createElement('p');
-      h3.innerText = result.price;
+//       const h3 = document.createElement('p');
+//       h3.innerText = result.price;
   
-      const p = document.createElement('p');
-      p.innerText = result.status; // Gán giá trị "price" vào phần tử p
+//       const p = document.createElement('p');
+//       p.innerText = result.status; // Gán giá trị "price" vào phần tử p
       
       
-      divItem.appendChild(img)
-      divItem.appendChild(h2);
-      divItem.appendChild(h3);
-      divItem.appendChild(p);
+//       divItem.appendChild(img)
+//       divItem.appendChild(h2);
+//       divItem.appendChild(h3);
+//       divItem.appendChild(p);
       
      
         
-      list.appendChild(divItem);
-    });
-  }
-  getProduct();
+//       list.appendChild(divItem);
+//     });
+//   }
+//   getProduct();
 
+  
+  
+  let currentSearchTerm = '';
+ 
+ 
+  async function redirectToSearchProduct() {
+    const searchInput = document.getElementById('searchbar');
+    const searchTerm = searchInput.value.toLowerCase();
+    console.log('Search Term:', searchTerm);
+    // Chuyển hướng đến trang searchProduct.html với tham số tìm kiếm trong URL
+    window.location.href = 'searchproduct.html?search=' + searchTerm;
+  }
+
+  async function resetSearchInput() {
+    const searchInput = document.getElementById('searchbar');
+    searchInput.value = currentSearchTerm; // Gán lại giá trị tìm kiếm trước đó vào thanh tìm kiếm
+  }
+  
   async function getProductByName() {
     const searchInput = document.getElementById('searchbar');
     const list = document.getElementById('searchProduct');
@@ -117,81 +135,52 @@ async function getProduct() {
   
     const searchProduct = async () => {
       const searchTerm = searchInput.value.toLowerCase();
+      currentSearchTerm = searchTerm;
       const response = await axios.get('http://localhost:8080/product/searchProductByName?name=' + searchTerm);
       const filteredData = response.data;
       renderProducts(filteredData);
     };
 
-  
+
     const renderProducts = (products) => {
-      list.innerHTML = '';
-      products.forEach(result => {
-        const divItem = document.createElement('div');
-        divItem.classList.add('detail');
-  
-        const img = document.createElement('img');
-        img.src = result.image;
-  
-        const h2 = document.createElement('h2');
-        h2.innerText = result.name;
-  
-        const h3 = document.createElement('p');
-        h3.innerText = result.price;
-  
-        const p = document.createElement('p');
-        p.innerText = result.status;
-  
-        divItem.appendChild(img);
-        divItem.appendChild(h2);
-        divItem.appendChild(h3);
-        divItem.appendChild(p);
-  
-        list.appendChild(divItem);
-      });
+      const list = document.getElementById('searchProduct');
+      if (list) {
+        list.innerHTML = '';
+        products.forEach(result => {
+          const divItem = document.createElement('div');
+          divItem.classList.add('detail');
+    
+          const img = document.createElement('img');
+          img.src = result.image;
+    
+          const h2 = document.createElement('h2');
+          h2.innerText = result.name;
+    
+          const h3 = document.createElement('p');
+          h3.innerText = result.price;
+    
+          const p = document.createElement('p');
+          p.innerText = result.status;
+    
+          divItem.appendChild(img);
+          divItem.appendChild(h2);
+          divItem.appendChild(h3);
+          divItem.appendChild(p);
+    
+          list.appendChild(divItem);
+        });
+      } else {
+        console.error("Phần tử searchProduct không tồn tại.");
+      }
     };
-  
-    searchInput.addEventListener('keyup', searchProduct);
-  
+    
     const response = await axios.get('http://localhost:8080/product/getListProduct');
     originalData = response.data;
     renderProducts(originalData);
+  
+    await resetSearchInput();
   }
   
   getProductByName();
-
-  async function getProductChuot() {
-  
-    const list = document.getElementById('name');
-    const response = await axios.get('http://localhost:8080/product/searchProductByName?name=chuot');
-    const data = response.data;
-  
-    data.forEach(result => {
-      const divItem = document.createElement('div');
-      divItem.classList.add('detail'); // Thêm class "detail" vào div
-
-      const img = document.createElement('img');
-      img.src = result.image;
-  
-      const h2 = document.createElement('h2');
-      h2.innerText = result.name; // Gán giá trị "name" vào phần tử h2
-
-      const h3 = document.createElement('p');
-      h3.innerText = result.price;
-  
-      const p = document.createElement('p');
-      p.innerText = result.status; // Gán giá trị "price" vào phần tử p
-      
-      
-      divItem.appendChild(img)
-      divItem.appendChild(h2);
-      divItem.appendChild(h3);
-      divItem.appendChild(p);
-      
-     
-        
-      list.appendChild(divItem);
-    });
-  }
-  getProductChuot();
 
   
