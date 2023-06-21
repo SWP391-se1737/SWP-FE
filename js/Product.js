@@ -187,4 +187,19 @@ async function getProductByName() {
 
 getProductByName();
 
+// function loginWithGoogle() {
+//   fetch('/api/login/google')
+//     .then(response => {
+//       if (response.ok) {
+//         // Xử lý đăng nhập thành công
+//         console.log('Đăng nhập thành công');
+//       } else {
+//         // Xử lý đăng nhập thất bại
+//         console.error('Đăng nhập thất bại');
+//       }
+//     })
+//     .catch(error => {
+//       console.error('Lỗi:', error);
+//     });
+// }
 
