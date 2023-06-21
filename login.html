@@ -1,30 +1,27 @@
 <!DOCTYPE html>
 <html>
-    
-    <head>
-        <title></title>
-        <link rel="stylesheet" type="text/css" href="css/login.css">
-        <link rel="stylesheet" type="text/css" href="css/head-footer.css">
-    </head>
-    <body>
-       <div class="header">
-        <a class="title" href="homepage.html">Flea Shop</a>
-       </div>
-        <div class="container">
-        <div class="login">
-            <h1>LOGIN</h1>
-            <form id="loginForm">
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
-                <button type="submit">Login</button>
-                <button onclick="loginWithGoogle()">Login with Google</button>
-                <div id="errorMessage" class="errorMessage">
-        
-                </div>
-            </form>
-        </div>
+  <head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="css/head-footer.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a class="title" href="homepage.html">Flea Shop</a>
     </div>
-    
+    <div class="container">
+      <div class="login">
+        <h1>LOGIN</h1>
+        <form id="loginForm">
+          <input type="text" name="username" placeholder="Username" />
+          <input type="password" name="password" placeholder="Password" />
+          <button type="submit">Login</button>
+          <button onclick="loginWithGoogle()">Login with Google</button>
+          <div id="errorMessage" class="errorMessage"></div>
+        </form>
+      </div>
+    </div>
+
     <!-- <script>
         function loginWithGoogle() {
             fetch('/login/google')
@@ -46,49 +43,53 @@
         }
         </script> -->
 
-        <script>
-           const loginForm = document.getElementById('loginForm');
-const errorMessage = document.getElementById('errorMessage');
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const errorMessage = document.getElementById("errorMessage");
 
-loginForm.addEventListener('submit', function (e) {
-    e.preventDefault();
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    const username = loginForm.elements.username.value;
-    const password = loginForm.elements.password.value;
+        const username = loginForm.elements.username.value;
+        const password = loginForm.elements.password.value;
 
-    // Gửi yêu cầu đăng nhập thông qua API
-    fetch('http://localhost:8080/Account/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
-    })
-    .then(function(response) {
-        if (response.ok) {
-            // Đăng nhập thành công
-            window.location.href = 'adminpage.html';
-        } else if (response.status === 401) {
-            // Đăng nhập thất bại
-            errorMessage.textContent = 'Invailid Username or Password';
-        } else {
-            // Xử lý các trường hợp lỗi khác
-            errorMessage.textContent = 'Đã xảy ra lỗi';
-        }
-    })
-    .catch(function(error) {
-        console.error(error);
-    });
-});
-        
-            function loginWithGoogle() {
-                // Chuyển hướng đến đường dẫn /login/google sau khi đăng nhập thành công
-                window.location.href = "/login/google";
+
+        // Gửi yêu cầu đăng nhập thông qua API
+        fetch("http://localhost:8080/Account/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: `username=${encodeURIComponent(
+            username
+          )}&password=${encodeURIComponent(password)}`,
+        })
+          .then(function (response) {
+            if (response.ok) {
+              // Đăng nhập thành công
+              window.location.href = "adminpage.html";
+            } else if (response.status === 401) {
+              // Đăng nhập thất bại
+              errorMessage.textContent = "Invailid Username or Password";
+            } else {
+              // Xử lý các trường hợp lỗi khác
+              errorMessage.textContent = "Đã xảy ra lỗi";
             }
-        </script>
-    </body>
-    <div class="container-fluid footer">
-        Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh City<br/>
-        Contact us: fleashop@gmail.com
-      </div>
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
+
+      function loginWithGoogle() {
+        // Chuyển hướng đến đường dẫn /login/google sau khi đăng nhập thành công
+        window.location.href = "/login/google";
+      }
+    </script>
+  </body>
+  <div class="container-fluid footer">
+    Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh
+    City<br />
+    Contact us: fleashop@gmail.com
+  </div>
 </html>
