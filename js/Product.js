@@ -148,9 +148,8 @@ async function getProductByName() {
       list.innerHTML = '';
       products.forEach(result => {
         const productId = result.id;
-
         const divItem = document.createElement('div');
-        divItem.classList.add('detail');
+        divItem.classList.add(`detail`);
         divItem.dataset.key = productId;
 
 
@@ -172,11 +171,17 @@ async function getProductByName() {
         divItem.appendChild(p);
 
         list.appendChild(divItem);
+
+        divItem.addEventListener('click', () => {
+          getProductDetail(divItem.dataset.key)
+        })
       });
     } else {
       console.error("Phần tử searchProduct không tồn tại.");
     }
+
   };
+  // 
 
   const response = await axios.get('http://localhost:8080/product/getListProduct');
   originalData = response.data;
@@ -185,6 +190,11 @@ async function getProductByName() {
   await resetSearchInput();
 }
 
+const getProductDetail = async (productId) => {
+  // const response = await axios.get(`http://localhost:8080/product/getProductById/${productId}`);
+  const testPageUrl = `productDetail.html?id=${encodeURIComponent(productId)}`;
+  window.location.href = testPageUrl;
+}
 getProductByName();
 
 // function loginWithGoogle() {
@@ -202,4 +212,5 @@ getProductByName();
 //       console.error('Lỗi:', error);
 //     });
 // }
+
 
