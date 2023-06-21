@@ -67,7 +67,7 @@ loginForm.addEventListener('submit', function (e) {
     .then(function(response) {
         if (response.ok) {
             // Đăng nhập thành công
-            window.location.href = 'studentHomepage.html';
+            window.location.href = 'adminpage.html';
         } else if (response.status === 401) {
             // Đăng nhập thất bại
             errorMessage.textContent = 'Invailid Username or Password';

@@ -72,6 +72,8 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     color: #41424A;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
  }
  .aboutus{
     background-image: url(/img/baner-icon/menu-order-now.png);
