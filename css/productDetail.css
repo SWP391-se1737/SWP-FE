@@ -1,4 +1,37 @@
-.quantity-value {
-    display: inline;
-    margin-left: 5px;
-  }
+
+#productDetail > div > div:nth-child(1){
+  margin-right: 20px;
+  margin-left: 350px;
+}
+#productDetail > div > div:nth-child(1) > img{
+  height: 350px;
+  width: 350px;
+}
+
+#productDetail > div > div.product-info{
+  margin-left: 50px;
+  padding: 0 15px 0  0;
+
+}
+
+
+#productDetail > div > div.product-info > p:nth-child(5),
+#productDetail > div > div.product-info > p:nth-child(6){
+  display: inline-block;
+}
+
+#productDetail > div > div.product-info > p:nth-child(6){
+  margin-left: 0.15rem;
+}
+
+#productDetail{
+  min-height: 600px;
+}
+
+#productDetail > div > div.product-info{
+  height: 386px;
+}
+
+#productDetail > div > div.product-info > p:nth-child(3){
+  width: 200px;
+}
