@@ -14,4 +14,4 @@ async function getCampus() {
 // hàm map như forEach
 // mấy cái kia sửa lại không null đi
 // làm lại giống trên mà sài hàm map 
-getCampust()
+getCampus()

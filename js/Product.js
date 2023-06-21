@@ -194,8 +194,23 @@ const getProductDetail = async (productId) => {
   // const response = await axios.get(`http://localhost:8080/product/getProductById/${productId}`);
   const testPageUrl = `productDetail.html?id=${encodeURIComponent(productId)}`;
   window.location.href = testPageUrl;
-
 }
-
 getProductByName();
+
+// function loginWithGoogle() {
+//   fetch('/api/login/google')
+//     .then(response => {
+//       if (response.ok) {
+//         // Xử lý đăng nhập thành công
+//         console.log('Đăng nhập thành công');
+//       } else {
+//         // Xử lý đăng nhập thất bại
+//         console.error('Đăng nhập thất bại');
+//       }
+//     })
+//     .catch(error => {
+//       console.error('Lỗi:', error);
+//     });
+// }
+
 
