@@ -35,9 +35,9 @@
   <nav class="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="homepage.html">Flea Shop</a>
-      <form class="d-flex" role="search">
-        <input id="searchbar" onkeyup="search_animal()"  name="search" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
-                  <a href="homepage.html" class="btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <form class="d-flex" role="search">    
+          <input id="searchbar" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
+        <button class="btn" onclick="redirectToSearchProduct()"><i class="fa-solid fa-magnifying-glass"></i></button>
         <a href="shopping-cart.html" class="ping"><i class="fa-solid fa-cart-shopping"></i><span
             class="qtycart">0</span></a>
       </form>
@@ -56,13 +56,13 @@
             <a class="nav-link active" href="homepage.html" aria-current="page">Home</a>
           </li>
           <li class="nav-item franchising">
-            <a class="nav-link " href="franchising.html">News</a>
+            <a class="nav-link " href="news.html">News</a>
           </li>
           <li class="nav-item location">
             <a class="nav-link " href="location.html">Locations</a>
           </li>
           <li class="nav-item aboutus">
-            <a class="nav-link " href="studentHomepage.html">Sign in</a>
+            <a class="nav-link " href="login.html">Sign in</a>
           </li>
         </ul>
       </div>
@@ -73,20 +73,20 @@
   </div>
   <h1 class="title">Select item type</h1>
   <ul class="nav justify-content-center listPage">
-    <li class="nav-item ">
-      <a class="nav-link" href="menu.html">
+    <li class="nav-item">
+      <a class="nav-link" href="javascript:void(0);" id="electronicDeviceLink">
         <span class="img-oring"><img src="/img/icon/laptop.png" alt=""></span>
         <span class="text">Electronic device</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="vegetable-juice.html">
+    <li class="nav-item" >
+      <a class="nav-link" href="javascript:void(0);" id="clothing">
         <span class="img-oring"><img src="/img/icon/clothing.png" alt=""></span>
         <span class="text">Clothes</span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="smoothies.html">
+      <a class="nav-link" href="javascript:void(0);" id="shoe">
         <span class="img-oring"><img src="/img/icon/shoe.png" alt=""></span>
         <span class="text">Shoe</span>
       </a>
@@ -109,13 +109,40 @@
       
       <div class="content">
           
-        <div id="searchProduct" class="listProduct" type="button">
+        <div id="searchProduct" class="listProduct">
           
         </div>
       </div>
     </section>
     <script src="js/Product.js"></script>
+    
+    <script>
+      const electronicDeviceLink = document.getElementById('electronicDeviceLink');
 
+    electronicDeviceLink.addEventListener('click', function() {
+    const categoryId = 2;
+    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
+    window.location.href = testPageUrl;
+});
+
+const clothingLink = document.getElementById('clothing');
+
+    clothingLink.addEventListener('click', function() {
+    const categoryId = 1;
+    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
+    window.location.href = testPageUrl;
+});
+
+const shoeLink = document.getElementById('shoe');
+
+    shoeLink.addEventListener('click', function() {
+    const categoryId = 3;
+    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
+    window.location.href = testPageUrl;
+});
+    </script>
+
+    
     
 </body>
 <div class="container-fluid footer">

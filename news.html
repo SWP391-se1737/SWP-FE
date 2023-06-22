@@ -35,9 +35,9 @@
   <nav class="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="homepage.html">Flea Shop</a>
-      <form class="d-flex" role="search">
-        <input id="searchbar" onkeyup="search_animal()"  name="search" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
-                  <a href="searchproduct.html" class="btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <form class="d-flex" role="search">    
+          <input id="searchbar" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
+        <button class="btn" onclick="redirectToSearchProduct()"><i class="fa-solid fa-magnifying-glass"></i></button>
         <a href="shopping-cart.html" class="ping"><i class="fa-solid fa-cart-shopping"></i><span
             class="qtycart">0</span></a>
       </form>
@@ -56,69 +56,29 @@
             <a class="nav-link active" href="homepage.html" aria-current="page">Home</a>
           </li>
           <li class="nav-item franchising">
-            <a class="nav-link " href="franchising.html">News</a>
+            <a class="nav-link " href="news.html">News</a>
           </li>
           <li class="nav-item location">
             <a class="nav-link " href="location.html">Locations</a>
           </li>
           <li class="nav-item aboutus">
-            <a class="nav-link " href="history.html">History</a>
-          </li>
-          <li class="nav-item aboutus">
-            <a class="nav-link " href="profile.html">Profile</a>
+            <a class="nav-link " href="login.html">Sign in</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="container-fluid">
-    <img class="baner" src="img/icon/banner_homepage.png" alt="">
-  </div>
-  <h1 class="title">Select item type</h1>
-  <ul class="nav justify-content-center listPage">
-    <li class="nav-item ">
-      <a class="nav-link" href="menu.html">
-        <span class="img-oring"><img src="/img/icon/laptop.png" alt=""></span>
-        <span class="text">Electronic device</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="vegetable-juice.html">
-        <span class="img-oring"><img src="/img/icon/clothing.png" alt=""></span>
-        <span class="text">Clothes</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="smoothies.html">
-        <span class="img-oring"><img src="/img/icon/shoe.png" alt=""></span>
-        <span class="text">Shoe</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="protein.html">
-        <span class="img-oring"><img src="/img/icon/accessory.png" alt=""></span>
-        <span class="text">Accessory</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="winter.html">
-        <span class="img-oring"><img src="/img/icon/other.png" alt=""></span>
-        <span class="text">Other</span>
-      </a>
-    </li>
-  </ul>
-</div>
-<section class="container">
+    <section class="container">
       
-  <div class="content">
-      
-    <div id="searchProduct" class="listProduct">
-      
-    </div>
-  </div>
-</section>
-<script src="js/Product.js"></script>
-
+      <div class="content">
+          
+        <div id="searchProduct" class="listProduct">
+          
+        </div>
+      </div>
+    </section>
+    <script src="js/Product.js"></script>
+    
     
 </body>
 <div class="container-fluid footer">

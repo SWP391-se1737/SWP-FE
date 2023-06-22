@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="css/head-footer.css">
   <!--link này dùng chung cho header , footer-->
   <link rel="stylesheet" href="css/homepage.css">
+  <link rel="stylesheet" href="css/location.css">
   <link rel="stylesheet" type="text/css" href="css/listProduct.css">
   <title>Flea Shop</title>
 </head>
@@ -35,9 +36,9 @@
   <nav class="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="homepage.html">Flea Shop</a>
-      <form class="d-flex" role="search">
-        <input id="searchbar" onkeyup="search_animal()"  name="search" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
-                  <a href="searchproduct.html" class="btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <form class="d-flex" role="search">    
+          <input id="searchbar" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
+        <button class="btn" onclick="redirectToSearchProduct()"><i class="fa-solid fa-magnifying-glass"></i></button>
         <a href="shopping-cart.html" class="ping"><i class="fa-solid fa-cart-shopping"></i><span
             class="qtycart">0</span></a>
       </form>
@@ -56,69 +57,52 @@
             <a class="nav-link active" href="homepage.html" aria-current="page">Home</a>
           </li>
           <li class="nav-item franchising">
-            <a class="nav-link " href="franchising.html">News</a>
+            <a class="nav-link " href="news.html">News</a>
           </li>
           <li class="nav-item location">
             <a class="nav-link " href="location.html">Locations</a>
           </li>
           <li class="nav-item aboutus">
-            <a class="nav-link " href="history.html">History</a>
-          </li>
-          <li class="nav-item aboutus">
-            <a class="nav-link " href="profile.html">Profile</a>
+            <a class="nav-link " href="login.html">Sign in</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div class="container-fluid">
-    <img class="baner" src="img/icon/banner_homepage.png" alt="">
+    <!-- Location -->
+  <!-- Map Begin -->
+  <div class="map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!4m6!3m5!1s0x31752731176b07b1:0xb752b24b379bae5e!8m2!3d10.8411276!4d106.809883!16s%2Fg%2F11j2zx_fz_"
+      height="500" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
-  <h1 class="title">Select item type</h1>
-  <ul class="nav justify-content-center listPage">
-    <li class="nav-item ">
-      <a class="nav-link" href="menu.html">
-        <span class="img-oring"><img src="/img/icon/laptop.png" alt=""></span>
-        <span class="text">Electronic device</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="vegetable-juice.html">
-        <span class="img-oring"><img src="/img/icon/clothing.png" alt=""></span>
-        <span class="text">Clothes</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="smoothies.html">
-        <span class="img-oring"><img src="/img/icon/shoe.png" alt=""></span>
-        <span class="text">Shoe</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="protein.html">
-        <span class="img-oring"><img src="/img/icon/accessory.png" alt=""></span>
-        <span class="text">Accessory</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link " href="winter.html">
-        <span class="img-oring"><img src="/img/icon/other.png" alt=""></span>
-        <span class="text">Other</span>
-      </a>
-    </li>
-  </ul>
-</div>
-<section class="container">
-      
-  <div class="content">
-      
-    <div id="searchProduct" class="listProduct">
-      
+  <!-- Map End -->
+  <section class="contact spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <div class="contact__text">
+            <div class="section-title">
+              <span>Information</span>
+              <h2>Location</h2>
+              <p>Flea shop with 2 main stores will make it easier for FPT university students to exchange second hand items.</p>
+            </div>
+            <ul>
+              <li>
+                <h4>HoChiMinh</h4>
+                <p>Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức<br /></p>
+              </li>
+              <li>
+                <h4 style="margin-top: 10px">BinhDuong</h4>
+                <p>VRG2+9GJ, Đ. Quảng Trường Sáng Tạo, Đông Hoà, Dĩ An<br /></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
-<script src="js/Product.js"></script>
-
+  </section> 
     
 </body>
 <div class="container-fluid footer">
