@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -9,7 +10,10 @@
 
     <!-- =========================== Style ============================== -->
     <link rel="stylesheet" href="css/adminpage.css">
+
+    
 </head>
+
 <body>
     <!-- ========================== Navigation ============== -->
     <div class="container">
@@ -106,7 +110,7 @@
                 </li>
             </ul>
         </div>
-
+        
         <div class="main">
             <div class="topbar">
                 <div class="toggle">
@@ -122,29 +126,34 @@
                     <img src="" alt="">
                 </div>
             </div>
-            <div class="details">
-                <div class="staffs">
+
+            <div class="dashboard">
+                <div class="recentProducts">
                     <div class="cardHeader">
-                        <h2>Staffs</h2>
+                        <h2>Recent Products</h2>
+                        <a href="manageProduct.html" class="btn">View All</a>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
-                                <td>ID</td>
-                                <td>Email</td>
-                                <td>Phone</td>
-                                <td>Role</td>
-                                <td>Status</td>
+                                <td>ID<td>
+                                <td>Name<td>
+                                <td>Image<td>
+                                <td>Description<td>
+                                <td>Price<td>
+                                <td>Create At<td>
+                                <td>Exprire Day<td>
+                                <td>Status<td>
+                                <td>Quantity<td>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tbody id="table_body">
+                        <tbody id="table_body">
                             
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
     <!-- ========================= Scripts ====================== -->
@@ -153,5 +162,6 @@
     <!-- ========================== IonIcons =======================-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    </body>
+</body>
+
 </html>
