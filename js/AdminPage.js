@@ -20,7 +20,7 @@ toggle.onclick = function(){
 
 async function getProductList() {
     try {
-        const res = await fetch(':localhost:8080/product/getListProduct');
+        const res = await fetch('localhost:8080/product/getListProduct');
         const data = await res.json();
         if(!res.ok){
             console.log(data.description);
