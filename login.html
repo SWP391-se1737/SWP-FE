@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="initial-scale=1.0" />
+    <link rel="webside icon" type="png" href="/img/icon/icon.jpg" />
     <link rel="stylesheet" type="text/css" href="css/login.css" />
-    <link rel="stylesheet" type="text/css" href="css/head-footer.css" />
+    <link rel="stylesheet" href="css/head-footer.css" />
+    <!--link này dùng chung cho header , footer-->
+    <link rel="stylesheet" href="css/homepage.css" />
+    <title>Flea Shop</title>
   </head>
   <body>
     <div class="header">
-      <a class="title" href="homepage.html">Flea Shop</a>
+      <a class="title1" href="homepage.html">Flea Shop</a>
     </div>
     <div class="container">
       <div class="login">
@@ -21,28 +27,6 @@
         </form>
       </div>
     </div>
-
-    <!-- <script>
-        function loginWithGoogle() {
-            fetch('/login/google')
-                .then(function(response) {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Failed to login with Google.');
-                    }
-                })
-                .then(function(data) {
-                    // Xử lý dữ liệu trả về từ API (nếu cần)
-                    // Chuyển hướng đến trang đăng nhập thành công hoặc trang khác
-                    window.location.href = '/Account';
-                })
-                .catch(function(error) {
-                    console.error(error);
-                });
-        }
-        </script> -->
-
     <script>
       const loginForm = document.getElementById("loginForm");
       const errorMessage = document.getElementById("errorMessage");
@@ -52,7 +36,6 @@
 
         const username = loginForm.elements.username.value;
         const password = loginForm.elements.password.value;
-
 
         // Gửi yêu cầu đăng nhập thông qua API
         fetch("http://localhost:8080/Account/login", {
