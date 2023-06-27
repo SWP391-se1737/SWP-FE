@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 let list = document.querySelectorAll(".navigation li");
 
 function activeLink(){
@@ -18,15 +20,72 @@ toggle.onclick = function(){
     main.classList.toggle("active");
 };
 
-async function getProductList() {
-    try {
-        const res = await fetch('localhost:8080/product/getListProduct');
-        const data = await res.json();
-        if(!res.ok){
-            console.log(data.description);
-            return;
-        }
-        let tableData="";
+// async function getProductList() {
+//     try {
+//         const res = await fetch('localhost:8080/product/getListProduct');
+//         const data = await res.json();
+//         if(!res.ok){
+//             console.log(data.description);
+//             return;
+//         }
+//         let tableData="";
+//         data.map(products =>{
+//             tableData+= `<tr>
+//             <td>${products.id}<td>
+//             <td>${products.name}<td>
+//             <td>${products.image}<td>
+//             <td>${products.description}<td>
+//             <td>${products.price}<td>
+//             <td>${products.createat}<td>
+//             <td>${products.exprire}<td>
+//             <td>${products.status}<td>
+//             <td>${products.quantity}<td>
+//             </tr>`;
+//         });
+//         document.getElementById("table_body").innerHTML=tableData;
+        
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+
+
+// async function getAccountList() {
+//     try {
+//         const data = await fetch('http://localhost:8080/Account/listAccount');
+//         const objectData = await data.json();
+//         if(!res.ok){
+//             console.log(objectData.description);
+//             return;
+//         }
+//         let tableData="";
+//         objectData.map(accounts =>{
+//             tableData+= `<tr>
+//             <td>${accounts.id}<td>
+//             <td>${accounts.email}<td>
+//             <td>${accounts.phone}<td>
+//             <td>${accounts.role}<td>
+//             <td>${accounts.status}<td>
+//             </tr>`;
+//         });
+//         document.getElementById("table_body").innerHTML=tableData;
+        
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
+
+const getData = async () => {
+    const response = await axios.get(
+        `localhost:8080/product/getListProduct`
+    );
+    const products = response.data;
+    renderProducts(products);
+};
+getData();
+const renderProducts = (products) => {
+    console.log(products);
+    let tableData="";
         data.map(products =>{
             tableData+= `<tr>
             <td>${products.id}<td>
@@ -41,35 +100,4 @@ async function getProductList() {
             </tr>`;
         });
         document.getElementById("table_body").innerHTML=tableData;
-        
-    } catch (error) {
-        console.log(error);
-    }
 };
-
-
-async function getAccountList() {
-    try {
-        const data = await fetch('http://localhost:8080/Account/listAccount');
-        const objectData = await data.json();
-        if(!res.ok){
-            console.log(objectData.description);
-            return;
-        }
-        let tableData="";
-        objectData.map(accounts =>{
-            tableData+= `<tr>
-            <td>${accounts.id}<td>
-            <td>${accounts.email}<td>
-            <td>${accounts.phone}<td>
-            <td>${accounts.role}<td>
-            <td>${accounts.status}<td>
-            </tr>`;
-        });
-        document.getElementById("table_body").innerHTML=tableData;
-        
-    } catch (error) {
-        console.log(error);
-    }
-};
-
