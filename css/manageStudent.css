@@ -336,7 +336,7 @@ body{
 
 
 .dashboard table{
-    width: 100%;
+    width: 50%;
     border-collapse: collapse;
     margin-top: 10px;
 }
@@ -360,7 +360,19 @@ body{
 }
 
 .dashboard .recentProducts table tr td{
-    padding: 5px;
+    padding: 10px;
+}
+
+.dashboard .recentProducts table tr td:last-child {
+    text-align: end;
+}
+
+.dashboard .recentProducts table tr td:last-child(2) {
+    text-align: end;
+}
+
+.dashboard .recentProducts table tr td:last-child(3) {
+    text-align: center;
 }
 
 .details table{
@@ -397,7 +409,19 @@ body{
 }
 
 .details .products table tr td{
-    padding: 5px;
+    padding: 10px;
+}
+
+.details .products table tr td:last-child {
+    text-align: end;
+}
+
+.details .products table tr td:last-child(2) {
+    text-align: end;
+}
+
+.details .products table tr td:last-child(3) {
+    text-align: center;
 }
 
 .details .students table tr{
@@ -424,7 +448,7 @@ body{
 }
 
 .details .students table tr td{
-    padding: 5px;
+    padding: 10px;
 }
 
 .details .students table tr td:last-child {
@@ -652,8 +676,4 @@ body{
 
 .details .transactions table tr td:last-child(3) {
     text-align: center;
-}
-
-img {
-    width: 100px;
 }
