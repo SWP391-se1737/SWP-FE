@@ -28,16 +28,19 @@
   <!--link này dùng chung cho header , footer-->
   <link rel="stylesheet" href="css/homepage.css">
   <link rel="stylesheet" type="text/css" href="css/listProduct.css">
+  <script src="js/Category.js"></script>
+  <script src="js/Login.js"></script>
   <title>Flea Shop</title>
 </head>
+
 <body>
      <!-- navbar -->
   <nav class="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="homepage.html">Flea Shop</a>
       <form class="d-flex" role="search">    
-          <input id="searchbar" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
-        <button class="btn" onclick="redirectToSearchProduct()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input id="searchbar" onkeyup="search_animal()"  name="search" class="form-control me-2" type="search" placeholder="Search product" aria-label="Search">
+        <a href="searchproduct.html" class="btn"><i class="fa-solid fa-magnifying-glass"></i></a>
         <a href="shopping-cart.html" class="ping"><i class="fa-solid fa-cart-shopping"></i><span
             class="qtycart">0</span></a>
       </form>
@@ -45,7 +48,7 @@
        <span class="button-text">
           Post product
         </span>
-      </a>
+      </a>  
     </div>
   </nav>
   <nav class="navbar navbar-expand-lg bg-secondary navtwo">
@@ -61,8 +64,17 @@
           <li class="nav-item location">
             <a class="nav-link " href="location.html">Locations</a>
           </li>
-          <li class="nav-item aboutus">
+          <li class="nav-item aboutus" id="btnLogin">
             <a class="nav-link " href="login.html">Sign in</a>
+          </li>
+          <!-- <li class="nav-item aboutus" id="navbar-user">
+            <a class="nav-link " href="history.html">Deposit</a>
+          </li>
+          <li class="nav-item aboutus" id="navbar-user">
+            <a class="nav-link " href="history.html">History</a>
+          </li> -->
+          <li class="nav-item aboutus" id="navbar-user" style="display: none;">
+            <a class="nav-link " href="profile.html">Profile</a>
           </li>
         </ul>
       </div>
@@ -91,14 +103,14 @@
         <span class="text">Shoe</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link " href="protein.html">
+    <li class="nav-item" >
+      <a class="nav-link " href="javascript:void(0);" id="accessory">
         <span class="img-oring"><img src="/img/icon/accessory.png" alt=""></span>
         <span class="text">Accessory</span>
       </a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link " href="winter.html">
+    <li class="nav-item" >
+      <a class="nav-link " href="javascript:void(0);" id="other">
         <span class="img-oring"><img src="/img/icon/other.png" alt=""></span>
         <span class="text">Other</span>
       </a>
@@ -115,34 +127,6 @@
       </div>
     </section>
     <script src="js/Product.js"></script>
-    
-    <script>
-      const electronicDeviceLink = document.getElementById('electronicDeviceLink');
-
-    electronicDeviceLink.addEventListener('click', function() {
-    const categoryId = 2;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-
-const clothingLink = document.getElementById('clothing');
-
-    clothingLink.addEventListener('click', function() {
-    const categoryId = 1;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-
-const shoeLink = document.getElementById('shoe');
-
-    shoeLink.addEventListener('click', function() {
-    const categoryId = 3;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-    </script>
-
-    
     
 </body>
 <div class="container-fluid footer">
