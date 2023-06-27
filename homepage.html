@@ -28,8 +28,11 @@
   <!--link này dùng chung cho header , footer-->
   <link rel="stylesheet" href="css/homepage.css">
   <link rel="stylesheet" type="text/css" href="css/listProduct.css">
+  <script src="js/Category.js"></script>
+  <script src="js/Login.js"></script>
   <title>Flea Shop</title>
 </head>
+
 <body>
      <!-- navbar -->
   <nav class="navbar">
@@ -61,8 +64,17 @@
           <li class="nav-item location">
             <a class="nav-link " href="location.html">Locations</a>
           </li>
-          <li class="nav-item aboutus">
+          <li class="nav-item aboutus" id="btnLogin">
             <a class="nav-link " href="login.html">Sign in</a>
+          </li>
+          <!-- <li class="nav-item aboutus" id="navbar-user">
+            <a class="nav-link " href="history.html">Deposit</a>
+          </li>
+          <li class="nav-item aboutus" id="navbar-user">
+            <a class="nav-link " href="history.html">History</a>
+          </li> -->
+          <li class="nav-item aboutus" id="navbar-user" style="display: none;">
+            <a class="nav-link " href="profile.html">Profile</a>
           </li>
         </ul>
       </div>
@@ -115,48 +127,6 @@
       </div>
     </section>
     <script src="js/Product.js"></script>
-    
-    <script>
-      const electronicDeviceLink = document.getElementById('electronicDeviceLink');
-
-    electronicDeviceLink.addEventListener('click', function() {
-    const categoryId = 2;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-
-const clothingLink = document.getElementById('clothing');
-
-    clothingLink.addEventListener('click', function() {
-    const categoryId = 1;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-
-const shoeLink = document.getElementById('shoe');
-
-    shoeLink.addEventListener('click', function() {
-    const categoryId = 3;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-const accessoryLink = document.getElementById('accessory');
-
-    accessoryLink.addEventListener('click', function() {
-    const categoryId = 4;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-const otherLink = document.getElementById('other');
-
-    otherLink.addEventListener('click', function() {
-    const categoryId = 5;
-    const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-    window.location.href = testPageUrl;
-});
-    </script>
-
-    
     
 </body>
 <div class="container-fluid footer">
