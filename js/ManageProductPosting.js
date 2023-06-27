@@ -8,7 +8,10 @@ const response = await axios.get('http://localhost:8080/product/getListProduct')
                 <td>${products.id}<td>
                 <td>${products.name}<td>
                 <td><img src="${products.image}"/><td>
+                <td>${products.description}<td>
                 <td>${products.price}<td>
+                <td>${products.create_AT})<td>
+                <td>${products.expire}<td>
                 <td>${products.status}<td>
                 <td>${products.quantity}<td>
                 </tr>`;
