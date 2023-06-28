@@ -1,5 +1,5 @@
 async function getCampusList() {
-    const response = await axios.get('http://localhost:8080/product/getListProduct');
+    const response = await axios.get('http://localhost:8080/Campus/listCampus');
       campuses = response.data;
       console.log(campuses);
       let tableData="";

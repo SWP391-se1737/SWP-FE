@@ -1,5 +1,5 @@
 async function getCategoryList() {
-    const response = await axios.get('');
+    const response = await axios.get('http://localhost:8080/Category/listCategory');
       categories = response.data;
       console.log(categories);
       let tableData="";
