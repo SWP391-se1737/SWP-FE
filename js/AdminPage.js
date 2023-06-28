@@ -11,6 +11,7 @@ const response = await axios.get('http://localhost:8080/product/getListProduct')
                 <td>${products.price}<td>
                 <td>${products.status}<td>
                 <td>${products.quantity}<td>
+                
                 </tr>`;
             });
             document.getElementById("table_body").innerHTML=tableData;
