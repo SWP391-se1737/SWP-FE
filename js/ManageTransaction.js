@@ -5,10 +5,11 @@ async function getTransactionList() {
       let tableData="";
       transactions.map(transactions =>{
                     tableData+= `<tr>
-                    
+                    <td>${transactions.id}</td>
+                    <td>${transactions.amount}</td>
+                    <td>${transactions.status}</td>
                     </tr>`;
                 });
                 document.getElementById("table_body").innerHTML=tableData;
     }
     getTransactionList();
-    
