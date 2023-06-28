@@ -50,6 +50,7 @@ const renderProducts = (product) => {
             // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
             // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
             addToCart(productId);
+            
         });
 
         infoDiv.appendChild(h2);
@@ -72,3 +73,8 @@ const renderProducts = (product) => {
         console.error("Phần tử searchProduct không tồn tại.");
     }
 };
+
+const addToCart = async (productId) => {
+    const btn = document.querySelectorAll("button")
+    console.log(btn)
+  }
