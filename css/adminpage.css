@@ -397,7 +397,7 @@ body{
 }
 
 .details .products table tr td{
-    padding: 5px;
+    padding: 10px;
 }
 
 .details .students table tr{
@@ -427,18 +427,6 @@ body{
     padding: 5px;
 }
 
-.details .students table tr td:last-child {
-    text-align: end;
-}
-
-.details .students table tr td:last-child(2) {
-    text-align: end;
-}
-
-.details .students table tr td:last-child(3) {
-    text-align: center;
-}
-
 .details .categories table tr{
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -464,18 +452,6 @@ body{
 
 .details .categories table tr td{
     padding: 10px;
-}
-
-.details .categories table tr td:last-child {
-    text-align: end;
-}
-
-.details .categories table tr td:last-child(2) {
-    text-align: end;
-}
-
-.details .categories table tr td:last-child(3) {
-    text-align: center;
 }
 
 .details .categories label input{
@@ -525,18 +501,6 @@ body{
     padding: 10px;
 }
 
-.details .productMoving table tr td:last-child {
-    text-align: end;
-}
-
-.details .productMoving table tr td:last-child(2) {
-    text-align: end;
-}
-
-.details .productMoving table tr td:last-child(3) {
-    text-align: center;
-}
-
 .details .staffs table tr{
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -562,18 +526,6 @@ body{
 
 .details .staffs table tr td{
     padding: 10px;
-}
-
-.details .staffs table tr td:last-child {
-    text-align: end;
-}
-
-.details .staffs table tr td:last-child(2) {
-    text-align: end;
-}
-
-.details .staffs table tr td:last-child(3) {
-    text-align: center;
 }
 
 .details .campuses table tr{
@@ -603,18 +555,6 @@ body{
     padding: 10px;
 }
 
-.details .campuses table tr td:last-child {
-    text-align: end;
-}
-
-.details .campuses table tr td:last-child(2) {
-    text-align: end;
-}
-
-.details .campuses table tr td:last-child(3) {
-    text-align: center;
-}
-
 .details .transactions table tr{
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -642,18 +582,15 @@ body{
     padding: 10px;
 }
 
-.details .transactions table tr td:last-child {
-    text-align: end;
-}
-
-.details .transactions table tr td:last-child(2) {
-    text-align: end;
-}
-
-.details .transactions table tr td:last-child(3) {
-    text-align: center;
-}
-
 img {
     width: 100px;
+}
+
+.details button{
+    position: relative;
+    padding: 5px 10px;
+    background: var(--orange);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
 }
