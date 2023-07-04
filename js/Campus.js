@@ -1,17 +1,33 @@
 async function getCampus() {
-    const response = await axios.get('http://localhost:8080/Campus/listCampus');
-    const data = response.data;
+    const list = document.getElementById('listCampuses');
+    let originalData = [];
 
-    const div = document.createElement("div");
-    div.innerHTML = data.map(item => item.name).join(', ');
-    const listDiv = document.querySelector(".container .content .list");
-    // list.appendChild(h1)
-    listDiv.appendChild(div)
+    try {
+        const response = await axios.get('http://localhost:8080/Campus/listCampus');
+        const filteredData = response.data;
+        renderCampus(filteredData);
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+    }
 }
+const renderCampus = (campuses) => {
+    const select = document.getElementById("listCampuses");
+    if (select) {
+        select.innerHTML = ""; // Xóa bỏ các tùy chọn cũ (nếu có)
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "0";
+        defaultOption.innerText = "Campus";
+        select.appendChild(defaultOption);
 
-// async await xử lý bất đồng bộ vì dòng 21 chưa thực thi xong thì dòng 22 23 không nhận
-// nên dùng async await để thực thi xong dòng 21 thì dòng 22 23 mới chạy 
-// hàm map như forEach
-// mấy cái kia sửa lại không null đi
-// làm lại giống trên mà sài hàm map 
-getCampus()
+        campuses.forEach((result) => {
+            const option = document.createElement("option");
+            option.value = result.id; // Đặt giá trị value của option là id của campus
+            option.innerText = result.name; // Hiển thị tên của campus
+
+            select.appendChild(option);
+        });
+    } else {
+        console.error("Phần tử listCampuses không tồn tại.");
+    }
+};
+getCampus();

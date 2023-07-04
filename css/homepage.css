@@ -21,11 +21,11 @@
  .baner{
     object-fit: cover;
     width: 100%;
-    height: 100%;
+    height: 300px
  }
  .title{
     text-transform: uppercase;
-    font-family: 'Caveat', cursive;
+    font-family: 'Courier New', Courier, monospaces;
     text-align: center;
     margin-top: 50px;
     position: relative;
@@ -33,18 +33,18 @@
  .title::after{
     content: "";
     position: absolute;
-    width: 300px;
+    width: 400px;
     height: 1px;
-    background-color: rgb(194, 191, 191);
+    background-color: rgb(28, 28, 28);
     top: 50%;
     right: 50px;
  }
  .title::before{
     content: "";
     position: absolute;
-    width: 300px;
+    width: 400px;
     height: 1px;
-    background-color: rgb(194, 191, 191);
+    background-color: rgb(27, 27, 27);
     top: 50%;
     left: 50px;
  }
@@ -239,6 +239,16 @@
      color: #fff;
      cursor: pointer;
  }
+ .sidebar {
+    width: 90px; /* Điều chỉnh độ rộng của thanh menu */
+    float: left; /* Đưa thanh menu sang bên phải */
+    margin-right: 5px; /* Điều chỉnh khoảng cách giữa thanh menu và nội dung chính */
+    margin-right: 0px;
+  }
+  section.container {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
  .product-count .qtyminus {
      border-radius: 3px 0 0 3px; 
  }
@@ -268,29 +278,30 @@
  }
 
  .detail img{
-    width: 300px;
-    height: 260px;
+    width: 230px;
+    height: 210px;
     display: inline-block;
   transition: transform 0.3s ease;
  }
  .detail img:hover{
-    transform: scale(1.2) rotate(10deg);
+    transform: scale(1.04) rotate(0deg);
  }
  
 .listProduct{
     display: flex; /* Sử dụng flexbox để xếp các phần tử con theo hàng ngang */
   flex-wrap: wrap; /* Cho phép các phần tử con xuống dòng khi không đủ không gian */
   justify-content: center; /* Căn giữa các phần tử con theo chiều ngang */
+  width: 1200px;
 }
- .detail{
-    width: 400px;
-    height: 380px;
-    border: none;
-    border-radius: 30px;
+.detail {
+    width: 280px;
+    height: 330px;
+    box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5); /* Sửa giá trị rgba */
+    border-radius: 10px;
     text-align: center;
     background-color: white;
-    margin: 10px; /* Tạo khoảng cách giữa các phần tử con */
- }
+    margin: 10px;
+}
  a.button{
     display: inline-block;
     padding: 8px 16px;

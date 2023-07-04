@@ -10,38 +10,33 @@
         <title>Flea Shop</title>
     </head>
     <body>
+      <script src="js/Campus.js"></script>
+      <script src="js/Category.js"></script>
         <div class="header">
             <a class="title" href="homepage.html">Flea Shop</a>
            </div>
         <div class="container">
             <div class="post">
-                <h1>POST</h1>
+                <h1>ĐĂNG TIN</h1>
                 <form>
                   <div class="content-1">
-                    <select id="category" name="category">
-                      <option value="" disabled selected hidden>Category</option>
-                      <option value="option1">Electronic device</option>
-                      <option value="option2">Clothes</option>
-                      <option value="option3">Shoe</option>
-                      <option value="option3">Accessory</option>
-                      <option value="option3">Other</option>
+                    <select id="optionCategory" style="font-family: 'Courier New', Courier, monospace">
+
                     </select>
-                    <input type="text" name="name" placeholder="Product Name">
-                    <input type="text" name="discriptions" placeholder="Discriptions" style="height: 120px;">
-                    <select id="campus" name="campus">
-                        <option value="" disabled selected hidden>Campus</option>
-                        <option value="option1">Khu cong nghe cao quan 9</option>
-                        <option value="option2">Nha van hoa sinh viên</option>
+                    <input type="text" name="name" placeholder="Tên sản phẩm">
+                    <input type="text" name="discriptions" placeholder="Mô tả sản phẩm" style="height: 120px;">
+                    <select id="listCampuses" style="font-family: 'Courier New', Courier, monospace">
+
                     </select>
-                    <input type="text" name="price" placeholder="Price">
+                    <input type="text" name="price" placeholder="Giá">
                   </div>
                 <div class="content-2">
                   <a href=""><img src="img/icon/uploadimg.png"></a>                 
                 </div>      
-                <input type="submit" name="submit"  value="Create" class="button"/>
+                <input type="submit" name="submit"  value="Tạo" class="button"/>
                  <a href="postProduct.html" class="button">
                   <span class="button-text">
-                     Cancle
+                     Hủy
                    </span>
                  </a>         
             </form>
