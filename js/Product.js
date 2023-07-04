@@ -143,7 +143,7 @@ async function getProductByName() {
 
 
   const renderProducts = (products) => {
-    
+
     const list = document.getElementById('searchProduct');
     if (list) {
       list.innerHTML = '';
@@ -157,7 +157,7 @@ async function getProductByName() {
         const img = document.createElement('img');
         img.src = result.image;
 
-        const h2 = document.createElement('h2');
+        const h2 = document.createElement('h5');
         h2.innerText = result.name;
 
         const h3 = document.createElement('p');
@@ -176,9 +176,9 @@ async function getProductByName() {
         divItem.addEventListener('click', () => {
           getProductDetail(divItem.dataset.key)
         })
-        
+
       });
-      
+
     } else {
       console.error("Phần tử searchProduct không tồn tại.");
     }
