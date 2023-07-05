@@ -11,3 +11,4 @@ function goToUSerPage() {
         document.getElementById('navbar-user').style.display = 'none';
     }
 }
+

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/head-footer.css" />
     <!--link này dùng chung cho header , footer-->
     <link rel="stylesheet" href="css/homepage.css" />
+    <script src="js/Login.js"></script>
     <title>Flea Shop</title>
   </head>
   <body>
@@ -26,46 +27,50 @@
           <div id="errorMessage" class="errorMessage"></div>
         </form>
       </div>
-    </div>
-    
-    <script>
-      const loginForm = document.getElementById("loginForm");
-      const errorMessage = document.getElementById("errorMessage");
+      <script>
+        const loginForm = document.getElementById("loginForm");
+        const errorMessage = document.getElementById("errorMessage");
 
-      loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
 
-        const username = loginForm.elements.username.value;
-        const password = loginForm.elements.password.value;
+        loginForm.addEventListener("submit", function (e) {
+          e.preventDefault();
 
-        // Gửi yêu cầu đăng nhập thông qua API
-        fetch("http://localhost:8080/Account/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `username=${encodeURIComponent(
-            username
-          )}&password=${encodeURIComponent(password)}`,
-        })
-          .then(function (response) {
-            if (response.ok) {
-              // Đăng nhập thành công
-              window.location.href = "adminpage.html";
-            } else if (response.status === 401) {
-              // Đăng nhập thất bại
-              errorMessage.textContent = "Invailid Username or Password";
-            } else {
-              // Xử lý các trường hợp lỗi khác
-              errorMessage.textContent = "Đã xảy ra lỗi";
-            }
+          const username = loginForm.elements.username.value;
+          const password = loginForm.elements.password.value;
+
+          // Gửi yêu cầu đăng nhập thông qua API
+          fetch("http://localhost:8080/Account/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `username=${encodeURIComponent(
+              username
+            )}&password=${encodeURIComponent(password)}`,
           })
-          .catch(function (error) {
-            console.error(error);
-          });
-      });
+            .then(function (response) {
+              if (response.ok) {
+                // Đăng nhập thành công
+                window.location.href = "adminpage.html";
+              } else if (response.status === 401) {
+                // Đăng nhập thất bại
+                errorMessage.textContent = "Invailid Username or Password";
+              } else {
+                // Xử lý các trường hợp lỗi khác
+                errorMessage.textContent = "Đã xảy ra lỗi";
+              }
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        });
+        function loginWithGoogle() {
+          // Chuyển hướng đến đường dẫn /login/google sau khi đăng nhập thành công
+          window.location.href = "/login/google";
+        }
+      </script>
+    </div>
 
-    </script>
   </body>
   <div class="container-fluid footer">
     Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh

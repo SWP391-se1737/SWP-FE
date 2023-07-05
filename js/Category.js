@@ -1,68 +1,17 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const clothingLink = document.getElementById('clothing');
-
-    clothingLink.addEventListener('click', function () {
-        const categoryId = 1;
-        const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-        window.location.href = testPageUrl;
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const electronicDeviceLink = document.getElementById('electronicDeviceLink');
-
-    electronicDeviceLink.addEventListener('click', function () {
-        const categoryId = 2;
-        const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-        window.location.href = testPageUrl;
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const shoeLink = document.getElementById('shoe');
-
-    shoeLink.addEventListener('click', function () {
-        const categoryId = 3;
-        const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-        window.location.href = testPageUrl;
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const accessoryLink = document.getElementById('accessory');
-
-    accessoryLink.addEventListener('click', function () {
-        const categoryId = 4;
-        const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-        window.location.href = testPageUrl;
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const otherLink = document.getElementById('other');
-
-    otherLink.addEventListener('click', function () {
-        const categoryId = 5;
-        const testPageUrl = `filter.html?category_id=${encodeURIComponent(categoryId)}`;
-        window.location.href = testPageUrl;
-    });
-});
-
 const getData = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("category_id");
     const response = await axios.get(
         `http://localhost:8080/product/filterProductByCategory?category_id=${id}`
     );
-    const products = response.data;
-    renderProducts(products);
+    const categories = response.data;
+    renderCategories(categories);
 };
-getData();
-const renderProducts = (products) => {
+const renderCategories = (categories) => {
     const list = document.getElementById("listDetail");
     if (list) {
         list.innerHTML = "";
-        products.forEach((result) => {
+        categories.forEach((result) => {
             // Tạo phần tử và thiết lập nội dung
             // ...
             // Thêm phần tử vào danh sách
@@ -99,6 +48,79 @@ const renderProducts = (products) => {
         console.error("Phần tử searchProduct không tồn tại.");
     }
 };
+getData();
+
+async function getCategory() {
+    const list = document.getElementById('listCategories');
+    let originalData = [];
+
+    try {
+        const response = await axios.get('http://localhost:8080/Category/listCategory');
+        const filteredData = response.data;
+        renderCategory(filteredData);
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+    }
+}
+const renderCategory = (categories) => {
+    const list = document.getElementById("listCategories");
+    if (list) {
+        list.innerHTML = ""; // Xóa bỏ các nút ấn cũ (nếu có)
+
+        categories.forEach((result) => {
+            const listItem = document.createElement("li");
+
+            const category_id = result.id;
+            const a = document.createElement("a");
+            a.innerText = result.name;
+            a.href = `filter.html?category_id=${encodeURIComponent(category_id)}`;
+
+            listItem.appendChild(a);
+
+            list.appendChild(listItem);
+        });
+    } else {
+        console.error("Phần tử listCategories không tồn tại.");
+    }
+};
+getCategory();
+
+
+async function optionCategory() {
+    const list = document.getElementById('optionCategory');
+    let originalData = [];
+
+    try {
+        const response = await axios.get('http://localhost:8080/Category/listCategory');
+        const filteredData = response.data;
+        renderOptionCategory(filteredData);
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+    }
+}
+const renderOptionCategory = (categories) => {
+    const select = document.getElementById("optionCategory");
+    if (select) {
+        select.innerHTML = ""; // Xóa bỏ các tùy chọn cũ (nếu có)
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "0";
+        defaultOption.innerText = "Phân loại";
+        select.appendChild(defaultOption);
+
+        categories.forEach((result) => {
+            const option = document.createElement("option");
+            option.value = result.id;
+            option.innerText = result.name;
+
+            select.appendChild(option);
+        });
+    } else {
+        console.error("Phần tử optionCategory không tồn tại.");
+    }
+};
+optionCategory();
+
+
 
 
 
