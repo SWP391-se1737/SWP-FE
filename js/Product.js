@@ -157,7 +157,7 @@ async function getProductByName() {
         const img = document.createElement('img');
         img.src = result.image;
 
-        const h2 = document.createElement('h2');
+        const h2 = document.createElement('h5');
         h2.innerText = result.name;
 
         const h3 = document.createElement('p');
@@ -165,6 +165,8 @@ async function getProductByName() {
 
         const p = document.createElement('p');
         p.innerText = result.status;
+
+
 
         divItem.appendChild(img);
         divItem.appendChild(h2);
