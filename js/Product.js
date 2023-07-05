@@ -166,6 +166,8 @@ async function getProductByName() {
         const p = document.createElement('p');
         p.innerText = result.status;
 
+
+
         divItem.appendChild(img);
         divItem.appendChild(h2);
         divItem.appendChild(h3);

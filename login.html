@@ -31,6 +31,7 @@
         const loginForm = document.getElementById("loginForm");
         const errorMessage = document.getElementById("errorMessage");
 
+
         loginForm.addEventListener("submit", function (e) {
           e.preventDefault();
 
@@ -63,13 +64,13 @@
               console.error(error);
             });
         });
-
         function loginWithGoogle() {
           // Chuyển hướng đến đường dẫn /login/google sau khi đăng nhập thành công
           window.location.href = "/login/google";
         }
       </script>
     </div>
+
   </body>
   <div class="container-fluid footer">
     Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh
