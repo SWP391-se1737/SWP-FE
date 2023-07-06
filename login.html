@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/head-footer.css" />
     <!--link này dùng chung cho header , footer-->
     <link rel="stylesheet" href="css/homepage.css" />
-    <script src="js/Login.js"></script>
     <title>Flea Shop</title>
   </head>
   <body>
@@ -23,54 +22,108 @@
           <input type="text" name="username" placeholder="Username" />
           <input type="password" name="password" placeholder="Password" />
           <button type="submit">Login</button>
-          <button onclick="loginWithGoogle()">Login with Google</button>
+          <button class="logingg2" id="logingg">Login with Google</button>
           <div id="errorMessage" class="errorMessage"></div>
         </form>
       </div>
-      <script>
-        const loginForm = document.getElementById("loginForm");
-        const errorMessage = document.getElementById("errorMessage");
-
-
-        loginForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const username = loginForm.elements.username.value;
-          const password = loginForm.elements.password.value;
-
-          // Gửi yêu cầu đăng nhập thông qua API
-          fetch("http://localhost:8080/Account/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `username=${encodeURIComponent(
-              username
-            )}&password=${encodeURIComponent(password)}`,
-          })
-            .then(function (response) {
-              if (response.ok) {
-                // Đăng nhập thành công
-                window.location.href = "adminpage.html";
-              } else if (response.status === 401) {
-                // Đăng nhập thất bại
-                errorMessage.textContent = "Invailid Username or Password";
-              } else {
-                // Xử lý các trường hợp lỗi khác
-                errorMessage.textContent = "Đã xảy ra lỗi";
-              }
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
-        });
-        function loginWithGoogle() {
-          // Chuyển hướng đến đường dẫn /login/google sau khi đăng nhập thành công
-          window.location.href = "/login/google";
-        }
-      </script>
+      
     </div>
 
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+
+      // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+
+      // Add Firebase products that you want to use
+      import {
+        getAuth,
+        GoogleAuthProvider,
+        getRedirectResult,
+        signInWithRedirect
+      } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCbhm_w0zzUI-rhlGXxgnV_gs1HFt3U4yo",
+        authDomain: "login-384608.firebaseapp.com",
+        // authDomain: "127.0.0.1:5500",
+        projectId: "logingmail-384608",
+        storageBucket: "logingmail-384608.appspot.com",
+        messagingSenderId: "97635408020",
+        appId: "1:97635408020:web:6300750200017212807c81",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider(app);
+
+      logingg.addEventListener("click", (e) => {
+        signInWithRedirect(auth, provider);
+      });
+
+      getRedirectResult(auth)
+        .then((result) => {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential ? credential.accessToken : null;
+          const user = result.user;
+
+          // Xử lý thành công đăng nhập
+          // Ví dụ: hiển thị thông tin người dùng đã đăng nhập
+          const displayName = user.displayName;
+          const email = user.email;
+          console.log("Logged in user:", displayName, email);
+        })
+        .catch((error) => {
+          // Xử lý lỗi đăng nhập
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error("Login error:", errorCode, errorMessage);
+        });
+    </script>
+
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const errorMessage = document.getElementById("errorMessage");
+
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const username = loginForm.elements.username.value;
+        const password = loginForm.elements.password.value;
+
+        // Gửi yêu cầu đăng nhập thông qua API
+        fetch("http://localhost:8080/Account/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: `username=${encodeURIComponent(
+            username
+          )}&password=${encodeURIComponent(password)}`,
+        })
+          .then(function (response) {
+            if (response.ok) {
+              // Đăng nhập thành công
+              window.location.href = "adminpage.html";
+            } else if (response.status === 401) {
+              // Đăng nhập thất bại
+              errorMessage.textContent = "Invailid Username or Password";
+            } else {
+              // Xử lý các trường hợp lỗi khác
+              errorMessage.textContent = "Đã xảy ra lỗi";
+            }
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
+    </script>
   </body>
   <div class="container-fluid footer">
     Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh
