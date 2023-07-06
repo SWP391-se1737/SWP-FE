@@ -3,6 +3,13 @@
     margin-top: 0px;
     margin-bottom: cm;
  }
+ .navbar {
+   position: fixed;
+   top: 0;
+   width: 100%;
+   z-index: 9999;
+   background-color: #ffffff;
+ }
  .container-fluid{
     padding: 0px;
  }
@@ -85,13 +92,12 @@
     background-size: 171px 47px;
  }
  
- 
- 
- 
  /* footer */
+
  .footer{
+   margin-top: 20px;
    min-height: 100%;
-   background-color: #e7e5e5;
+   background-color: #ffbc6e;
    text-align: center;
    height: 2cm;
    padding-top: 0.4cm;

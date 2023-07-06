@@ -147,12 +147,13 @@ async function getProductByName() {
     const list = document.getElementById('searchProduct');
     if (list) {
       list.innerHTML = '';
-      products.forEach(result => {
+      const availableProducts = products.filter((result) => result.status === 'Còn hàng');
+
+      availableProducts.forEach((result) => {
         const productId = result.id;
         const divItem = document.createElement('div');
         divItem.classList.add(`detail`);
         divItem.dataset.key = productId;
-
 
         const img = document.createElement('img');
         img.src = result.image;
@@ -161,19 +162,28 @@ async function getProductByName() {
         h2.innerText = result.name;
 
         const h3 = document.createElement('p');
-        h3.innerText = result.price;
+        h3.innerText = result.price.toLocaleString();
+        h3.classList.add('price');
 
-        const p = document.createElement('p');
-        p.innerText = result.status;
+        const addToCartButton = document.createElement("button");
+        addToCartButton.innerText = "Thêm vào giỏ hàng";
+        addToCartButton.classList.add("round-black-btn");
+
+        addToCartButton.addEventListener("click", () => {
+          // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
+          // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
+          addToCart(productId);
+        });
 
 
 
         divItem.appendChild(img);
         divItem.appendChild(h2);
         divItem.appendChild(h3);
-        divItem.appendChild(p);
+        divItem.appendChild(addToCartButton);
 
         list.appendChild(divItem);
+
 
         divItem.addEventListener('click', () => {
           getProductDetail(divItem.dataset.key)

@@ -1,4 +1,4 @@
-async function getCampus() {
+async function optionCampus() {
     const list = document.getElementById('listCampuses');
     let originalData = [];
 
@@ -30,4 +30,4 @@ const renderCampus = (campuses) => {
         console.error("Phần tử listCampuses không tồn tại.");
     }
 };
-getCampus();
+optionCampus();
