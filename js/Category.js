@@ -4,14 +4,16 @@ const getData = async () => {
     const response = await axios.get(
         `http://localhost:8080/product/filterProductByCategory?category_id=${id}`
     );
-    const categories = response.data;
-    renderCategories(categories);
+    const products = response.data;
+    renderProducts(products);
 };
-const renderCategories = (categories) => {
+const renderProducts = (products) => {
     const list = document.getElementById("listDetail");
     if (list) {
         list.innerHTML = "";
-        categories.forEach((result) => {
+        const availableProducts = products.filter((result) => result.status === 'Còn hàng');
+
+        availableProducts.forEach((result) => {
             // Tạo phần tử và thiết lập nội dung
             // ...
             // Thêm phần tử vào danh sách
@@ -21,27 +23,35 @@ const renderCategories = (categories) => {
             divItem.classList.add(`detail`);
             divItem.dataset.key = productId;
 
-            const img = document.createElement("img");
+            const img = document.createElement('img');
             img.src = result.image;
 
-            const h2 = document.createElement("h2");
+            const h2 = document.createElement('h5');
             h2.innerText = result.name;
 
-            const h3 = document.createElement("p");
-            h3.innerText = result.price;
+            const h3 = document.createElement('p');
+            h3.innerText = result.price.toLocaleString();
+            h3.classList.add('price');
 
-            const p = document.createElement("p");
-            p.innerText = result.status;
+            const addToCartButton = document.createElement("button");
+            addToCartButton.innerText = "Thêm vào giỏ hàng";
+            addToCartButton.classList.add("round-black-btn");
+
+            addToCartButton.addEventListener("click", () => {
+                // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
+                // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
+                addToCart(productId);
+            });
 
             divItem.appendChild(img);
             divItem.appendChild(h2);
             divItem.appendChild(h3);
-            divItem.appendChild(p);
+            divItem.appendChild(addToCartButton);
 
             list.appendChild(divItem);
 
             divItem.addEventListener("click", () => {
-                getProductDetail(divItem.dataset.key);
+                ProductDetail(divItem.dataset.key);
             });
         });
     } else {
@@ -49,6 +59,11 @@ const renderCategories = (categories) => {
     }
 };
 getData();
+const ProductDetail = async (productId) => {
+    // const response = await axios.get(`http://localhost:8080/product/getProductById/${productId}`);
+    const testPageUrl = `productDetail.html?id=${encodeURIComponent(productId)}`;
+    window.location.href = testPageUrl;
+}
 
 async function getCategory() {
     const list = document.getElementById('listCategories');

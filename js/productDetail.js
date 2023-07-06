@@ -27,38 +27,46 @@ const renderProducts = (product) => {
         const h2 = document.createElement("h2");
         h2.innerText = product.name;
 
-        const h3 = document.createElement("h3");
-        h3.innerText = product.price;
+        const h3 = document.createElement('p');
+        h3.innerText = product.price.toLocaleString();
+        h3.classList.add('price');
 
         const p = document.createElement("p");
-        p.innerText = product.description;
+        const strong = document.createElement("strong");
+        strong.innerText = "Mô tả: ";
+        p.appendChild(strong);
+        p.appendChild(document.createTextNode(product.description));
+        p.appendChild(document.createElement("br"));
 
         const p2 = document.createElement("p");
-        p2.innerText = product.sellcampus_id;
+        const strong1 = document.createElement("strong");
+        strong1.innerText = "Bán tại campus: ";
+        p2.appendChild(strong1);
+        p2.appendChild(document.createTextNode(product.sellcampus_id));
 
-        const quantityLabel = document.createElement("p");
-        quantityLabel.innerText = "Quantity:";
-
-        const quantityValue = document.createElement("p");
-        quantityValue.innerText = 2;
+        const p3 = document.createElement("p");
+        const strong2 = document.createElement("strong");
+        strong2.innerText = "Số lượng: ";
+        p3.appendChild(strong2);
+        p3.appendChild(document.createTextNode(product.quantity));
 
         const addToCartButton = document.createElement("button");
-        addToCartButton.innerText = "Add to Cart";
+        addToCartButton.innerText = "Thêm vào giỏ hàng";
         addToCartButton.classList.add("round-black-btn");
 
         addToCartButton.addEventListener("click", () => {
             // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
             // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
             addToCart(productId);
-            
+
         });
 
         infoDiv.appendChild(h2);
         infoDiv.appendChild(h3);
         infoDiv.appendChild(p);
         infoDiv.appendChild(p2);
-        infoDiv.appendChild(quantityLabel);
-        infoDiv.appendChild(quantityValue);
+        infoDiv.appendChild(p3);
+        infoDiv.appendChild(document.createElement("br"));
         infoDiv.appendChild(addToCartButton);
 
         // Thêm các thẻ div vào list
@@ -77,4 +85,4 @@ const renderProducts = (product) => {
 const addToCart = async (productId) => {
     const btn = document.querySelectorAll("button")
     console.log(btn)
-  }
+}

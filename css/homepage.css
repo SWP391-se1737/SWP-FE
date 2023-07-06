@@ -240,13 +240,12 @@
      cursor: pointer;
  }
  .sidebar {
-    width: 90px; /* Điều chỉnh độ rộng của thanh menu */
+    width: 232px; /* Điều chỉnh độ rộng của thanh menu */
     float: left; /* Đưa thanh menu sang bên phải */
-    margin-right: 5px; /* Điều chỉnh khoảng cách giữa thanh menu và nội dung chính */
-    margin-right: 0px;
+    margin-left: 64px;
   }
   section.container {
-    margin-left: 0px;
+    padding: 0px;
     margin-right: 0px;
   }
  .product-count .qtyminus {
@@ -290,14 +289,54 @@
 .listProduct{
     display: flex; /* Sử dụng flexbox để xếp các phần tử con theo hàng ngang */
   flex-wrap: wrap; /* Cho phép các phần tử con xuống dòng khi không đủ không gian */
-  justify-content: center; /* Căn giữa các phần tử con theo chiều ngang */
+  justify-content: lefts; /* Căn giữa các phần tử con theo chiều ngang */
   width: 1200px;
+}
+.round-black-btn {
+    border-radius: 4px;
+    background: #689F38;
+    color: #fff;
+    padding: 7px 45px;
+    display: inline-block;
+    margin-top: -5px;
+    border: solid 2px #689F38;
+    transition: all 0.5s ease-in-out 0s;
+    text-decoration: none;
+}
+.detail h5{
+    margin-top: 4px;
+    text-align: left;
+    padding-left: 30px;
+}
+.detail p{
+    text-align: left;
+    padding-left: 30px;
 }
 .detail {
     width: 280px;
     height: 330px;
-    box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5); /* Sửa giá trị rgba */
     border-radius: 10px;
+    box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5); /* Sửa giá trị rgba */
+
+    text-align: center;
+    background-color: white;
+    margin: 10px;
+}
+.price{
+    color: red; 
+    font-weight: bold;
+}
+.price::after {
+    content: " ₫";
+    color: red; 
+    font-weight: bold;
+  }
+ a.but.detail {
+    width: 280px;
+    height: 330px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5); /* Sửa giá trị rgba */
+
     text-align: center;
     background-color: white;
     margin: 10px;
@@ -305,7 +344,7 @@
  a.button{
     display: inline-block;
     padding: 8px 16px;
-    background-color: #fea353;
+    background-color: #ffbc6e;
     text-decoration: none;
     border-radius: 20px;
  }
@@ -315,3 +354,29 @@
  /*  END PRODUCT DETAILS */
  
  /* search  */
+ div#productDetail{
+    margin-top: 90px;
+ }
+ #listCategories {
+    width: 180px;
+    list-style-type: none;
+    padding: 0;
+    display: block;
+    padding: 10px;
+    background-color: #ffd6aa;
+  }
+  
+  #listCategories li {
+    margin-bottom: 10px;
+  }
+  
+  #listCategories li a {
+    text-decoration: none;
+    color: #333;
+    background-color: #ffd6aa;
+    transition: background-color 0.3s ease;
+  }
+  
+  #listCategories li a:hover {
+    background-color: #e0e0e0;
+  }
