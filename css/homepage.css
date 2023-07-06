@@ -284,6 +284,7 @@
  }
  .detail img:hover{
     transform: scale(1.04) rotate(0deg);
+
  }
  
 .listProduct{
@@ -336,7 +337,6 @@
     height: 330px;
     border-radius: 10px;
     box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5); /* Sửa giá trị rgba */
-
     text-align: center;
     background-color: white;
     margin: 10px;

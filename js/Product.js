@@ -175,6 +175,8 @@ async function getProductByName() {
           addToCart(productId);
         });
 
+
+
         divItem.appendChild(img);
         divItem.appendChild(h2);
         divItem.appendChild(h3);
