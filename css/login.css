@@ -1,18 +1,22 @@
 .login{
     width: 430px;
-    height: 380px;
+    height: 280px;
     border: 1px solid grey;
     border-radius: 30px;
     text-align: center;
-    background-color: white
-    
-    
+    background-color: white;
+    margin-right: 50px;
+    margin-left: 50px;
+}
+.login p{
+    font-size: 30px;
+    font-weight: bold;
 }
 .container{
     display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin-top: 80px;
 }
 body{
     background-color: rgb(255, 229, 192);

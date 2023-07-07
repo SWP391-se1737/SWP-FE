@@ -185,7 +185,7 @@ async function getProductByName() {
         list.appendChild(divItem);
 
 
-        divItem.addEventListener('click', () => {
+        img.addEventListener('click', () => {
           getProductDetail(divItem.dataset.key)
         })
 

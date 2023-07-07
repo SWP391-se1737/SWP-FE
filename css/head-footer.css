@@ -101,6 +101,8 @@
    text-align: center;
    height: 2cm;
    padding-top: 0.4cm;
+   position: relative !important;
+   bottom: 0 !important;
  }
  
  

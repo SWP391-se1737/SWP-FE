@@ -42,7 +42,7 @@ const renderProducts = (product) => {
         const strong1 = document.createElement("strong");
         strong1.innerText = "Bán tại campus: ";
         p2.appendChild(strong1);
-        p2.appendChild(document.createTextNode(product.sellcampus_id));
+        p2.appendChild(document.createTextNode(product.sellcampusid));
 
         const p3 = document.createElement("p");
         const strong2 = document.createElement("strong");
@@ -86,19 +86,19 @@ const addToCart = async (productId) => {
     const btn = document.querySelectorAll("button")
 
     //console.log(btn)
-    btn.forEach(function(button,index){
-       button.addEventListener("click", function(event){
-        var btnItem = event.target
-        var productDetail = btnItem.closest(".productDetail");
-        var productImg = productDetail.querySelector("img").src
-        var productName = productDetail.querySelector("h2").innerText
-        var productPrice = productDetail.querySelector("h3").innerText
-        addCart(productPrice,productImg,productName)
-       });
+    btn.forEach(function (button, index) {
+        button.addEventListener("click", function (event) {
+            var btnItem = event.target
+            var productDetail = btnItem.closest(".productDetail");
+            var productImg = productDetail.querySelector("img").src
+            var productName = productDetail.querySelector("h2").innerText
+            var productPrice = productDetail.querySelector("h3").innerText
+            addCart(productPrice, productImg, productName)
+        });
     });
-  };
+};
 
-  const addCart = (price, image, name) => {
+const addCart = (price, image, name) => {
     const productCart = document.getElementById("productDetail");
 
     if (productCart) {
@@ -124,4 +124,4 @@ const addToCart = async (productId) => {
     }
 };
 
-  
+
