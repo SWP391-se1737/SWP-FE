@@ -81,11 +81,11 @@
                     </a>
                 </li>
                 <li>
-                    <a href="manageCategory.html">
+                    <a href="managecampus.html">
                         <span class="icon">
                             <ion-icon name="reorder-three-outline"></ion-icon>
                         </span>
-                        <span class="title">Category</span>
+                        <span class="title">campus</span>
                     </a>
                 </li>
                 <li>
@@ -151,10 +151,21 @@
                     <div class="cardHeader">
                         <h2>Add new campus</h2> 
                     </div>
-                    <label>
-                        <input type="text">
-                        <a href="#" class="btn">Add</a>
-                    </label>
+                    <form action="" id="campus-form" autocomplete="off">
+                        <label for="campusName">Campus Name</label>
+                        <input class="form-control" type="text" id="campusName" placeholder="Enter campus Name"></br>
+
+                        <label for="campusAddress">Campus Address</label>
+                        <input class="form-control" type="text" id="campusAddress" placeholder="Enter Address Name"></br>
+
+                        <label for="campusLatitude">Campus Latitude</label>
+                        <input class="form-control" type="text" id="campusLatitude" placeholder="Enter Latitude Name"></br>
+
+                        <label for="campusLongitude">Campus Longitude</label>
+                        <input class="form-control" type="text" id="campusLongitude" placeholder="Enter Longitude Name">
+                        
+                    <a href="#" class="add">Add</a>
+                </form>
                 </div>
             </div>    
         </div>

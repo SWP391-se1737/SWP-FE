@@ -1,6 +1,7 @@
 async function getCategoryList() {
     const response = await axios.get('http://localhost:8080/Category/listCategory');
       categories = response.data;
+      console.log(categories);
       let tableData="";
       categories.map(categories =>{
                 tableData+= `<tr>
@@ -30,11 +31,11 @@ document.querySelector("#category-form").addEventListener("click", (e)=>{
 document.querySelector("#category-list").addEventListener("click", (e)=>{
   target = e.target;
   if(target.classList.contains("delete")){
-    const categoryName = document.getElementById("categoryName");
-    console.log(categoryName);
+    const categoryID = document.getElementById("categoryID");
+    console.log(categoryID);
     // const categoryName = categoryName.elements.categoryName.value;
-    axios.delete('http://localhost:8080/Category/deleteCategory', {
-    name : categoryName
+    axios.delete('http://localhost:8080/Category/deleteCategory/{categoryID}', {
+      
   })
   }
 });

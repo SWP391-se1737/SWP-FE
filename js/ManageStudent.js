@@ -16,7 +16,7 @@ async function getStudentList() {
             // </tr>`;
             tableData += `<tr>
             <td id="studentEmail" value="${students.email}">${students.email}</td>
-            <td>${students.id}</td>
+            <td id="studentID">${students.id}</td>
             <td>${students.name}</td>
             <td>${students.phone}</td>
             <td>${students.role}</td>
@@ -32,12 +32,10 @@ getStudentList();
 document.querySelector("#student-list").addEventListener("click", (e)=>{
     target = e.target;
     if(target.classList.contains("delete")){
-      const studentEmail = document.getElementById("studentEmail");
-      console.log(studentEmail);
-      const studentEmail1 = studentEmail.elements.studentEmail.value;
-      console.log(studentEmail1);
-      axios.delete('http://localhost:8080/Account/deleteAccount/', {
-      email : studentEmail
+      const studentEmail = document.getElementById("studentID");
+      console.log(studentID);
+      axios.delete('http://localhost:8080//Account/deleteAccount/6', {
+        id : '6'
     })
     }
   });
