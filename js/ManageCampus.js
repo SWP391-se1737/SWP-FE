@@ -14,6 +14,6 @@ async function getCampusList() {
                       <td><button>Delete</button></td>
                     </tr>`;
                 });
-                document.getElementById("table_body").innerHTML=tableData;
+                document.getElementById("campus-list").innerHTML=tableData;
     }
     getCampusList();

@@ -3,7 +3,7 @@ async function getStaffList() {
     staffs = response.data;
     console.log(staffs);
     let tableData = "";
-    staffs.map(staffs => {
+    staffs.forEach(staffs => {
         if (staffs.role == ("Staff")) {
             tableData += `<tr>
             <td>${staffs.email}</td>
@@ -16,6 +16,6 @@ async function getStaffList() {
             </tr>`;
         }
     });
-    document.getElementById("table_body").innerHTML = tableData;
+    document.getElementById("staff-list").innerHTML= tableData;
 }
 getStaffList();
