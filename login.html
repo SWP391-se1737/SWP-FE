@@ -73,23 +73,78 @@
       });
 
       getRedirectResult(auth)
-        .then((result) => {
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          const token = credential ? credential.accessToken : null;
-          const user = result.user;
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential ? credential.accessToken : null;
+    const user = result.user;
 
-          // Xử lý thành công đăng nhập
-          // Ví dụ: hiển thị thông tin người dùng đã đăng nhập
-          const displayName = user.displayName;
-          const email = user.email;
-          console.log("Logged in user:", displayName, email);
+    // Lấy thông tin cần thiết
+    const displayName = user.displayName;
+    const email = user.email;
+
+    // Kiểm tra địa chỉ email
+    if (email.endsWith('@fpt.edu.vn')) {
+      // Người dùng có đuôi email "@fpt.edu.vn"
+
+      // Gọi API phía máy chủ để kiểm tra tài khoản
+      const searchAccountByEmailApiUrl = "http://localhost:8080/Account/searchAccountByName?email=" + email;
+
+      fetch(searchAccountByEmailApiUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+
+          // Kiểm tra phản hồi từ máy chủ để xác định tài khoản đã tồn tại hay chưa
+          const exists = data.exists;
+          if (exists) {
+            console.log("Tài khoản đã tồn tại. Không thêm vào cơ sở dữ liệu.");
+            // Hoặc hiển thị thông báo không thêm vào cơ sở dữ liệu
+            // ...
+            window.location.href = "studentHomepage.html";
+          } else {
+            console.log("Tài khoản chưa tồn tại. Thêm vào cơ sở dữ liệu.");
+
+            // Gọi API phía máy chủ để thêm tài khoản
+            const addAccountApiUrl = "http://localhost:8080/Account/addAccount";
+
+            const requestData = {
+              email: email,
+              token: token,
+              role: "Student",
+              status: "true"
+            };
+
+            fetch(addAccountApiUrl, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestData),
+            })
+              .then((response) => response.text())
+              .then((data) => {
+                console.log(data); // Ghi log phản hồi từ máy chủ
+                window.location.href = "studentHomepage.html";
+              })
+              .catch((error) => {
+                console.error("Lỗi API:", error);
+              });
+          }
         })
         .catch((error) => {
-          // Xử lý lỗi đăng nhập
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.error("Login error:", errorCode, errorMessage);
+          console.error("Lỗi API:", error);
         });
+    } else {
+      // Người dùng không có đuôi email "@fpt.edu.vn"
+      console.error("Địa chỉ email không hợp lệ.");
+      errorMessage.textContent = "Địa chỉ email không hợp lệ.";
+      // Hoặc hiển thị thông báo không cho phép đăng nhập
+      // ...
+    }
+  })
+  .catch((error) => {
+    console.error("Lỗi đăng nhập:", error.code, error.message);
+  });
     </script>
 
     <script>
