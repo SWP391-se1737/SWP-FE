@@ -2,13 +2,13 @@ const getData = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("category_id");
     const response = await axios.get(
-        `http://localhost:8080/product/filterProductByCategory?category_id=${id}`
+        `http://localhost:8080/product/filterProductByCategory?categoryid=${id}`
     );
     const products = response.data;
     renderProducts(products);
 };
 const renderProducts = (products) => {
-    const list = document.getElementById("listDetail");
+    const list = document.getElementById("listProduct");
     if (list) {
         list.innerHTML = "";
         const availableProducts = products.filter((result) => result.status === 'Còn hàng');
@@ -50,7 +50,7 @@ const renderProducts = (products) => {
 
             list.appendChild(divItem);
 
-            divItem.addEventListener("click", () => {
+            img.addEventListener("click", () => {
                 ProductDetail(divItem.dataset.key);
             });
         });
