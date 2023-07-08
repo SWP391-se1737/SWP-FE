@@ -33,4 +33,5 @@ document.querySelector("#campus-form").addEventListener("click", (e)=>{
       latitude : campusLatitude
   })
   }
+  getCampusList();
 });

@@ -26,16 +26,5 @@ document.querySelector("#category-form").addEventListener("click", (e)=>{
       status : 'true'
   })
   }
-});
-
-document.querySelector("#category-list").addEventListener("click", (e)=>{
-  target = e.target;
-  if(target.classList.contains("delete")){
-    const categoryID = document.getElementById("categoryID");
-    console.log(categoryID);
-    // const categoryName = categoryName.elements.categoryName.value;
-    axios.delete('http://localhost:8080/Category/deleteCategory/{categoryID}', {
-      
-  })
-  }
+  getCategoryList();
 });
