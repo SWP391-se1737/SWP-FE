@@ -16,19 +16,21 @@ async function getStudentList() {
             else {
                 tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + student.email + "` , `" + student.id + "`  , `" + student.phone + "` , `" + student.role + "` , `" + student.status + "`)'>Active</button></td>";
             }
+            tableData += "</tr>";
         }   
     });
     document.getElementById("student-list").innerHTML = tableData;
 }
 getStudentList();
 
-function setStatusInActive(email, id, phone, role, status) {
+function setStatusInActive(email, id, phone, role) {
     axios.put('http://localhost:8080/Account/updateAccount/' +id, {
         email : email,
         phone : phone,
         role : role,
         status : false
     })
+    getStudentList();
     getStudentList();
 }
 
@@ -40,5 +42,6 @@ function setStatusActive(email, id, phone, role) {
         role : role,
         status : true
     })
+    getStudentList();
     getStudentList();
 }

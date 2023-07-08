@@ -587,6 +587,34 @@ body{
     padding: 10px;
 }
 
+
+.details .orders table tr{
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.details .orders table tr .btn{
+    position: relative;
+    padding: 5px 10px;
+    background: var(--orange);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}
+
+.details .orders table tr:last-child{
+    border-bottom: none;
+}
+
+.details .orders table tbody tr:hover{
+    background: var(--orange);
+    color: var(--white);
+}
+
+.details .orders table tr td{
+    padding: 5px;
+}
+
 img {
     width: 100px;
 }
