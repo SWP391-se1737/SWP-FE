@@ -165,14 +165,14 @@ async function getProductByName() {
         h3.innerText = result.price.toLocaleString();
         h3.classList.add('price');
 
-        const addToCartButton = document.createElement("button");
-        addToCartButton.innerText = "Thêm vào giỏ hàng";
-        addToCartButton.classList.add("round-black-btn");
+        const buytButton = document.createElement("button");
+        buytButton.innerText = "Mua ngay";
+        buytButton.classList.add("round-black-btn");
 
-        addToCartButton.addEventListener("click", () => {
+        buytButton.addEventListener("click", () => {
           // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
           // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
-          addToCart(productId);
+          buyProduct(productId);
         });
 
 
@@ -180,7 +180,7 @@ async function getProductByName() {
         divItem.appendChild(img);
         divItem.appendChild(h2);
         divItem.appendChild(h3);
-        divItem.appendChild(addToCartButton);
+        divItem.appendChild(buytButton);
 
         list.appendChild(divItem);
 

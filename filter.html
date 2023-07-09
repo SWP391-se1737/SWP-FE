@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="css/head-footer.css">
   <link rel="stylesheet" href="css/homepage.css">
   <link rel="stylesheet" type="text/css" href="css/listProduct.css">
-  <script src="js/Login.js"></script>
   <title>Flea Shop</title>
 </head>
 
@@ -28,14 +27,65 @@
       <form class="d-flex" role="search">    
         <input id="searchbar" onkeyup="search_animal()"  name="search" class="form-control me-2" type="search" placeholder="Tìm sản phẩm" aria-label="Search">
         <a href="searchproduct.html" class="btn"><i class="fa-solid fa-magnifying-glass"></i></a>
-        <a href="shopping-cart.html" class="ping"><i class="fa-solid fa-cart-shopping"></i><span
-            class="qtycart">0</span></a>
+        <!-- <a href="shopping-cart.html" class="ping"><i class="fa-solid fa-cart-shopping"></i><span
+            class="qtycart">0</span></a> -->
       </form>
       <a href="postProduct.html" class="button">
        <span class="button-text" style="font-family: 'Courier New', Courier, monospace; font-weight: bold;">
           Đăng tin
         </span>
-        <a href="login.html" class="ping"><i class="fa-solid fa-user"></i></a>
+        <a href="#" class="ping" id="menuTrigger"><i class="fas fa-user"></i></a>
+        <div id="sidebar">
+          <ul>
+            <li id="loginItem"><a href="login.html">Đăng nhập</a></li>
+            <li id="walletItem"><a href="wallet.html">Ví</a></li>
+            <li id="ordersItem"><a href="orders.html">Đơn đã mua</a></li>
+            <li id="salesItem"><a href="sales.html">Đơn đã bán</a></li>
+            <li id="transactionsItem"><a href="transactions.html">Giao dịch đã thực hiện</a></li>
+            <li id="logoutItem" style="display: none;"><a href="#" onclick="logout()">Đăng xuất</a></li>
+          </ul>
+        </div>
+
+        <script>
+          // Lấy phần tử nút trigger và phần tử menu dọc
+          const menuTrigger = document.getElementById("menuTrigger");
+          const sidebar = document.getElementById("sidebar");
+          var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+          var accid = sessionStorage.getItem('id');
+
+          // Xác định trạng thái menu (ẩn/hiển thị)
+          let isSidebarOpen = false;
+
+          // Xử lý sự kiện nhấp chuột vào nút trigger
+          menuTrigger.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Đảo ngược trạng thái menu và cập nhật giao diện
+            isSidebarOpen = !isSidebarOpen;
+            if (isSidebarOpen) {
+              sidebar.classList.add("open"); // Thêm lớp "open" để hiển thị sidebar
+              if (isLoggedIn === "true") {
+                // Đã đăng nhập
+                document.getElementById("loginItem").style.display = "none";
+                document.getElementById("walletItem").style.display = "block";
+                document.getElementById("ordersItem").style.display = "block";
+                document.getElementById("salesItem").style.display = "block";
+                document.getElementById("transactionsItem").style.display = "block";
+                document.getElementById("logoutItem").style.display = "block";
+              } else {
+                // Chưa đăng nhập
+                document.getElementById("loginItem").style.display = "block";
+                document.getElementById("walletItem").style.display = "none";
+                document.getElementById("ordersItem").style.display = "none";
+                document.getElementById("salesItem").style.display = "none";
+                document.getElementById("transactionsItem").style.display = "none";
+                document.getElementById("logoutItem").style.display = "none";
+              }
+            } else {
+              sidebar.classList.remove("open"); // Xóa lớp "open" để ẩn sidebar
+            }
+          });
+        </script>
     </div>
   </nav>
   <div class="content"></div>

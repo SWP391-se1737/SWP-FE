@@ -33,20 +33,20 @@ const renderProducts = (products) => {
             h3.innerText = result.price.toLocaleString();
             h3.classList.add('price');
 
-            const addToCartButton = document.createElement("button");
-            addToCartButton.innerText = "Thêm vào giỏ hàng";
-            addToCartButton.classList.add("round-black-btn");
+            const buyButton = document.createElement("button");
+            buyButton.innerText = "Mua ngay";
+            buyButton.classList.add("round-black-btn");
 
-            addToCartButton.addEventListener("click", () => {
-                // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
+            buyButton.addEventListener("click", () => {
+                // Thực hiện các hành động khi nhấp vào nút "Mua ngay"
                 // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
-                addToCart(productId);
+                buyProduct(productId);
             });
 
             divItem.appendChild(img);
             divItem.appendChild(h2);
             divItem.appendChild(h3);
-            divItem.appendChild(addToCartButton);
+            divItem.appendChild(buyButton);
 
             list.appendChild(divItem);
 
