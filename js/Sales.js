@@ -5,13 +5,13 @@ const getData = async () => {
     try {
         const response = await axios.get(`http://localhost:8080/product/getProductBySellerId?seller_id=${accid}`);
         const filteredData = response.data;
-        renderOrders(filteredData);
+        renderSales(filteredData);
     } catch (error) {
         console.error("Error fetching account:", error);
     }
 };
 getData();
-const renderOrders = async (product) => {
+const renderSales = async (product) => {
     const list = document.getElementById("listSale");
     if (list) {
         list.innerHTML = "";

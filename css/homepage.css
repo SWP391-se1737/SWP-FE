@@ -376,14 +376,34 @@
     background-color: #ffd6aa;
     transition: background-color 0.3s ease;
   }
-  
-  #listCategories li a:hover {
-    background-color: #e0e0e0;
-  }
   #sidebar {
-    display: none;
-    /* Các thuộc tính khác của sidebar */
+    width: 200px; /* Định dạng chiều rộng của sidebar */
+    height: 100%; /* Định dạng chiều cao của sidebar */
+    position: fixed;
+    top: 0;
+    right: -200px; /* Thay đổi giá trị này từ -200px thành 0px để sidebar được hiển thị ở bên phải */
+    background-color: #ffd6aa;
+    overflow-x: hidden;
+    overflow-y: auto; /* Thêm thuộc tính này để sidebar có thể cuộn dọc */
+    transition: 0.3s;
   }
+  
   #sidebar.open {
-    display: block;
+    right: 0; /* Thay đổi giá trị này từ 0px thành -200px để sidebar được ẩn đi ban đầu */
+  }
+  #sidebar a {
+    text-decoration: none; /* Loại bỏ dấu gạch dưới cho các phần tử <a> trong sidebar */
+    color: #000;
+    font-weight: 7px;
+}
+  
+  #sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #sidebar ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
   }
