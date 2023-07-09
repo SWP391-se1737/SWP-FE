@@ -39,6 +39,7 @@
         <div id="sidebar">
           <ul>
             <li id="loginItem"><a href="login.html">Đăng nhập</a></li>
+            <li id="profileItem"><a href="profile.html">Thông tin cá nhân</a></li>
             <li id="walletItem"><a href="wallet.html">Ví</a></li>
             <li id="ordersItem"><a href="orders.html">Đơn đã mua</a></li>
             <li id="salesItem"><a href="sales.html">Đơn đã bán</a></li>
@@ -68,6 +69,7 @@
               if (isLoggedIn === "true") {
                 // Đã đăng nhập
                 document.getElementById("loginItem").style.display = "none";
+                document.getElementById("profileItem").style.display = "block";
                 document.getElementById("walletItem").style.display = "block";
                 document.getElementById("ordersItem").style.display = "block";
                 document.getElementById("salesItem").style.display = "block";
@@ -76,6 +78,7 @@
               } else {
                 // Chưa đăng nhập
                 document.getElementById("loginItem").style.display = "block";
+                document.getElementById("profileItem").style.display = "none";
                 document.getElementById("walletItem").style.display = "none";
                 document.getElementById("ordersItem").style.display = "none";
                 document.getElementById("salesItem").style.display = "none";
@@ -89,7 +92,6 @@
         </script>
     </div>
   </nav>
-  <div class="content"></div>
   <div class="container-fluid">
     <img class="baner" src="img/icon/banner_homepage.png" alt="" style="margin-top: 76px;">
   </div>

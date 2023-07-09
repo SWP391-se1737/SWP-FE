@@ -10,9 +10,6 @@
    z-index: 9999;
    background-color: #ffffff;
  }
- body{
-   display: grid;
- }
  .container-fluid{
     padding: 0px;
  }
