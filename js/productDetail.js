@@ -51,14 +51,14 @@ const renderProducts = async (product) => {
         p3.appendChild(strong2);
         p3.appendChild(document.createTextNode(product.quantity));
 
-        const addToCartButton = document.createElement("button");
-        addToCartButton.innerText = "Thêm vào giỏ hàng";
-        addToCartButton.classList.add("round-black-btn");
+        const buyButton = document.createElement("button");
+        buyButton.innerText = "Mua ngay";
+        buyButton.classList.add("round-black-btn");
 
-        addToCartButton.addEventListener("click", () => {
+        buyButton.addEventListener("click", () => {
             // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
             // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
-            addToCart(productId);
+            buyProduct(productId);
 
         });
 
@@ -68,7 +68,7 @@ const renderProducts = async (product) => {
         infoDiv.appendChild(p2);
         infoDiv.appendChild(p3);
         infoDiv.appendChild(document.createElement("br"));
-        infoDiv.appendChild(addToCartButton);
+        infoDiv.appendChild(buyButton);
 
         // Thêm các thẻ div vào list
         const divItem = document.createElement("div");

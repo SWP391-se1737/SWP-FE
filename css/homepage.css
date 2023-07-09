@@ -297,9 +297,9 @@
     border-radius: 4px;
     background: #689F38;
     color: #fff;
-    padding: 7px 45px;
+    padding: 7px 75px;
     display: inline-block;
-    margin-top: -5px;
+    margin-top: -8px;
     border: solid 2px #689F38;
     transition: all 0.5s ease-in-out 0s;
     text-decoration: none;
@@ -379,4 +379,11 @@
   
   #listCategories li a:hover {
     background-color: #e0e0e0;
+  }
+  #sidebar {
+    display: none;
+    /* Các thuộc tính khác của sidebar */
+  }
+  #sidebar.open {
+    display: block;
   }
