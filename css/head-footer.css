@@ -10,6 +10,9 @@
    z-index: 9999;
    background-color: #ffffff;
  }
+ body{
+   display: grid;
+ }
  .container-fluid{
     padding: 0px;
  }
@@ -93,16 +96,14 @@
  }
  
  /* footer */
-
- .footer{
+ footer{
    margin-top: 20px;
-   min-height: 100%;
    background-color: #ffbc6e;
    text-align: center;
    height: 2cm;
    padding-top: 0.4cm;
-   position: relative !important;
-   bottom: 0 !important;
+   position:  inherit;
+   bottom: 0;
+   width: 100%;
  }
- 
  

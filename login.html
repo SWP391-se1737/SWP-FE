@@ -15,179 +15,190 @@
     <div class="header">
       <a class="title1" href="homepage.html">Flea Shop</a>
     </div>
-    <div class="container">
-      <div class="login">
-        <p>Quản trị viên</p>
-        <form id="loginForm">
-          <input type="text" name="username" placeholder="Username" />
-          <input type="password" name="password" placeholder="Password" />
-          <button type="submit">Login</button>
+    <div>
+      <div class="container">
+        <div class="login">
+          <p>Quản trị viên</p>
+          <form id="loginForm">
+            <input type="text" name="username" placeholder="Username" />
+            <input type="password" name="password" placeholder="Password" />
+            <button type="submit">Login</button>
+            <div id="errorMessage" class="errorMessage"></div>
+          </form>
+        </div>
+        <div class="login">
+          <p>Sinh viên, nhân viên</p>
+          <button class="logingg2" id="logingg" style="width: 200px">
+            Login with Google
+          </button>
           <div id="errorMessage" class="errorMessage"></div>
-        </form>
+        </div>
       </div>
-      <div class="login">
-        <p>Sinh viên, nhân viên</p>
-        <button class="logingg2" id="logingg" style="width: 200px">
-          Login with Google
-        </button>
-        <div id="errorMessage" class="errorMessage"></div>
-      </div>
-    </div>
 
-    <script type="module">
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+      <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
 
-      // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
+        // If you enabled Analytics in your project, add the Firebase SDK for Google Analytics
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics.js";
 
-      // Add Firebase products that you want to use
-      import {
-        getAuth,
-        GoogleAuthProvider,
-        getRedirectResult,
-        signInWithRedirect,
-      } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
-      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-      // TODO: Add SDKs for Firebase products that you want to use
-      // https://firebase.google.com/docs/web/setup#available-libraries
+        // Add Firebase products that you want to use
+        import {
+          getAuth,
+          GoogleAuthProvider,
+          getRedirectResult,
+          signInWithRedirect,
+        } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyCbhm_w0zzUI-rhlGXxgnV_gs1HFt3U4yo",
-        authDomain: "login-384608.firebaseapp.com",
-        // authDomain: "127.0.0.1:5500",
-        projectId: "logingmail-384608",
-        storageBucket: "logingmail-384608.appspot.com",
-        messagingSenderId: "97635408020",
-        appId: "1:97635408020:web:6300750200017212807c81",
-      };
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCbhm_w0zzUI-rhlGXxgnV_gs1HFt3U4yo",
+          authDomain: "login-384608.firebaseapp.com",
+          // authDomain: "127.0.0.1:5500",
+          projectId: "logingmail-384608",
+          storageBucket: "logingmail-384608.appspot.com",
+          messagingSenderId: "97635408020",
+          appId: "1:97635408020:web:6300750200017212807c81",
+        };
 
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider(app);
 
-      logingg.addEventListener("click", (e) => {
-        signInWithRedirect(auth, provider);
-      });
-
-      getRedirectResult(auth)
-  .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential ? credential.accessToken : null;
-    const user = result.user;
-
-    // Lấy thông tin cần thiết
-    const displayName = user.displayName;
-    const email = user.email;
-
-    // Kiểm tra địa chỉ email
-    if (email.endsWith('@fpt.edu.vn')) {
-      // Người dùng có đuôi email "@fpt.edu.vn"
-
-      // Gọi API phía máy chủ để kiểm tra tài khoản
-      const searchAccountByEmailApiUrl = "http://localhost:8080/Account/searchAccountByName?email=" + email;
-
-      fetch(searchAccountByEmailApiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-
-          // Kiểm tra phản hồi từ máy chủ để xác định tài khoản đã tồn tại hay chưa
-          const exists = data.exists;
-          if (exists) {
-            console.log("Tài khoản đã tồn tại. Không thêm vào cơ sở dữ liệu.");
-            // Hoặc hiển thị thông báo không thêm vào cơ sở dữ liệu
-            // ...
-            window.location.href = "studentHomepage.html";
-          } else {
-            console.log("Tài khoản chưa tồn tại. Thêm vào cơ sở dữ liệu.");
-
-            // Gọi API phía máy chủ để thêm tài khoản
-            const addAccountApiUrl = "http://localhost:8080/Account/addAccount";
-
-            const requestData = {
-              email: email,
-              token: token,
-              role: "Student",
-              status: "true"
-            };
-
-            fetch(addAccountApiUrl, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(requestData),
-            })
-              .then((response) => response.text())
-              .then((data) => {
-                console.log(data); // Ghi log phản hồi từ máy chủ
-                window.location.href = "studentHomepage.html";
-              })
-              .catch((error) => {
-                console.error("Lỗi API:", error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.error("Lỗi API:", error);
+        logingg.addEventListener("click", (e) => {
+          signInWithRedirect(auth, provider);
         });
-    } else {
-      // Người dùng không có đuôi email "@fpt.edu.vn"
-      console.error("Địa chỉ email không hợp lệ.");
-      errorMessage.textContent = "Địa chỉ email không hợp lệ.";
-      // Hoặc hiển thị thông báo không cho phép đăng nhập
-      // ...
-    }
-  })
-  .catch((error) => {
-    console.error("Lỗi đăng nhập:", error.code, error.message);
-  });
-    </script>
 
-    <script>
-      const loginForm = document.getElementById("loginForm");
-      const errorMessage = document.getElementById("errorMessage");
+        getRedirectResult(auth)
+          .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential ? credential.accessToken : null;
+            const user = result.user;
 
-      loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+            // Lấy thông tin cần thiết
+            const displayName = user.displayName;
+            const email = user.email;
 
-        const username = loginForm.elements.username.value;
-        const password = loginForm.elements.password.value;
+            // Kiểm tra địa chỉ email
+            if (email.endsWith("@fpt.edu.vn")) {
+              // Người dùng có đuôi email "@fpt.edu.vn"
 
-        // Gửi yêu cầu đăng nhập thông qua API
-        fetch("http://localhost:8080/Account/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `username=${encodeURIComponent(
-            username
-          )}&password=${encodeURIComponent(password)}`,
-        })
-          .then(function (response) {
-            if (response.ok) {
-              // Đăng nhập thành công
-              window.location.href = "adminpage.html";
-            } else if (response.status === 401) {
-              // Đăng nhập thất bại
-              errorMessage.textContent = "Invailid Username or Password";
+              // Gọi API phía máy chủ để kiểm tra tài khoản
+              const searchAccountByEmailApiUrl =
+                "http://localhost:8080/Account/searchAccountByName?email=" +
+                email;
+
+              fetch(searchAccountByEmailApiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log(data);
+
+                  // Kiểm tra phản hồi từ máy chủ để xác định tài khoản đã tồn tại hay chưa
+                  const exists = data.exists;
+                  if (exists) {
+                    console.log(
+                      "Tài khoản đã tồn tại. Không thêm vào cơ sở dữ liệu."
+                    );
+                    // Hoặc hiển thị thông báo không thêm vào cơ sở dữ liệu
+                    // ...
+                    window.location.href = "studentHomepage.html";
+                  } else {
+                    console.log(
+                      "Tài khoản chưa tồn tại. Thêm vào cơ sở dữ liệu."
+                    );
+
+                    // Gọi API phía máy chủ để thêm tài khoản
+                    const addAccountApiUrl =
+                      "http://localhost:8080/Account/addAccount";
+
+                    const requestData = {
+                      email: email,
+                      token: token,
+                      role: "Student",
+                      status: "true",
+                    };
+
+                    fetch(addAccountApiUrl, {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(requestData),
+                    })
+                      .then((response) => response.text())
+                      .then((data) => {
+                        console.log(data); // Ghi log phản hồi từ máy chủ
+                        window.location.href = "studentHomepage.html";
+                      })
+                      .catch((error) => {
+                        console.error("Lỗi API:", error);
+                      });
+                  }
+                })
+                .catch((error) => {
+                  console.error("Lỗi API:", error);
+                });
             } else {
-              // Xử lý các trường hợp lỗi khác
-              errorMessage.textContent = "Đã xảy ra lỗi";
+              // Người dùng không có đuôi email "@fpt.edu.vn"
+              console.error("Địa chỉ email không hợp lệ.");
+              errorMessage.textContent = "Địa chỉ email không hợp lệ.";
+              // Hoặc hiển thị thông báo không cho phép đăng nhập
+              // ...
             }
           })
-          .catch(function (error) {
-            console.error(error);
+          .catch((error) => {
+            console.error("Lỗi đăng nhập:", error.code, error.message);
           });
-      });
-    </script>
+      </script>
+
+      <script>
+        const loginForm = document.getElementById("loginForm");
+        const errorMessage = document.getElementById("errorMessage");
+
+        loginForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const username = loginForm.elements.username.value;
+          const password = loginForm.elements.password.value;
+
+          // Gửi yêu cầu đăng nhập thông qua API
+          fetch("http://localhost:8080/Account/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: `username=${encodeURIComponent(
+              username
+            )}&password=${encodeURIComponent(password)}`,
+          })
+            .then(function (response) {
+              if (response.ok) {
+                // Đăng nhập thành công
+                window.location.href = "adminpage.html";
+              } else if (response.status === 401) {
+                // Đăng nhập thất bại
+                errorMessage.textContent = "Invailid Username or Password";
+              } else {
+                // Xử lý các trường hợp lỗi khác
+                errorMessage.textContent = "Đã xảy ra lỗi";
+              }
+            })
+            .catch(function (error) {
+              console.error(error);
+            });
+        });
+      </script>
+    </div>
   </body>
-  <div class="container-fluid footer">
-    Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh
-    City<br />
-    Contact us: fleashop@gmail.com
-  </div>
+  <footer style="position: absolute">
+    <div class="container-fluid footer">
+      Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi
+      Minh City<br />
+      Contact us: fleashop@gmail.com
+    </div>
+  </footer>
 </html>

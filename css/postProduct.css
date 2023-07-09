@@ -5,14 +5,14 @@
     text-align: center;
 }
 h1{
-    background-color: rgb(251, 168, 109);
+    background-color: #ffbc6e;
 }
 body{
     background-color: rgb(255, 255, 255);
 }
 .header a{
     text-decoration: none;
-    color: rgb(246, 136, 68);
+    color: #ffbc6e;
     font-size: 30px;
     font-weight:600;
     padding-left: 100px;
@@ -36,9 +36,9 @@ form select{
   display: flex;
   margin-top: 20px;
   margin-left: 180px;
-  height: 100vh;
+  height: 550px;
   margin-right: 890px;
-  min-height:1000px;
+  min-height:350px;
 }
 a.button{
     margin-top: 10px;
@@ -78,8 +78,10 @@ form input{
     margin-left:20rem;
  }
 
- body > div.container > div > form > div.content-2 > a:nth-child(1) > img{
-    width:260px;
+ body > div.container > div > form > div.content-2 > img{
+    width:320px;
+    margin-left: -70px;
+
  }
 
 
