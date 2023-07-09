@@ -5,13 +5,14 @@ async function optionCampus() {
     try {
         const response = await axios.get('http://localhost:8080/Campus/listCampus');
         const filteredData = response.data;
-        renderCampus(filteredData);
+        renderCampus1(filteredData);
     } catch (error) {
         console.error("Error fetching categories:", error);
     }
 }
-const renderCampus = (campuses) => {
+const renderCampus1 = (campuses) => {
     const select = document.getElementById("listCampuses");
+
     if (select) {
         select.innerHTML = ""; // Xóa bỏ các tùy chọn cũ (nếu có)
         const defaultOption = document.createElement("option");
@@ -30,29 +31,36 @@ const renderCampus = (campuses) => {
         select.addEventListener("change", function () {
             const selectedCampusId = select.value;
             // Gọi hàm xử lý để load lại danh sách sản phẩm với campus đã chọn
-            loadProductsByCampus(selectedCampusId);
+            loadProductsByCampusAndCategory(selectedCampusId);
         });
     } else {
         console.error("Phần tử listCampuses không tồn tại.");
     }
 };
-optionCampus();
-
-async function loadProductsByCampus(campusId) {
-    const list = document.getElementById('searchProduct');
+async function loadProductsByCampusAndCategory(campusId) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryId = urlParams.get("category_id");
     let originalData = [];
 
     try {
-        const response = await axios.get(`http://localhost:8080/product/filterProductByCampus?sellcampusid=${campusId}`);
+        let response;
+        if (campusId == 0) {
+            response = await axios.get(`http://localhost:8080/product/filterProductByCategory?categoryid=${categoryId}`);
+        } else {
+            response = await axios.get(`http://localhost:8080/product/search?category_id=${categoryId}&sellcampus_id=${campusId}`);
+        }
+
         const filteredData = response.data;
-        renderProductsByCampus(filteredData);
+        renderProductsByCampusAndCategory(filteredData);
     } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching products:", error);
     }
 }
 
-const renderProductsByCampus = (products) => {
-    const list = document.getElementById('searchProduct');
+optionCampus();
+
+const renderProductsByCampusAndCategory = (products) => {
+    const list = document.getElementById('listProduct');
     if (list) {
         list.innerHTML = '';
         const availableProducts = products.filter((result) => result.status === 'Còn hàng');

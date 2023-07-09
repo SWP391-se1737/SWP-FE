@@ -81,8 +81,9 @@ const renderCategory = (categories) => {
     const list = document.getElementById("listCategories");
     if (list) {
         list.innerHTML = ""; // Xóa bỏ các nút ấn cũ (nếu có)
+        const filteredCategories = categories.filter((category) => category.status === true);
 
-        categories.forEach((result) => {
+        filteredCategories.forEach((result) => {
             const listItem = document.createElement("li");
 
             const category_id = result.id;
@@ -125,7 +126,7 @@ const renderOptionCategory = (categories) => {
         categories.forEach((result) => {
             const option = document.createElement("option");
             option.value = result.id;
-            option.innerText = result.name;
+            option.innerText = result.name;;
 
             select.appendChild(option);
         });

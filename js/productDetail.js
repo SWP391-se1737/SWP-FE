@@ -8,7 +8,7 @@ const getData = async () => {
     renderProducts(response.data);
 };
 getData();
-const renderProducts = (product) => {
+const renderProducts = async (product) => {
     const list = document.getElementById("productDetail");
     if (list) {
         list.innerHTML = "";
@@ -42,7 +42,8 @@ const renderProducts = (product) => {
         const strong1 = document.createElement("strong");
         strong1.innerText = "Bán tại campus: ";
         p2.appendChild(strong1);
-        p2.appendChild(document.createTextNode(product.sellcampusid));
+        //p2.appendChild(document.createTextNode(product.sellcampusid));
+        p2.appendChild(document.createTextNode(await getCampusNameById(product.sellcampusid)));
 
         const p3 = document.createElement("p");
         const strong2 = document.createElement("strong");
@@ -79,6 +80,17 @@ const renderProducts = (product) => {
         list.appendChild(divItem);
     } else {
         console.error("Phần tử searchProduct không tồn tại.");
+    }
+};
+
+const getCampusNameById = async (campusId) => {
+    try {
+        const response = await axios.get(`http://localhost:8080/Campus/getCampusById?id=${campusId}`);
+        const filteredData = response.data;
+        return filteredData.name;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw error;
     }
 };
 
@@ -123,5 +135,6 @@ const addCart = (price, image, name) => {
         console.error("Phần tử productCart không tồn tại.");
     }
 };
+
 
 
