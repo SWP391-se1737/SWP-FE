@@ -1,5 +1,4 @@
 async function optionCampus() {
-    const list = document.getElementById('listCampuses');
     let originalData = [];
 
     try {

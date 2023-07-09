@@ -1,5 +1,5 @@
 function uploadImage() {
-    const ref = firebase.storage().ref();
+    const ref = firebaseApp.storage().ref();
     const file = document.querySelector('#photo').file[0];
     const metadata = {
         contentType: file.type
