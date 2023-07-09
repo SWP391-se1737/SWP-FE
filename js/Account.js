@@ -1,6 +1,5 @@
 async function getProfileById() {
     var accid = sessionStorage.getItem('id');
-    let originalData = [];
 
     try {
         const response = await axios.get(`http://localhost:8080/Account/updateAccount/${accid}`);

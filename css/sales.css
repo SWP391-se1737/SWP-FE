@@ -1,0 +1,44 @@
+.namepage{
+    margin-top: 80px; 
+    font-family: 'Courier New', Courier, monospaces; 
+    text-align: center;
+    background-color: #ffbc6e;
+    width: 550px;
+    text-align: center;
+    margin-left: 500px;
+}
+body{
+    background-color: rgb(245, 245, 245);
+} 
+.detail h2{
+    margin-top: 4px;
+    text-align: left;
+    padding-left: 30px;
+}
+.detail p{
+    text-align: left;
+    padding-left: 30px;
+}
+.detail {
+    margin-top: 50px;
+    width: 1000px;
+    height: 230px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5); /* Sửa giá trị rgba */
+    text-align: center;
+    background-color: white;
+    margin: 10px;
+    text-align: -webkit-right;
+}
+.detail img{
+    width: 230px;
+    height: 210px;
+    display: inline-block;
+  transition: transform 0.3s ease;
+}
+.status{
+    font-size: large;
+    width: 150px;
+    padding-right: 30px;
+    color: red;
+}
