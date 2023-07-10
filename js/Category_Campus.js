@@ -1,4 +1,5 @@
 async function optionCampus() {
+    const list = document.getElementById('listCampuses');
     let originalData = [];
 
     try {
@@ -39,7 +40,6 @@ const renderCampus1 = (campuses) => {
 async function loadProductsByCampusAndCategory(campusId) {
     const urlParams = new URLSearchParams(window.location.search);
     const categoryId = urlParams.get("category_id");
-    let originalData = [];
 
     try {
         let response;
@@ -80,28 +80,31 @@ const renderProductsByCampusAndCategory = (products) => {
             h3.innerText = result.price.toLocaleString();
             h3.classList.add('price');
 
-            const addToCartButton = document.createElement("button");
-            addToCartButton.innerText = "Thêm vào giỏ hàng";
-            addToCartButton.classList.add("round-black-btn");
+            const buytButton = document.createElement("button");
+            buytButton.innerText = "Mua ngay";
+            buytButton.classList.add("round-black-btn");
 
-            addToCartButton.addEventListener("click", () => {
-                // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
-                // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
-                addToCart(productId);
+            buytButton.addEventListener("click", () => {
+                buyProduct(productId);
             });
+
+
 
             divItem.appendChild(img);
             divItem.appendChild(h2);
             divItem.appendChild(h3);
-            divItem.appendChild(addToCartButton);
+            divItem.appendChild(buytButton);
 
             list.appendChild(divItem);
 
+
             img.addEventListener('click', () => {
-                getProductDetail(divItem.dataset.key);
-            });
+                getProductDetail(divItem.dataset.key)
+            })
+
         });
+
     } else {
-        console.error("Phần tử searchProduct không tồn tại.");
+        console.error("Phần tử listProduct không tồn tại.");
     }
 };

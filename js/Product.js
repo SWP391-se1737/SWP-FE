@@ -57,8 +57,6 @@ async function getProductByName() {
         buytButton.classList.add("round-black-btn");
 
         buytButton.addEventListener("click", () => {
-          // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
-          // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
           buyProduct(productId);
         });
 
@@ -85,7 +83,7 @@ async function getProductByName() {
   };
   // 
   searchInput.addEventListener('keyup', searchProduct);
-  const response = await axios.get('http://localhost:8080/product/getListProduct');
+  const response = await axios.get('http://localhost:8080/product/getProductByCreateAtDesc');
   originalData = response.data;
   renderProducts(originalData);
 

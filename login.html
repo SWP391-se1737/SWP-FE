@@ -102,6 +102,7 @@
                   if (exists) {
                     sessionStorage.setItem("isLoggedIn", "true");
                     sessionStorage.setItem("id", data.account.id);
+                    sessionStorage.setItem("role", data.account.role);
                     console.log(
                       "Tài khoản đã tồn tại. Không thêm vào cơ sở dữ liệu."
                     );
