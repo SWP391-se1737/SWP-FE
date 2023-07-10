@@ -313,6 +313,16 @@ body{
     border-radius: 20px;
 }
 
+.details .orders{
+    position: relative;
+    display: grid;
+    min-height: 200px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
+    border-radius: 20px;
+}
+
 .details .cardHeader{
     display: flex;
     justify-content: space-between;
@@ -587,7 +597,6 @@ body{
     padding: 10px;
 }
 
-
 .details .orders table tr{
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -612,7 +621,7 @@ body{
 }
 
 .details .orders table tr td{
-    padding: 5px;
+    padding: 10px;
 }
 
 img {
