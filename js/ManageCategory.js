@@ -1,30 +1,34 @@
 async function getCategoryList() {
-    const response = await axios.get('http://localhost:8080/Category/listCategory');
-      categories = response.data;
-      console.log(categories);
-      let tableData="";
-      categories.map(categories =>{
-                tableData+= `<tr>
-                <td id="categoryID">${categories.id}</td>
-                <td id="categoryName">${categories.name}</td>
-                <td id="categoryStatus">${categories.status}</td>
-                <td><a href="#" class="update">Update</a>
-                <a a href="#" class="delete">Delete</a>
-                                    </tr>`;
-                                });
-                                document.getElementById("category-list").innerHTML=tableData;
+  const response = await axios.get('http://localhost:8080/Category/listCategory');
+  categories = response.data;
+  console.log(categories);
+  let tableData = "";
+  categories.map(category => {
+    tableData += "<tr>"
+    tableData += "<td>" + category.id + "</td>";
+    tableData += "<td>" + category.name + "</td>";
+    tableData += "<td>" + category.status + "</td>";
+    if (category.status == true) {
+      tableData += "<td><button class='btn btn-danger' onclick='setStatusInActive(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Inactive</button></td>";
+    }
+    else {
+      tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Active</button></td>";
+    }
+    tableData += "</tr>";
+  });
+  document.getElementById("category-list").innerHTML = tableData;
 }
 getCategoryList();
 
-document.querySelector("#category-form").addEventListener("click", (e)=>{
+document.querySelector("#category-form").addEventListener("click", (e) => {
   target = e.target;
-  if(target.classList.contains("add")){
+  if (target.classList.contains("add")) {
     const addCategoryForm = document.getElementById("category-form");
     const catergoryName = addCategoryForm.elements.catergoryName.value;
     axios.post('http://localhost:8080/Category/addCategory', {
-      name : catergoryName,
-      status : 'true'
-  })
+      name: catergoryName,
+      status: 'true'
+    })
   }
   getCategoryList();
 });

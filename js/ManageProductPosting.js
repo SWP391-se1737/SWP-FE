@@ -12,8 +12,11 @@ async function getProductList() {
       tableData1 += "<td>" + product.id + "</td>";
       tableData1 += "<td>" + product.name + "</td>";
       tableData1 += "<td>" + `<img src="${product.image}"/>` + "</td>";
-      tableData1 += "<td>" + product.description+"</td>";
       tableData1 += "<td>" + product.price + "</td>";
+      tableData1 += "<td>" + product.description+"</td>";
+      tableData1 += "<td>" + getCategoryNameByID(product.categoryid) +"</td>";
+      tableData1 += "<td>" + product.sellcampusid+"</td>";
+      tableData1 += "<td>" + product.seller_id+"</td>";
       tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
       tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
       tableData1 += "<td>" + product.quantity + "</td>";
@@ -28,8 +31,11 @@ async function getProductList() {
       tableData2 += "<td>" + product.id + "</td>";
       tableData2 += "<td>" + product.name + "</td>";
       tableData2 += "<td>" + `<img src="${product.image}"/>` + "</td>";
-      tableData2 += "<td>" + product.description+"</td>";
       tableData2 += "<td>" + product.price + "</td>";
+      tableData2 += "<td>" + product.description+"</td>";
+      tableData2 += "<td>" + getCategoryNameByID(product.categoryid) +"</td>";
+      tableData2 += "<td>" + product.sellcampusid+"</td>";
+      tableData2 += "<td>" + product.seller_id+"</td>";
       tableData2 += "<td>" + reformatDate(product.expire) + "</td>";
       tableData2 += "<td>" + reformatDate(product.expire) + "</td>";
       tableData2 += "<td>" + product.quantity + "</td>";
@@ -50,7 +56,7 @@ async function getProductList() {
 getProductList();
 
 function reformatDate(dateStr) {
-  var dArr = dateStr.split("T"); // input yyyy-MM-ddTHH:mm:ss.SSSZ
+  var dArr = dateStr.split(" "); // input yyyy-MM-dd HH:mm:ss
   var dateStr = dArr[0];         // string yyyy-MM-dd
   dateArr = dateStr.split("-");
   var timeStr = dArr[1];         // string HH:mm:ss.SSSZ
@@ -78,4 +84,14 @@ function acceptPosting(id, name, image, description, price, createAT, expire, qu
   })
   getProductList();
   getProductList();
+}
+
+async function getCategoryNameByID(id){
+  const response = await axios.get('http://localhost:8080/Campus/getCampusById?id=' + id);
+  categories = response.data;
+  var categoryName;
+  console.log(categories);
+  categoryName = categories.name;
+  console.log(categoryName);
+  return categoryName;
 }

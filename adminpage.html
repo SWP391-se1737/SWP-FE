@@ -6,12 +6,12 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Admin Dashboard</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- =========================== Style ============================== -->
     <link rel="stylesheet" href="css/adminpage.css">
 
-    
+
 </head>
 
 <body>
@@ -127,35 +127,46 @@
                 </div>
             </div>
 
-            <div class="dashboard">
-                <div class="recentProducts">
-                    <div class="cardHeader">
-                        <h2>Recent Products</h2>
-                        <a href="manageProductPosting.html" class="btn">View All</a>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>ID</td>
-                                <td>Name</td>
-                                <td>Image</td>
-                                <td>Price</td>
-                                <td>Status</td>
-                                <td>Quantity</td>
-                            </tr>
-                        </thead>
-                        <tbody id="table_body">
-                        </tbody>
-                    </table>
+            <!-- Add Charts -->
+            <div class="graphBox">
+                <div class="box">
+                    <canvas id="myChart"></canvas>
                 </div>
+                <div class="box"></div>
             </div>
+
         </div>
     </div>
     <!-- ========================= Scripts ====================== -->
     <script src="js/AdminNavbar.js"></script>
     <script src="js/AdminPage.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'polarArea',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <!-- ========================== IonIcons =======================-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
