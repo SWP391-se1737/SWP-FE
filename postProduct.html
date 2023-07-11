@@ -26,7 +26,7 @@
         <div class="container">
             <div class="post">
                 <h1>ĐĂNG TIN</h1>
-                <form>
+                <form onsubmit="event.preventDefault(); uploadAndCreatePost(event)">
                   <div class="content-1">
                     <select id="optionCategory" style="font-family: 'Courier New', Courier, monospace">
 
@@ -39,9 +39,15 @@
                     <input type="text" name="price" placeholder="Giá">
                   </div>
                 <div class="content-2">
-                  <img src="img/icon/uploadimg.png">
+                  <label for="photo" >
+                    <img src="img/icon/uploadimg.png" id="profile-pic" style="width: 400px; height: 400px;">
+                  </label> 
                 </div>      
-                <input type="submit" name="submit"  value="Tạo" class="button" for="uploadBtn"/>
+               
+                 
+                  <input type="submit" name="submit" value="Tạo" class="button"/>
+                  
+               
                  <a href="postProduct.html" class="button">
                   <span class="button-text">
                      Hủy
@@ -51,8 +57,8 @@
             </div>
         </div>
         <div>
-                  <input type="file" accept="image/jpeg, image/png, image/jpg" id="photo" style="background-color: rgb(253, 253, 253); border: none;">
-                <button onclick="uploadImage()" id="uploadBtn">uploadImg</button>
+                  <input type="file" accept="image/jpeg, image/png, image/jpg" id="photo" style="background-color: rgb(253, 253, 253); border: none; display: none;">
+                <button onclick="uploadImage()" id="uploadBtn" style="display: none;"></button>
                 <label></label>
         </div>
         <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
@@ -64,6 +70,13 @@
               // https://firebase.google.com/docs/web/setup#available-libraries
   
               // Your web app's Firebase configuration
+          
+              let profilePic = document.getElementById("profile-pic");
+              let photo = document.getElementById("photo");
+              photo.onchange = function(){
+                profilePic.src = URL.createObjectURL(photo.files[0]);
+              }
+
               const firebaseConfig = {
                 apiKey: "AIzaSyCCvDizeCUo-CZIdI-G57gR9jyTS9rh-3w",
                 authDomain: "image-9930d.firebaseapp.com",
@@ -94,6 +107,43 @@
               .catch(console.error);
       }
   
+      function uploadAndCreatePost(event) {
+  event.preventDefault(); // Ngăn chặn hành vi mặc định của submit
+
+  // Lấy giá trị từ các trường input trong form
+  const name = document.querySelector('input[name="name"]').value;
+  const description = document.querySelector('input[name="discriptions"]').value;
+  const price = document.querySelector('input[name="price"]').value;
+
+  // Tạo đối tượng sản phẩm
+  const product = {
+    name: name,
+    description: description,
+    price: price
+    
+  };
+
+  // Gửi yêu cầu POST đến URL tương ứng
+  fetch("http://localhost:8080/product/createNewProduct", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(product)
+  })
+    .then(response => {
+      if (response.ok) {
+        console.log('Tạo sản phẩm thành công');
+        // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
+      } else {
+        console.error('Lỗi tạo sản phẩm');
+      }
+    })
+    .catch(error => {
+      console.error('Lỗi tạo sản phẩm day ne', error);
+    });
+}
+
             </script>
     </body>
     <footer>

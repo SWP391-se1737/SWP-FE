@@ -15,7 +15,13 @@
   <link rel="stylesheet" href="css/profile.css">
   <title>Flea Shop</title>
 </head>
-
+<script>
+  var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+      if(isLoggedIn == null) {
+        const loginPageUrl = 'login.html';
+        window.location.href = loginPageUrl;
+      }
+</script>
 <body>
      <!-- navbar -->
   <nav class="navbar">
@@ -95,8 +101,25 @@
             <div id="profileDetail" class="profileDetail">
               
             </div>
+            <h1>hello</h1>
             <script src="js/Account.js"></script>
           </section>
+          <script>
+            fetch("http://localhost:8080/Account/getAccountById?id=" + accid)
+                .then(response => response.json())
+                .then(data => {
+                    // Xử lý dữ liệu trả về
+                    var account = data;
+                    var html = "<p>Account ID: " + account.id + "</p>";
+                    html += "<p>Email: " + account.email + "</p>";
+                    html += "<p>Phone: " + account.phone + "</p>";
+                    document.getElementById("profileDetail").innerHTML = html;
+                })
+                .catch(error => {
+                    console.log("Đã xảy ra lỗi khi lấy thông tin tài khoản:", error);
+                });
+        </script>
+          
 
      </body>
      <footer style="position: absolute">
