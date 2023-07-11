@@ -94,20 +94,47 @@
         </script>
     </div>
 </nav>
-  <h1 class="namepage">SỐ DƯ VÍ</h1>
-        <section class="container">
-    
-          <div id="" class="">
-            
-          </div>
-          <script src="js/Sales.js"></script>
-        </section>
+<h1 class="namepage">SỐ DƯ VÍ</h1>
+<section class="container">
+  <div>
+    <input type="text" id="amountInput" placeholder="Nhập số tiền">
+    <button id="paymentButton">Thanh toán</button>
+  </div>
+  <div id="paymentButtonContainer">
+    <!-- Nút thanh toán -->
+  </div>
+  <script>
+    function displayPaymentButton(paymentLink) {
+      // Tạo nút thanh toán và chuyển hướng khi được nhấp
+      var paymentButton = document.createElement("button");
+      paymentButton.innerHTML = "Thanh toán";
+      paymentButton.onclick = function() {
+        window.location.href = paymentLink;
+      };
+      document.getElementById("paymentButtonContainer").appendChild(paymentButton);
+    }
 
-   </body>
-     <footer  style="position: absolute">
-      <div class="container-fluid footer">
-        Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh City<br/>
-        Contact us: fleashop@gmail.com
-      </div>
-      </footer>
+    document.getElementById("paymentButton").addEventListener("click", function() {
+      var amount = document.getElementById("amountInput").value;
+
+      // Gửi yêu cầu AJAX để lấy đường link thanh toán từ API
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var paymentLink = response.url;
+            displayPaymentButton(paymentLink);
+          } else {
+            console.error("Lỗi khi gọi API: " + xhr.status);
+          }
+        }
+      };
+      xhr.open("GET", "http://localhost:8080/payment/createPayment?amount=" + amount, true);
+      xhr.send();
+    });
+  </script>
+  <script src="js/Sales.js"></script>
+</section>
+</body>
  </html>
