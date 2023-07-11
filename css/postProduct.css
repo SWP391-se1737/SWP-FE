@@ -42,6 +42,7 @@ form select{
 }
 a.button{
     margin-top: 10px;
+    margin-left: 50px;
     display: inline-block;
     color:red;
     background-color: #e7e5e5;
@@ -77,14 +78,6 @@ form input{
  .content-2{
     margin-left:20rem;
  }
-
- body > div.container > div > form > div.content-2 > img{
-    width:320px;
-    margin-left: -70px;
-
- }
-
-
 
  body > div.container > div > form > input{
     position: absolute;

@@ -22,7 +22,7 @@
     margin-left: 50px;
     padding: 0 15px 0  0;
     text-align: left;
-  
+    width: 350px;
   }
   
   
@@ -40,11 +40,11 @@
   }
   
   #productDetail > div > div.product-info > p:nth-child(3){
-    width: 300px;
+    width: 350px;
   }
   .detail {
     width: 280px;
-    height: 330px;
+    height: 350px;
     border-radius: 10px;
     box-shadow: none;
     text-align: center;
@@ -65,7 +65,7 @@
     color: #fff;
     padding: 7px 75px;
     display: inline-block;
-    margin-top: 10px;
+    margin-top: -20px;
     margin-left: 30px;
     border: solid 2px #689F38; 
     transition: all 0.5s ease-in-out 0s;
