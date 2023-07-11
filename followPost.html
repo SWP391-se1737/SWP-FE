@@ -12,16 +12,10 @@
   <!-- Css -->
   <link rel="stylesheet" href="css/head-footer.css">
   <link rel="stylesheet" href="css/homepage.css">
-  <link rel="stylesheet" href="css/orders.css">
+  <link rel="stylesheet" href="css/followPost.css">
   <title>Flea Shop</title>
 </head>
-<script>
-  var isLoggedIn = sessionStorage.getItem('isLoggedIn');
-      if(isLoggedIn == null) {
-        const loginPageUrl = 'login.html';
-        window.location.href = loginPageUrl;
-      }
-</script>
+
 <body>
      <!-- navbar -->
   <nav class="navbar">
@@ -94,17 +88,17 @@
         </script>
     </div>
   </nav>
-  <body>
-  <h1 class="namepage">SẢN PHẨM ĐÃ MUA</h1>
+    <h1 class="namepage">CHI TIẾT BÀI ĐĂNG</h1>
           <section class="container">
       
-            <div id="listOrder" class="listOrder">
+            <div id="productDetail" class="postDetail">
               
             </div>
+            <script src="js/Sales.js"></script>
           </section>
-          <script src="js/Orders.js"></script>
+
      </body>
-     <footer  style="position: absolute">
+     <footer>
       <div class="container-fluid footer">
         Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh City<br/>
         Contact us: fleashop@gmail.com

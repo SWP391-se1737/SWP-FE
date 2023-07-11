@@ -1,7 +1,7 @@
 .navbar .container-fluid{
     justify-content: space-around;
     margin-top: 0px;
-    margin-bottom: cm;
+    margin-right: 120px;
  }
  .navbar {
    position: fixed;
@@ -95,12 +95,13 @@
  /* footer */
  footer{
    margin-top: 20px;
-   background-color: #ffbc6e;
+   background-color: rgb(255, 184, 126);
    text-align: center;
    height: 2cm;
    padding-top: 0.4cm;
    position:  inherit;
    bottom: 0;
    width: 100%;
+   color: #000000;
  }
  

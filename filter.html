@@ -15,7 +15,7 @@
   <!-- Css -->
   <link rel="stylesheet" href="css/head-footer.css">
   <link rel="stylesheet" href="css/homepage.css">
-  <link rel="stylesheet" type="text/css" href="css/listProduct.css">
+  <script src="js/Product.js"></script>
   <title>Flea Shop</title>
 </head>
 
@@ -84,6 +84,7 @@
                 document.getElementById("transactionsItem").style.display = "none";
                 document.getElementById("logoutItem").style.display = "none";
               }
+              
             } else {
               sidebar.classList.remove("open"); // Xóa lớp "open" để ẩn sidebar
             }
@@ -95,20 +96,15 @@
   <div class="container-fluid">
     <img class="baner" src="img/icon/banner_homepage.png" alt="" style="margin-top: 76px;">
   </div>
-  <script src="js/Category.js"></script>
+  <script src="js/Category_Campus.js"></script>
   <h1 class="title">Sản phẩm mới</h1>
-  <div>
-  <div class="sidebar">
-    <h3 style="font-family: 'Courier New', Courier, monospace;">Phân loại</h3>
     <div id="listCategories" class="listCategories">
 
     </div>
-    <h2>--------------</h2>
-    <select id="listCampuses" style="font-family: 'Courier New', Courier, monospace; font-size: large;">
+  <select id="listCampuses" style="font-family: 'Courier New', Courier, monospace; font-size: large;">
 
-    </select>
-  </div>
-  <script src="js/Category_Campus.js"></script>
+  </select>
+  <script src="js/Category.js"></script>
     <section class="container" style="margin-right: 0">
       <div class="content">
         <div id="listProduct" class="listProduct"></div>

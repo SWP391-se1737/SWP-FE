@@ -12,10 +12,16 @@
   <!-- Css -->
   <link rel="stylesheet" href="css/head-footer.css">
   <link rel="stylesheet" href="css/homepage.css">
-  <link rel="stylesheet" type="text/css" href="css/listProduct.css">
+  <link rel="stylesheet" href="css/sales.css">
   <title>Flea Shop</title>
 </head>
-
+<script>
+  var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+      if(isLoggedIn == null) {
+        const loginPageUrl = 'login.html';
+        window.location.href = loginPageUrl;
+      }
+</script>
 <body>
      <!-- navbar -->
   <nav class="navbar">
@@ -88,13 +94,13 @@
         </script>
     </div>
   </nav>
-  <body>
-  <h1 class="title">SẢN PHẨM ĐÃ MUA</h1>
+    <h1 class="namepage">SẢN PHẨM ĐÃ BÁN</h1>
           <section class="container">
       
-            <div class="content">
+            <div id="listSale" class="listSale">
               
             </div>
+            <script src="js/Sales.js"></script>
           </section>
 
      </body>

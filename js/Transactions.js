@@ -1,4 +1,4 @@
-async function getProfileById() {
+async function getWalletIdByAccId() {
     var accid = sessionStorage.getItem('id');
 
     try {
@@ -51,4 +51,4 @@ const renderProfile = (account) => {
         console.error("Phần tử profileDetail không tồn tại.");
     }
 };
-getProfileById()
+getWalletIdByAccId()

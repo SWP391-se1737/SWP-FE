@@ -14,12 +14,8 @@ const renderProducts = (products) => {
         const availableProducts = products.filter((result) => result.status === 'Còn hàng');
 
         availableProducts.forEach((result) => {
-            // Tạo phần tử và thiết lập nội dung
-            // ...
-            // Thêm phần tử vào danh sách
-            // ...
             const productId = result.id;
-            const divItem = document.createElement("div");
+            const divItem = document.createElement('div');
             divItem.classList.add(`detail`);
             divItem.dataset.key = productId;
 
@@ -33,27 +29,30 @@ const renderProducts = (products) => {
             h3.innerText = result.price.toLocaleString();
             h3.classList.add('price');
 
-            const buyButton = document.createElement("button");
-            buyButton.innerText = "Mua ngay";
-            buyButton.classList.add("round-black-btn");
+            const buytButton = document.createElement("button");
+            buytButton.innerText = "Mua ngay";
+            buytButton.classList.add("round-black-btn");
 
-            buyButton.addEventListener("click", () => {
-                // Thực hiện các hành động khi nhấp vào nút "Mua ngay"
-                // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
+            buytButton.addEventListener("click", () => {
                 buyProduct(productId);
             });
+
+
 
             divItem.appendChild(img);
             divItem.appendChild(h2);
             divItem.appendChild(h3);
-            divItem.appendChild(buyButton);
+            divItem.appendChild(buytButton);
 
             list.appendChild(divItem);
 
-            img.addEventListener("click", () => {
-                ProductDetail(divItem.dataset.key);
-            });
+
+            img.addEventListener('click', () => {
+                getProductDetail(divItem.dataset.key)
+            })
+
         });
+
     } else {
         console.error("Phần tử searchProduct không tồn tại.");
     }
@@ -84,13 +83,13 @@ const renderCategory = (categories) => {
         const filteredCategories = categories.filter((category) => category.status === true);
 
         filteredCategories.forEach((result) => {
-            const listItem = document.createElement("li");
-
             const category_id = result.id;
             const a = document.createElement("a");
             a.innerText = result.name;
             a.href = `filter.html?category_id=${encodeURIComponent(category_id)}`;
 
+            const listItem = document.createElement("span");
+            listItem.className = "category-item";
             listItem.appendChild(a);
 
             list.appendChild(listItem);
@@ -135,7 +134,6 @@ const renderOptionCategory = (categories) => {
     }
 };
 optionCategory();
-
 
 
 
