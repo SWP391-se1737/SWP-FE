@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/head-footer.css">
   <link rel="stylesheet" href="css/homepage.css">
   <link rel="stylesheet" href="css/profile.css">
+  
   <link rel="stylesheet" type="text/css" href="css/profile.css">
   <title>Flea Shop</title>
 </head>
@@ -96,16 +97,24 @@
     </div>
   </nav>
   <body>
-  <h1 class="namepage">Thông tin cá nhân</h1>
-          <section class="container">
-      
-            <div id="profileDetail" class="profileDetail">
-              
-            </div>
-            <h1>hello</h1>
-            <script src="js/Account.js"></script>
-          </section>
-          <script>
+    <h1 class="namepage">Thông tin cá nhân</h1>
+    <section class="container">
+        <div id="profileDetail" class="profileDetail">
+            <!-- Thông tin cá nhân sẽ được thêm vào đây -->
+        </div>
+        <div>
+            <label for="phone">Số điện thoại:</label>
+            <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại">
+            <button onclick="updatePhone()">Cập nhật</button>
+        </div>
+        <div id="errorMessage" class="errorMessage"></div>
+    </section>
+    <script src="js/Account.js"></script>
+    <script>
+        var accid = sessionStorage.getItem('id');
+        var phoneInput = document.getElementById("phone");
+
+        function loadAccountInfo() {
             fetch("http://localhost:8080/Account/getAccountById?id=" + accid)
                 .then(response => response.json())
                 .then(data => {
@@ -113,15 +122,51 @@
                     var account = data;
                     var html = "<p>Account ID: " + account.id + "</p>";
                     html += "<p>Email: " + account.email + "</p>";
-                    html += "<p>Phone: " + account.phone + "</p>";
+                   
                     document.getElementById("profileDetail").innerHTML = html;
+
+                    // Hiển thị số điện thoại trong ô nhập liệu
+                    phoneInput.value = account.phone;
                 })
                 .catch(error => {
                     console.log("Đã xảy ra lỗi khi lấy thông tin tài khoản:", error);
                 });
-        </script>
-          
+        }
 
+        function updatePhone() {
+            var newPhone = phoneInput.value;
+            var requestBody = {
+                id: accid,
+                phone: newPhone
+            };
+
+            fetch("http://localhost:8080/Account/updateUser/" + accid, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.includes("Update Success")) {
+                    console.log("Số điện thoại đã được cập nhật:", data);
+                    // Cập nhật lại hiển thị thông tin cá nhân
+                    loadAccountInfo();
+                } else {
+                    console.log("Cập nhật số điện thoại không thành công:", data);
+                }
+            })
+            .catch(error => {
+             
+              errorMessage.textContent = "Số điện thoại đã được cập nhật:", data;
+            });
+            
+        }
+
+        // Gọi hàm loadAccountInfo để hiển thị thông tin cá nhân khi trang được tải
+        loadAccountInfo();
+    </script>
      </body>
      <footer style="position: absolute">
       <div class="container-fluid footer">

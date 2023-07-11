@@ -138,7 +138,7 @@
                       .then((response) => response.text())
                       .then((data) => {
                         console.log(data); // Ghi log phản hồi từ máy chủ
-                        window.location.href = "studentHomepage.html";
+                        window.location.href = "homepage.html";
                       })
                       .catch((error) => {
                         console.error("Lỗi API:", error);
@@ -161,43 +161,44 @@
           });
       </script>
 
-      <script>
-        const loginForm = document.getElementById("loginForm");
-        const errorMessage = document.getElementById("errorMessage");
+<script>
+  // Lắng nghe sự kiện submit form
+  document.getElementById("loginForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Ngăn chặn việc gửi yêu cầu mặc định của form
 
-        loginForm.addEventListener("submit", function (e) {
-          e.preventDefault();
+    // Lấy giá trị email và password từ form
+    var email = document.getElementsByName("username")[0].value;
+    var password = document.getElementsByName("password")[0].value;
 
-          const username = loginForm.elements.username.value;
-          const password = loginForm.elements.password.value;
+    // Xây dựng chuỗi query parameters
+    var queryParams = new URLSearchParams();
+    queryParams.set("Email", email);
+    queryParams.set("Password", password);
 
-          // Gửi yêu cầu đăng nhập thông qua API
-          fetch("http://localhost:8080/Account/login", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: `username=${encodeURIComponent(
-              username
-            )}&password=${encodeURIComponent(password)}`,
-          })
-            .then(function (response) {
-              if (response.ok) {
-                // Đăng nhập thành công
-                window.location.href = "adminpage.html";
-              } else if (response.status === 401) {
-                // Đăng nhập thất bại
-                errorMessage.textContent = "Invailid Username or Password";
-              } else {
-                // Xử lý các trường hợp lỗi khác
-                errorMessage.textContent = "Đã xảy ra lỗi";
-              }
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
-        });
-      </script>
+    // Gửi yêu cầu POST đến API với query parameters
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:8080/Account/login?" + queryParams.toString(), true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+  // Xử lý phản hồi thành công từ API
+  var response = xhr.responseText;
+  // Hiển thị thông báo thành công
+  document.getElementById("errorMessage").innerText = response;
+  window.location.href = "adminpage.html";
+}else {
+          // Xử lý phản hồi lỗi từ API
+          var errorResponse = JSON.parse(xhr.responseText);
+          // Hiển thị thông báo lỗi
+          document.getElementById("errorMessage").innerText = errorResponse;
+        }
+      }
+    };
+    xhr.send();
+  });
+</script>
+
     </div>
   </body>
   <footer style="position: absolute">
