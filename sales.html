@@ -15,7 +15,13 @@
   <link rel="stylesheet" href="css/sales.css">
   <title>Flea Shop</title>
 </head>
-
+<script>
+  var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+      if(isLoggedIn == null) {
+        const loginPageUrl = 'login.html';
+        window.location.href = loginPageUrl;
+      }
+</script>
 <body>
      <!-- navbar -->
   <nav class="navbar">

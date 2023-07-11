@@ -1,0 +1,73 @@
+.namepage{
+    margin-top: 80px; 
+    font-family: 'Courier New', Courier, monospaces; 
+    text-align: center;
+    background-color: #ffbc6e;
+    width: 550px;
+    text-align: center;
+    margin-left: 500px;
+}
+
+#productDetail > div > div:nth-child(1){
+    margin-right: 20px;
+    margin-left: 350px;
+  }
+  #productDetail > div > div:nth-child(1) > img{
+    margin-top: -110px;
+    height: 350px;
+    width: 350px;
+  }
+  
+  #productDetail > div > div.product-info{
+    margin-left: 50px;
+    padding: 0 15px 0  0;
+    text-align: left;
+  
+  }
+  
+  
+  #productDetail > div > div.product-info > p:nth-child(5),
+  #productDetail > div > div.product-info > p:nth-child(6){
+    display: inline-block;
+  }
+  
+  #productDetail > div > div.product-info > p:nth-child(6){
+    margin-left: 0.15rem;
+  }
+  
+  #productDetail > div > div.product-info{
+    height: 450px;
+  }
+  
+  #productDetail > div > div.product-info > p:nth-child(3){
+    width: 300px;
+  }
+  .detail {
+    width: 280px;
+    height: 330px;
+    border-radius: 10px;
+    box-shadow: none;
+    text-align: center;
+    background-color: white;
+    margin: 10px;
+  }
+  .detail h3{
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .detail p{
+    text-align: left;
+    padding-left: 0px;
+  }
+  .round-black-btn {
+    border-radius: 4px;
+    background: #689F38;
+    color: #fff;
+    padding: 7px 75px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 30px;
+    border: solid 2px #689F38; 
+    transition: all 0.5s ease-in-out 0s;
+    text-decoration: none;
+  }

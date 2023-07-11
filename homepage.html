@@ -17,7 +17,6 @@
   <link rel="stylesheet" href="css/homepage.css">
   <title>Flea Shop</title>
 </head>
-
 <body>
      <!-- navbar -->
   <nav class="navbar">
@@ -47,25 +46,20 @@
         </div>
 
         <script>
-          // Lấy phần tử nút trigger và phần tử menu dọc
           const menuTrigger = document.getElementById("menuTrigger");
           const sidebar = document.getElementById("sidebar");
           var isLoggedIn = sessionStorage.getItem('isLoggedIn');
           var accid = sessionStorage.getItem('id');
-
-          // Xác định trạng thái menu (ẩn/hiển thị)
+        
           let isSidebarOpen = false;
-
-          // Xử lý sự kiện nhấp chuột vào nút trigger
+        
           menuTrigger.addEventListener("click", function (e) {
             e.preventDefault();
-
-            // Đảo ngược trạng thái menu và cập nhật giao diện
+        
             isSidebarOpen = !isSidebarOpen;
             if (isSidebarOpen) {
-              sidebar.classList.add("open"); // Thêm lớp "open" để hiển thị sidebar
+              sidebar.classList.add("open");
               if (isLoggedIn === "true") {
-                // Đã đăng nhập
                 document.getElementById("loginItem").style.display = "none";
                 document.getElementById("profileItem").style.display = "block";
                 document.getElementById("walletItem").style.display = "block";
@@ -74,7 +68,6 @@
                 document.getElementById("transactionsItem").style.display = "block";
                 document.getElementById("logoutItem").style.display = "block";
               } else {
-                // Chưa đăng nhập
                 document.getElementById("loginItem").style.display = "block";
                 document.getElementById("profileItem").style.display = "none";
                 document.getElementById("walletItem").style.display = "none";
@@ -83,9 +76,8 @@
                 document.getElementById("transactionsItem").style.display = "none";
                 document.getElementById("logoutItem").style.display = "none";
               }
-              
             } else {
-              sidebar.classList.remove("open"); // Xóa lớp "open" để ẩn sidebar
+              sidebar.classList.remove("open");
             }
           });
         </script>

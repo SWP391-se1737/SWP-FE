@@ -9,6 +9,14 @@
         <link rel="stylesheet" type="text/css" href="css/head-footer.css">
         <title>Flea Shop</title>
     </head>
+    <script>
+      var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+      if(isLoggedIn == null) {
+        const loginPageUrl = 'login.html';
+        window.location.href = loginPageUrl;
+      }
+        
+    </script>
     <body>
       <script src="js/Campus.js"></script>
       <script src="js/Category.js"></script>
