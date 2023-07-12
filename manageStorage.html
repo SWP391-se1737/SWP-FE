@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -11,7 +10,6 @@
     <!-- =========================== Style ============================== -->
     <link rel="stylesheet" href="css/adminpage.css">
 </head>
-
 <body>
     <!-- ========================== Navigation ============== -->
     <div class="container">
@@ -133,41 +131,70 @@
                 </div>
             </div>
             <div class="details">
-                <div class="orders">
+                <div class="products">
                     <div class="cardHeader">
-                        <h2>Orders</h2>
+                        <h2>Product Posting chờ duyệt</h2>
                     </div>
 
                     <table>
                         <thead>
                             <tr>
                                 <td>ID</td>
-                                <td>Buy At</td>
-                                <td>Ship At</td>
-                                <td>Buyer</td>
-                                <td>Product</td>
-                                <td>Total Amount</td>
+                                <td>Name</td>
+                                <td>Image</td>
+                                <td>Price</td>
+                                <td>Description</td>
+                                <td>Category</td>
+                                <td>Store at</td>
+                                <td>Seller</td>
+                                <td>Create At</td>
+                                <td>Exprire Day</td>
                                 <td>Quantity</td>
-                                <td>Buy campus</td>
                                 <td>Status</td>
                             </tr>
                         </thead>
-                        <tbody id="order-list">
+                        <tbody id="product-list1">
+                            
+                        </tbody>
+                    </table>
+                </div>                
+            </div>
+            <div class="details">
+                <div class="products">
+                    <div class="cardHeader">
+                        <h2>Danh sách Product</h2>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Name</td>
+                                <td>Image</td>
+                                <td>Price</td>
+                                <td>Description</td>
+                                <td>Category</td>
+                                <td>Store at</td>
+                                <td>Seller</td>
+                                <td>Create At</td>
+                                <td>Exprire Day</td>
+                                <td>Quantity</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        <tbody id="product-list2">
                             
                         </tbody>
                     </table>
                 </div>
-            </div>    
+            </div>   
         </div>
     </div>
     <!-- ========================= Scripts ====================== -->
-    <script src="js/ManageOrder.js"></script>
+    <script src="js/ManageStorage.js"></script>
     <script src="js/AdminNavbar.js"></script>
     <!-- ========================== IonIcons =======================-->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-
+    </body>
 </html>
-<!-- <table>
-                        -->
