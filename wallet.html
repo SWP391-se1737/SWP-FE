@@ -191,7 +191,7 @@
                     var response = JSON.parse(xhr.responseText);
                     var paymentLink = response.url;
                     // Redirect to the payment link
-                    window.location.href = "wallet.html";
+                    window.location.href = paymentLink;
                 } else {
                     console.error("Lỗi khi gọi API: " + xhr.status);
                 }
