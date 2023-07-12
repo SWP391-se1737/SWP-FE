@@ -25,7 +25,6 @@ async function getProductList() {
                   "` , `" + product.expire + "`  , `" + product.expire + "` , `" + product.quantity + "` , `" + product.categoryid + 
                   "` , `" + product.seller_id + "`  , `" + product.buycampus_id + "` , `" + product.sellcampusid + "` , `" + product.status + "`)'>Chờ duyệt</button></td>";
         tableData1 += "</tr>";
-        
       }
       else {
         tableData2 += "<tr>"
@@ -64,7 +63,7 @@ function reformatDate(dateStr) {
 function acceptPosting(id, name, image, description, price, createAT, expire, quantity, categoryid, seller_id, buycampus_id, sellcampusid) {
   status1 = "Còn hàng";
   console.log(id, name, image, description, price, createAT, expire, quantity, seller_id, buycampus_id, sellcampusid, categoryid);
-  axios.put('http://localhost:8080/product/updateProductById?id=' +id, {
+  axios.put('http://localhost:8080/product/updateProductById?id=' + id, {
     id: id,
     name: name,
     image: image,
@@ -77,7 +76,7 @@ function acceptPosting(id, name, image, description, price, createAT, expire, qu
     buycampus_id: buycampus_id,
     sellcampusid: sellcampusid,
     categoryid: categoryid,
-    status : status1
+    status: status1
   })
   getProductList();
   getProductList();
@@ -86,6 +85,7 @@ function acceptPosting(id, name, image, description, price, createAT, expire, qu
 const getCategoryNameByID = async (categoryid) => {
   const response = await axios.get(`http://localhost:8080/Category/getCategoryById/${categoryid}`);
   const category = response.data;
+
   return category.name;
 }
 

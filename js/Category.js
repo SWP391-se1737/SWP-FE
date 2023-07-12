@@ -122,7 +122,9 @@ const renderOptionCategory = (categories) => {
         defaultOption.innerText = "Phân loại";
         select.appendChild(defaultOption);
 
-        categories.forEach((result) => {
+        const filteredCategories = categories.filter((category) => category.status === true);
+
+        filteredCategories.forEach((result) => {
             const option = document.createElement("option");
             option.value = result.id;
             option.innerText = result.name;;

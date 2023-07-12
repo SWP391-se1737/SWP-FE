@@ -51,6 +51,7 @@ const renderSales = async (product) => {
             infoDiv.appendChild(p);
             infoDiv.appendChild(p1);
 
+
             // Thêm các thẻ div vào list
             const divItem = document.createElement("div");
             divItem.classList.add("detail", "d-flex");
@@ -112,37 +113,67 @@ const renderPost = async (product) => {
         p.appendChild(document.createTextNode(product.description));
         p.appendChild(document.createElement("br"));
 
-        const p2 = document.createElement("p");
+        const p1 = document.createElement("p");
         const strong1 = document.createElement("strong");
         strong1.innerText = "Bán tại campus: ";
-        p2.appendChild(strong1);
-        //p2.appendChild(document.createTextNode(product.sellcampusid));
-        p2.appendChild(document.createTextNode(await getCampusNameById(product.sellcampusid)));
+        p1.appendChild(strong1);
+        p1.appendChild(document.createTextNode(await getCampusNameById(product.sellcampusid)));
 
-        const p3 = document.createElement("p");
+        const p2 = document.createElement("p");
         const strong2 = document.createElement("strong");
         strong2.innerText = "Số lượng: ";
-        p3.appendChild(strong2);
-        p3.appendChild(document.createTextNode(product.quantity));
+        p2.appendChild(strong2);
+        p2.appendChild(document.createTextNode(product.quantity));
 
-        const buyButton = document.createElement("button");
-        buyButton.innerText = "Mua ngay";
-        buyButton.classList.add("round-black-btn");
+        const p3 = document.createElement("p");
+        const strong3 = document.createElement("strong");
+        strong3.innerText = "Ngày tạo bài đăng: ";
+        p3.appendChild(strong3);
+        p3.appendChild(document.createTextNode(product.createAT));
 
-        buyButton.addEventListener("click", () => {
-            // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
-            // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
-            buyProduct(productId);
+        const p4 = document.createElement("p");
+        const strong4 = document.createElement("strong");
+        strong4.innerText = "Ngày bài đăng hết hạn: ";
+        p4.appendChild(strong4);
+        p4.appendChild(document.createTextNode(product.expire));
 
-        });
+        const p5 = document.createElement("p");
+        const strong5 = document.createElement("strong");
+        strong5.innerText = "Phân loại: ";
+        p5.appendChild(strong5);
+        p5.appendChild(document.createTextNode(await getCategoryNameById(product.categoryid)));
+
+        const p6 = document.createElement("p");
+        const strong6 = document.createElement("strong");
+        strong6.innerText = "Trạng thái: ";
+        p6.appendChild(strong6);
+        p6.appendChild(document.createTextNode(product.status));
+
+        const deleteProduct = document.createElement("button");
+        deleteProduct.innerText = "Xóa bài đăng";
+        deleteProduct.classList.add("round-black-btn");
+        if (product.status === 'Còn hàng') {
+            deleteProduct.addEventListener("click", () => {
+                // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
+                // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
+                deleteProductByUser(productId);
+
+            });
+        }
 
         infoDiv.appendChild(h2);
         infoDiv.appendChild(h3);
+        infoDiv.appendChild(p5);
         infoDiv.appendChild(p);
+        infoDiv.appendChild(p1);
+        infoDiv.appendChild(document.createElement("br"));
         infoDiv.appendChild(p2);
         infoDiv.appendChild(p3);
+        infoDiv.appendChild(p4);
+        infoDiv.appendChild(p6);
         infoDiv.appendChild(document.createElement("br"));
-        infoDiv.appendChild(buyButton);
+        if (product.status === 'Còn hàng')
+            infoDiv.appendChild(deleteProduct);
 
         // Thêm các thẻ div vào list
         const divItem = document.createElement("div");
@@ -159,6 +190,16 @@ const renderPost = async (product) => {
 const getCampusNameById = async (campusId) => {
     try {
         const response = await axios.get(`http://localhost:8080/Campus/getCampusById?id=${campusId}`);
+        const filteredData = response.data;
+        return filteredData.name;
+    } catch (error) {
+        console.error("Error fetching campus:", error);
+        throw error;
+    }
+};
+const getCategoryNameById = async (categoryId) => {
+    try {
+        const response = await axios.get(`http://localhost:8080/Category/getCategoryById/${categoryId}`);
         const filteredData = response.data;
         return filteredData.name;
     } catch (error) {

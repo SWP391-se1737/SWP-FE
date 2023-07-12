@@ -46,7 +46,7 @@
             <li id="ordersItem"><a href="orders.html">Đơn đã mua</a></li>
             <li id="salesItem"><a href="sales.html">Đơn đã bán</a></li>
             <li id="transactionsItem"><a href="transactions.html">Giao dịch đã thực hiện</a></li>
-            <li id="logoutItem" style="display: none;"><a href="#" onclick="logout()">Đăng xuất</a></li>
+            <li id="logoutItem" style="display: none;"><a href="#" onclick="logout(); return false;">Đăng xuất</a></li>
           </ul>
         </div>
 
@@ -91,23 +91,154 @@
               sidebar.classList.remove("open"); // Xóa lớp "open" để ẩn sidebar
             }
           });
+
+          function logout() {
+          // Xóa các mục trong sessionStorage
+          sessionStorage.removeItem('isLoggedIn');
+          sessionStorage.removeItem('id');
+
+          // Điều hướng về trang homepage.html
+          window.location.href = 'homepage.html';
+          }
         </script>
     </div>
 </nav>
-  <h1 class="namepage">SỐ DƯ VÍ</h1>
-        <section class="container">
-    
-          <div id="" class="">
-            
-          </div>
-          <script src="js/Sales.js"></script>
-        </section>
+<h1 class="namepage">SỐ DƯ VÍ</h1>
+<div id="balanceContainer"></div>
+<section class="container">
+  <div>
+    <a href="#" class="paymentLink" data-amount="100000" onclick="displayPaymentButton(100000, this, 'wallet.html')">
+      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126562281015087104.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    </a>
+    <a href="#" class="paymentLink" data-amount="200000" onclick="displayPaymentButton(200000, this, 'wallet.html')">
+      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126563042528727040.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    </a>
+    <a href="#" class="paymentLink" data-amount="300000" onclick="displayPaymentButton(300000, this, 'wallet.html')">
+      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126564825938399232.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    </a>
+    <a href="#" class="paymentLink" data-amount="400000" onclick="displayPaymentButton(400000, this, 'wallet.html')">
+      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126565594859180032.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    </a>
+  </div>
+  <div id="paymentButtonContainer">
+    <!-- Nút thanh toán -->
+  </div>
+  
+</section>
+<script>
+  // Gọi API để nhận số dư từ backend
+  function getBalance() {
+    // Thực hiện AJAX request đến endpoint /getWalletBalanceByUserId/{userId} với userId tương ứng
+    var accid = sessionStorage.getItem('id');
+    var url = "http://localhost:8080/wallet/getWalletBalanceByUserId/" + accid;
 
-   </body>
-     <footer  style="position: absolute">
-      <div class="container-fluid footer">
-        Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh City<br/>
-        Contact us: fleashop@gmail.com
-      </div>
-      </footer>
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // Phản hồi thành công từ API
+        var balanceList = JSON.parse(xhr.responseText);
+
+        // Lấy số dư đầu tiên trong danh sách (giả sử chỉ có một số dư duy nhất)
+        var balance = balanceList[0];
+
+        // Hiển thị số dư trong phần tử <div>
+        var balanceContainer = document.getElementById("balanceContainer");
+        balanceContainer.innerHTML = "Số dư ví: " + balance;
+      }
+    };
+    xhr.send();
+  }
+
+  // Gọi hàm getBalance để hiển thị số dư khi trang được tải
+  getBalance();
+</script>
+<script>
+  var accid = sessionStorage.getItem('id');
+
+  function displayPaymentButton(amount, element, returnUrl) {
+    // Xóa các nút thanh toán hiện có
+    var paymentContainer = document.getElementById("paymentButtonContainer");
+    while (paymentContainer.firstChild) {
+      paymentContainer.firstChild.remove();
+    }
+
+    // Tạo nút thanh toán và chuyển hướng khi được nhấp
+    var paymentButton = document.createElement("button");
+    paymentButton.innerHTML = "Xác nhận thanh toán ";
+    paymentButton.onclick = function() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var paymentLink = response.url;
+            window.location.href = paymentLink;
+          } else {
+            console.error("Lỗi khi gọi API: " + xhr.status);
+          }
+          
+        }
+      };
+      xhr.open("GET", "http://localhost:8080/wallet/getWalletBalanceByUserId/" + accid, true);
+      xhr.send();
+    };
+
+    // Sao chép hình ảnh từ tấm hình và thêm vào nút thanh toán
+    var image = element.querySelector("img");
+    var imageCopy = image.cloneNode(true);
+    paymentButton.appendChild(imageCopy);
+
+    paymentContainer.appendChild(paymentButton);
+
+    // Gọi API để lấy balance
+    paymentButton.onclick = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var paymentLink = response.url;
+                    // Redirect to the payment link
+                    window.location.href = paymentLink;
+                } else {
+                    console.error("Lỗi khi gọi API: " + xhr.status);
+                }
+            }
+        };
+        xhr.open("GET", "http://localhost:8080/payment/createPayment?id=" + accid + "&amount=" + amount, true);
+        xhr.send();
+        
+    };
+    var accid = sessionStorage.getItem('id');
+    var exchangprovider = "vnpay";
+var url = "http://localhost:8080/Deposits/addDeposits";
+
+var data = {
+  currency_from: amount,
+  currency_to: amount/1000,
+  user_id: parseInt(sessionStorage.getItem('id')),
+  exchangeProvider: exchangprovider
+};
+console.log(data);
+var xhr = new XMLHttpRequest();
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    // Xử lý phản hồi thành công từ server (nếu cần)
+    console.log(xhr.responseText);
+  }
+};
+
+xhr.send(JSON.stringify(data));
+ 
+  }
+
+</script>
+
+<script src="js/Sales.js"></script>
+
+</body>
  </html>
