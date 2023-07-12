@@ -332,12 +332,12 @@
 .price::after {
   content: "";
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-image: url(https://banner2.cleanpng.com/20191006/fvt/transparent-lotus-5d996d7b7ecc97.5045893615703361235194.jpg);
+  width: 27px;
+  height: 27px;
+  background-image: url(https://img3.thuthuatphanmem.vn/uploads/2019/10/17/anh-hoa-sen-dep_102719565.png);
   background-size: cover;
   margin-left: 5px;
-  margin-bottom: -5px;
+  margin-bottom: -7px;
 }
  a.but.detail {
     width: 280px;

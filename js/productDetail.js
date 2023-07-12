@@ -94,47 +94,5 @@ const getCampusNameById = async (campusId) => {
     }
 };
 
-const addToCart = async (productId) => {
-    const btn = document.querySelectorAll("button")
-
-    //console.log(btn)
-    btn.forEach(function (button, index) {
-        button.addEventListener("click", function (event) {
-            var btnItem = event.target
-            var productDetail = btnItem.closest(".productDetail");
-            var productImg = productDetail.querySelector("img").src
-            var productName = productDetail.querySelector("h2").innerText
-            var productPrice = productDetail.querySelector("h3").innerText
-            addCart(productPrice, productImg, productName)
-        });
-    });
-};
-
-const addCart = (price, image, name) => {
-    const productCart = document.getElementById("productDetail");
-
-    if (productCart) {
-        const productDiv = document.createElement("div");
-        productDiv.classList.add("product-info");
-
-        const img = document.createElement("img");
-        img.src = image;
-
-        const h2 = document.createElement("h2");
-        h2.innerText = name;
-
-        const h3 = document.createElement("h3");
-        h3.innerText = price;
-
-        productDiv.appendChild(img);
-        productDiv.appendChild(h2);
-        productDiv.appendChild(h3);
-
-        productCart.appendChild(productDiv);
-    } else {
-        console.error("Phần tử productCart không tồn tại.");
-    }
-};
-
 
 
