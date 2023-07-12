@@ -24,9 +24,8 @@ async function getProductMoving() {
 }
 getProductMoving();
 
-function changeStatus(id, fromLocation, toLocation, arrivalDate, shipperId, movingDate, movingId) {
-    axios.put('http://localhost:8080/productMoving/updateProductMovingByMovingId?MovingId=' + id, {
-        id: id,
+function changeStatus(fromLocation, toLocation, arrivalDate, shipperId, movingDate, movingId) {
+    axios.put('http://localhost:8080/productMoving/updateProductMovingByMovingId?MovingId=' + movingId, {
         fromLocation: fromLocation,
         toLocation: toLocation,
         arrivalDate: arrivalDate,
