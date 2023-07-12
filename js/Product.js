@@ -95,6 +95,10 @@ const getProductDetail = async (productId) => {
   const testPageUrl = `productDetail.html?id=${encodeURIComponent(productId)}`;
   window.location.href = testPageUrl;
 }
+const buyProduct = (productId) => {
+  const testPageUrl = `orderProduct.html?id=${encodeURIComponent(productId)}`;
+  window.location.href = testPageUrl;
+}
 getProductByName();
 
 
