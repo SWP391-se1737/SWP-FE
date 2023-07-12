@@ -3,17 +3,21 @@ async function getCampusList() {
   campuses = response.data;
   console.log(campuses);
   let tableData = "";
-  campuses.map(campuses => {
-    tableData += `<tr>
-                      <td>${campuses.id}</td>
-                      <td>${campuses.name}</td>
-                      <td>${campuses.address}</td>                      
-                      <td>${campuses.latitude}</td>
-                      <td>${campuses.longitude}</td>                      
-                      <td><button>Update</button></td>
-                      <td><button>Delete</button></td>
-                    </tr>`;
-  });
+  for (const campus of campuses) {
+    tableData += "<tr>"
+    tableData += "<td>" + campus.id + "</td>";
+    tableData += "<td>" + campus.name + "</td>";
+    tableData += "<td>" + campus.address + "</td>";
+    tableData += "<td>" + campus.longitude + "</td>";
+    tableData += "<td>" + campus.latitude + "</td>";
+    // if (category.status == true) {
+    //   tableData += "<td><button class='btn btn-danger' onclick='setStatusInActive(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Inactive</button></td>";
+    // }
+    // else {
+    //   tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Active</button></td>";
+    // }
+    tableData += "</tr>";
+  };
   document.getElementById("campus-list").innerHTML = tableData;
 }
 getCampusList();
