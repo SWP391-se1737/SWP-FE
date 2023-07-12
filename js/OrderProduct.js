@@ -153,36 +153,37 @@ const orderProduct = async (productId) => {
 
     // Tạo đối tượng orderData từ các thông tin đã lấy được
     const orderData = {
-        BuyAt: BuyAt,
-        ShipAt: null,
+        buyAt: BuyAt,
+        shipAt: null,
         status: "chờ nhận hàng",
-        BuyerId: parseInt(sessionStorage.getItem('id')),
-        ProductId: productId,
-        TotalAmount: parseInt(price),
-        Quantity: 1,
-        BuyCampusId: parseInt(selectedCampus)
+        buyerid: parseInt(sessionStorage.getItem('id')),
+        productId: productId,
+        totalamount: parseInt(price),
+        quantity: 1,
+        buycampusid: parseInt(selectedCampus)
     };
-    console.log(orderData);
+    createOrderProduct(orderData)
 
     // Gửi request POST tới API /Order/createOrder
-    try {
-        const response = await fetch('/Order/createOrder', {
+    function createOrderProduct(orderData) {
+        fetch("http://localhost:8080/order/createNewOrder", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(orderData)
-        });
-
-        // Xử lý response
-        if (response.ok) {
-            // Thành công
-            console.log('Đặt hàng thành công!');
-        } else {
-            // Lỗi
-            console.error('Đặt hàng thất bại.');
-        }
-    } catch (error) {
-        console.error('Đã xảy ra lỗi:', error);
-    }
-};
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Đặt hàng thành công!');
+                    window.location.href = 'orders.html';
+                    // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
+                } else {
+                    console.error('Đặt hàng thất bại.');
+                }
+            })
+            .catch(error => {
+                console.error('Đã xảy ra lỗi:', error);
+            });
+    };
+}
