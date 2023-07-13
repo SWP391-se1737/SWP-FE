@@ -12,7 +12,7 @@
   <!-- Css -->
   <link rel="stylesheet" href="css/head-footer.css">
   <link rel="stylesheet" href="css/homepage.css">
-  <link rel="stylesheet" href="css/sales.css">
+  <link rel="stylesheet" href="css/wallet.css">
   <title>Flea Shop</title>
 </head>
 <script>
@@ -104,23 +104,24 @@
     </div>
 </nav>
 <h1 class="namepage">SỐ DƯ VÍ</h1>
-<div id="balanceContainer"></div>
+<div id="balanceContainer" class="price"></div>
+<div class="wallet">Nạp đồng vào ví</div>
 <section class="container">
-  <div>
-    <a href="#" class="paymentLink" data-amount="100000" onclick="displayPaymentButton(100000, this, 'wallet.html')">
-      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126562281015087104.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+  <div class="imgage">
+    <a href="#" class="paymentLink" data-amount="100000" onclick="displayPaymentButton(50000, this, 'wallet.html')">
+      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128803641327878144/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
-    <a href="#" class="paymentLink" data-amount="200000" onclick="displayPaymentButton(200000, this, 'wallet.html')">
-      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126563042528727040.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    <a href="#" class="paymentLink" data-amount="200000" onclick="displayPaymentButton(100000, this, 'wallet.html')">
+      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128804144539516948/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
-    <a href="#" class="paymentLink" data-amount="300000" onclick="displayPaymentButton(300000, this, 'wallet.html')">
-      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126564825938399232.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    <a href="#" class="paymentLink" data-amount="300000" onclick="displayPaymentButton(150000, this, 'wallet.html')">
+      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128804468041977927/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
-    <a href="#" class="paymentLink" data-amount="400000" onclick="displayPaymentButton(400000, this, 'wallet.html')">
-      <img src="https://stc-sot.vcdn.vn/ws-content/uploads//VALORANT-ZINGPAY-1-LIVE/image/product/1126565594859180032.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    <a href="#" class="paymentLink" data-amount="400000" onclick="displayPaymentButton(200000, this, 'wallet.html')">
+      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128804594655432764/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
   </div>
-  <div id="paymentButtonContainer">
+  <div id="paymentButtonContainer" class="payment">
     <!-- Nút thanh toán -->
   </div>
   
@@ -144,7 +145,7 @@
 
         // Hiển thị số dư trong phần tử <div>
         var balanceContainer = document.getElementById("balanceContainer");
-        balanceContainer.innerHTML = "Số dư ví: " + balance;
+        balanceContainer.innerHTML = balance;
       }
     };
     xhr.send();
@@ -241,4 +242,10 @@ xhr.send(JSON.stringify(data));
 <script src="js/Sales.js"></script>
 
 </body>
+<footer style="position: absolute">
+  <div class="container-fluid footer">
+    Address: Lot E2a-7, Road D1, D. D1, Long Thanh My, Thu Duc City, Ho Chi Minh City<br/>
+    Contact us: fleashop@gmail.com
+  </div>
+  </footer>
  </html>

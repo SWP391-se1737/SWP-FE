@@ -2,11 +2,60 @@
     margin-top: 80px; 
     font-family: 'Courier New', Courier, monospaces; 
     text-align: center;
-    background-color: #ffbc6e;
-    width: 550px;
+   
+    width: 400px;
     text-align: center;
-    margin-left: 500px;
+    margin-left: 550px;
 }
 body{
     background-color: rgb(245, 245, 245);
 } 
+.price{
+    color: black; 
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+}
+.price::after {
+  content: "";
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-image: url(https://png.pngtree.com/png-clipart/20230317/ourmid/pngtree-gold-coins-png-image_6652461.png);
+  background-size: cover;
+  margin-left: 5px;
+  margin-bottom: -7px;
+}
+.paymentLink{
+    margin-right: 50px;
+    margin-left: 40px;
+  
+}
+.imgage{
+    margin-left: 300px;
+    margin-top: 30px;
+    
+}
+.payment{
+    margin-top: 30px;
+    margin-left: 500px;
+}
+.payment img{
+    width: 400px;
+    height: 100px;
+}
+.paymentLink img{
+    width: 400px;
+    height: 100px;
+    margin-top: 10px;
+}
+.wallet{
+    margin-top: 20px; 
+    font-family: 'Inder'; 
+    font-size: 40px;
+    
+    width: 550px;
+    height: 20px;
+    text-align: center;
+    margin-left: 500px;
+}
