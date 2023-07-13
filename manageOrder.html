@@ -17,7 +17,7 @@
     <div class="container">
         <div class="navigation">
             <ul>
-                <li>
+                <li id="homepageNav">
                     <a href="homepage.html">
                         <span class="icon">
                             <ion-icon name="home-outline"></ion-icon>
@@ -26,7 +26,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li id="adminpageNav">
                     <a href="adminpage.html">
                         <span class="icon">
                             <ion-icon name="person-outline"></ion-icon>
@@ -34,7 +34,7 @@
                         <span class="title">Dashboard</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageProductPostingNav">
                     <a href="manageProductPosting.html">
                         <span class="icon">
                             <ion-icon name="bag-outline"></ion-icon>
@@ -42,7 +42,7 @@
                         <span class="title">Product Posting</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageOrderNav">
                     <a href="manageOrder.html">
                         <span class="icon">
                             <ion-icon name="bag-outline"></ion-icon>
@@ -50,7 +50,7 @@
                         <span class="title">Order</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageTransactionNav">
                     <a href="manageTransaction.html">
                         <span class="icon">
                             <ion-icon name="wallet-outline"></ion-icon>
@@ -58,7 +58,7 @@
                         <span class="title">Transaction</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageStudentNav">
                     <a href="manageStudent.html">
                         <span class="icon">
                             <ion-icon name="person-outline"></ion-icon>
@@ -66,7 +66,7 @@
                         <span class="title">Student</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageStaffNav">
                     <a href="manageStaff.html">
                         <span class="icon">
                             <ion-icon name="person-outline"></ion-icon>
@@ -74,7 +74,7 @@
                         <span class="title">Staff</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageProductMovingNav">
                     <a href="manageProductMoving.html">
                         <span class="icon">
                             <ion-icon name="bus-outline"></ion-icon>
@@ -82,7 +82,7 @@
                         <span class="title">Product Moving</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageCategoryNav">
                     <a href="manageCategory.html">
                         <span class="icon">
                             <ion-icon name="reorder-three-outline"></ion-icon>
@@ -90,7 +90,7 @@
                         <span class="title">Category</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageCampusNav">
                     <a href="manageCampus.html">
                         <span class="icon">
                             <ion-icon name="business-outline"></ion-icon>
@@ -98,7 +98,7 @@
                         <span class="title">Campus</span>
                     </a>
                 </li>
-                <li>
+                <li id="manageStorageNav">
                     <a href="manageStorage.html">
                         <span class="icon">
                             <ion-icon name="archive-outline"></ion-icon>
@@ -106,7 +106,7 @@
                         <span class="title">Storage</span>
                     </a>
                 </li>
-                <li>
+                <li id="signoutNav">
                     <a href="http://localhost:8080/logout">
                         <span class="icon">
                             <ion-icon name="log-out-outline"></ion-icon>
@@ -160,6 +160,48 @@
             </div>    
         </div>
     </div>
+    <script>
+        var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        var accRole = sessionStorage.getItem('role');
+        console.log(accRole);
+            if (isLoggedIn === "true") {
+                if (accRole === "Staff") {
+                    document.getElementById("homepageNav").style.display = "block";
+                    document.getElementById("adminpageNav").style.display = "block";
+                    document.getElementById("manageProductPostingNav").style.display = "block";
+                    document.getElementById("manageOrderNav").style.display = "block";
+                    document.getElementById("manageTransactionNav").style.display = "block";
+                    document.getElementById("manageStudentNav").style.display = "none";
+                    document.getElementById("manageStaffNav").style.display = "none";
+                    document.getElementById("manageProductMovingNav").style.display = "block";
+                    document.getElementById("manageCategoryNav").style.display = "none";
+                    document.getElementById("manageCampusNav").style.display = "none";
+                    document.getElementById("manageStorageNav").style.display = "none";
+                    document.getElementById("signoutNav").style.display = "block";
+            } else {
+                document.getElementById("homepage").style.display = "block";
+                    document.getElementById("adminpage").style.display = "block";
+                    document.getElementById("manageProductPosting").style.display = "block";
+                    document.getElementById("manageOrder").style.display = "block";
+                    document.getElementById("manageTransaction").style.display = "block";
+                    document.getElementById("manageStudent").style.display = "block";
+                    document.getElementById("manageStaff").style.display = "block";
+                    document.getElementById("manageProductMoving").style.display = "block";
+                    document.getElementById("manageCategory").style.display = "block";
+                    document.getElementById("manageCampus").style.display = "block";
+                    document.getElementById("manageStorage").style.display = "block";
+                    document.getElementById("signout").style.display = "block";
+            }};
+
+        function logout() {
+        // Xóa các mục trong sessionStorage
+        sessionStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('id');
+
+        // Điều hướng về trang homepage.html
+        window.location.href = 'homepage.html';
+        }
+      </script>
     <!-- ========================= Scripts ====================== -->
     <script src="js/ManageOrder.js"></script>
     <script src="js/AdminNavbar.js"></script>
