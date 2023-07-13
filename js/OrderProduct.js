@@ -166,6 +166,7 @@ const orderProduct = async (productId) => {
 
     // Gửi request POST tới API /Order/createOrder
     function createOrderProduct(orderData) {
+        console.log(orderData);
         fetch("http://localhost:8080/order/createNewOrder", {
             method: 'POST',
             headers: {
@@ -175,10 +176,12 @@ const orderProduct = async (productId) => {
         })
             .then(response => {
                 if (response.ok) {
+                    
                     console.log('Đặt hàng thành công!');
                     window.location.href = 'orders.html';
                     // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
                 } else {
+                    errorMessage.textContent = "Đặt hàng thất bại, bạn hãy kiểm tra lại số dư";
                     console.error('Đặt hàng thất bại.');
                 }
             })
