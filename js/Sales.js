@@ -160,6 +160,26 @@ const renderPost = async (product) => {
 
             });
         }
+        function deleteProductByUser(productId) {
+            fetch(`http://localhost:8080/product/deleteProductByStudent?id=${productId}`, {
+                method: 'PUT'
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Error deleting product');
+            })
+            .then(data => {
+                // Xử lý phản hồi từ máy chủ sau khi xóa thành công
+                window.location.href = "sales.html";
+                console.log(data);
+            })
+            .catch(error => {
+                // Xử lý lỗi nếu có
+                console.error(error);
+            });
+        }
 
         infoDiv.appendChild(h2);
         infoDiv.appendChild(h3);
