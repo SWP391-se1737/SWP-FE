@@ -52,6 +52,7 @@
   var response = xhr.responseText;
   // Hiển thị thông báo thành công
   document.getElementById("errorMessage").innerText = response;
+  sessionStorage.setItem("role", "Admin");
   window.location.href = "adminpage.html";
 }else {
           // Xử lý phản hồi lỗi từ API

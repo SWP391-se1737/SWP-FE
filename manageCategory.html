@@ -1,220 +1,238 @@
 <!DOCTYPE html>
 
 <html>
-
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Admin Dashboard</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- =========================== Style ============================== -->
-    <link rel="stylesheet" href="css/adminpage.css">
-</head>
-
-<body>
+    <link rel="stylesheet" href="css/adminpage.css" />
+  </head>
+  <script>
+    var role = sessionStorage.getItem("role");
+    if (role !== "Admin" && role !== "Staff") {
+      const loginPageUrl = "adminlogin.html";
+      window.location.href = loginPageUrl;
+    }
+  </script>
+  <body>
     <!-- ========================== Navigation ============== -->
     <div class="container">
-        <div class="navigation">
-            <ul>
-                <li id="homepageNav">
-                    <a href="homepage.html">
-                        <span class="icon">
-                            <ion-icon name="home-outline"></ion-icon>
-                        </span>
-                        <span class="title">Flea Shop</span>
-                    </a>
-                </li>
+      <div class="navigation">
+        <ul>
+          <li id="homepageNav">
+            <a href="homepage.html">
+              <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+              </span>
+              <span class="title">Flea Shop</span>
+            </a>
+          </li>
 
-                <li id="adminpageNav">
-                    <a href="adminpage.html">
-                        <span class="icon">
-                            <ion-icon name="person-outline"></ion-icon>
-                        </span>
-                        <span class="title">Dashboard</span>
-                    </a>
-                </li>
-                <li id="manageProductPostingNav">
-                    <a href="manageProductPosting.html">
-                        <span class="icon">
-                            <ion-icon name="bag-outline"></ion-icon>
-                        </span>
-                        <span class="title">Product Posting</span>
-                    </a>
-                </li>
-                <li id="manageOrderNav">
-                    <a href="manageOrder.html">
-                        <span class="icon">
-                            <ion-icon name="bag-outline"></ion-icon>
-                        </span>
-                        <span class="title">Order</span>
-                    </a>
-                </li>
-                <li id="manageTransactionNav">
-                    <a href="manageTransaction.html">
-                        <span class="icon">
-                            <ion-icon name="wallet-outline"></ion-icon>
-                        </span>
-                        <span class="title">Transaction</span>
-                    </a>
-                </li>
-                <li id="manageStudentNav">
-                    <a href="manageStudent.html">
-                        <span class="icon">
-                            <ion-icon name="person-outline"></ion-icon>
-                        </span>
-                        <span class="title">Student</span>
-                    </a>
-                </li>
-                <li id="manageStaffNav">
-                    <a href="manageStaff.html">
-                        <span class="icon">
-                            <ion-icon name="person-outline"></ion-icon>
-                        </span>
-                        <span class="title">Staff</span>
-                    </a>
-                </li>
-                <li id="manageProductMovingNav">
-                    <a href="manageProductMoving.html">
-                        <span class="icon">
-                            <ion-icon name="bus-outline"></ion-icon>
-                        </span>
-                        <span class="title">Product Moving</span>
-                    </a>
-                </li>
-                <li id="manageCategoryNav">
-                    <a href="manageCategory.html">
-                        <span class="icon">
-                            <ion-icon name="reorder-three-outline"></ion-icon>
-                        </span>
-                        <span class="title">Category</span>
-                    </a>
-                </li>
-                <li id="manageCampusNav">
-                    <a href="manageCampus.html">
-                        <span class="icon">
-                            <ion-icon name="business-outline"></ion-icon>
-                        </span>
-                        <span class="title">Campus</span>
-                    </a>
-                </li>
-                <li id="manageStorageNav">
-                    <a href="manageStorage.html">
-                        <span class="icon">
-                            <ion-icon name="archive-outline"></ion-icon>
-                        </span>
-                        <span class="title">Storage</span>
-                    </a>
-                </li>
-                <li id="signoutNav">
-                    <a href="#" onclick="logout(); return false;">
-                        <span class="icon">
-                            <ion-icon name="log-out-outline"></ion-icon>
-                        </span>
-                        <span class="title">Sign Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+          <li id="adminpageNav">
+            <a href="adminpage.html">
+              <span class="icon">
+                <ion-icon name="person-outline"></ion-icon>
+              </span>
+              <span class="title">Dashboard</span>
+            </a>
+          </li>
+          <li id="manageProductPostingNav">
+            <a href="manageProductPosting.html">
+              <span class="icon">
+                <ion-icon name="bag-outline"></ion-icon>
+              </span>
+              <span class="title">Product Posting</span>
+            </a>
+          </li>
+          <li id="manageOrderNav">
+            <a href="manageOrder.html">
+              <span class="icon">
+                <ion-icon name="bag-outline"></ion-icon>
+              </span>
+              <span class="title">Order</span>
+            </a>
+          </li>
+          <li id="manageTransactionNav">
+            <a href="manageTransaction.html">
+              <span class="icon">
+                <ion-icon name="wallet-outline"></ion-icon>
+              </span>
+              <span class="title">Transaction</span>
+            </a>
+          </li>
+          <li id="manageStudentNav">
+            <a href="manageStudent.html">
+              <span class="icon">
+                <ion-icon name="person-outline"></ion-icon>
+              </span>
+              <span class="title">Student</span>
+            </a>
+          </li>
+          <li id="manageStaffNav">
+            <a href="manageStaff.html">
+              <span class="icon">
+                <ion-icon name="person-outline"></ion-icon>
+              </span>
+              <span class="title">Staff</span>
+            </a>
+          </li>
+          <li id="manageProductMovingNav">
+            <a href="manageProductMoving.html">
+              <span class="icon">
+                <ion-icon name="bus-outline"></ion-icon>
+              </span>
+              <span class="title">Product Moving</span>
+            </a>
+          </li>
+          <li id="manageCategoryNav">
+            <a href="manageCategory.html">
+              <span class="icon">
+                <ion-icon name="reorder-three-outline"></ion-icon>
+              </span>
+              <span class="title">Category</span>
+            </a>
+          </li>
+          <li id="manageCampusNav">
+            <a href="manageCampus.html">
+              <span class="icon">
+                <ion-icon name="business-outline"></ion-icon>
+              </span>
+              <span class="title">Campus</span>
+            </a>
+          </li>
+          <li id="manageStorageNav">
+            <a href="manageStorage.html">
+              <span class="icon">
+                <ion-icon name="archive-outline"></ion-icon>
+              </span>
+              <span class="title">Storage</span>
+            </a>
+          </li>
+          <li id="signoutNav">
+            <a href="#" onclick="logout(); return false;">
+              <span class="icon">
+                <ion-icon name="log-out-outline"></ion-icon>
+              </span>
+              <span class="title">Sign Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-        <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-                <!-- <div class="search">
+      <div class="main">
+        <div class="topbar">
+          <div class="toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+          </div>
+          <!-- <div class="search">
                     <form action="" id="category-form" autocomplete="off">
                         <label for="categoryName">Category Name</label>
                         <input class="form-control" type="text" id="catergoryName" placeholder="Enter Category Name">
                     <a href="#" class="search"><ion-icon name="search-outline"></ion-icon></a>
                 </form>
                 </div> -->
-                <div class="user">
-                    <img src="" alt="">
-                </div>
-            </div>
-            <div class="details">
-                <div class="categories">
-                    <div class="cardHeader">
-                        <h2>Categories</h2>
-                    </div>
-
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>ID</td>
-                                <td>Name</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-                        <tbody id="category-list">
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="details">
-                <div class="categories">
-                    <div class="cardHeader">
-                        <h2>Add new category</h2>
-                    </div>
-                    <form action="" id="category-form" autocomplete="off">
-                            <label for="categoryName">Category Name</label>
-                            <input class="form-control" type="text" id="catergoryName" placeholder="Enter Category Name">
-                        <a href="#" class="add">Add</a>
-                    </form>
-                </div>
-            </div>
+          <div class="user">
+            <img src="" alt="" />
+          </div>
         </div>
+        <div class="details">
+          <div class="categories">
+            <div class="cardHeader">
+              <h2>Categories</h2>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <td>ID</td>
+                  <td>Name</td>
+                  <td>Status</td>
+                </tr>
+              </thead>
+              <tbody id="category-list"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="details">
+          <div class="categories">
+            <div class="cardHeader">
+              <h2>Add new category</h2>
+            </div>
+            <form action="" id="category-form" autocomplete="off">
+              <label for="categoryName">Category Name</label>
+              <input
+                class="form-control"
+                type="text"
+                id="catergoryName"
+                placeholder="Enter Category Name"
+              />
+              <a href="#" class="add">Add</a>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
-        var isLoggedIn = sessionStorage.getItem('isLoggedIn');
-        var accRole = sessionStorage.getItem('role');
-        console.log(accRole);
-            if (isLoggedIn === "true") {
-                if (accRole === "Staff") {
-                    document.getElementById("homepageNav").style.display = "block";
-                    document.getElementById("adminpageNav").style.display = "block";
-                    document.getElementById("manageProductPostingNav").style.display = "block";
-                    document.getElementById("manageOrderNav").style.display = "block";
-                    document.getElementById("manageTransactionNav").style.display = "block";
-                    document.getElementById("manageStudentNav").style.display = "none";
-                    document.getElementById("manageStaffNav").style.display = "none";
-                    document.getElementById("manageProductMovingNav").style.display = "block";
-                    document.getElementById("manageCategoryNav").style.display = "none";
-                    document.getElementById("manageCampusNav").style.display = "none";
-                    document.getElementById("manageStorageNav").style.display = "none";
-                    document.getElementById("signoutNav").style.display = "block";
-            } else {
-                document.getElementById("homepage").style.display = "block";
-                    document.getElementById("adminpage").style.display = "block";
-                    document.getElementById("manageProductPosting").style.display = "block";
-                    document.getElementById("manageOrder").style.display = "block";
-                    document.getElementById("manageTransaction").style.display = "block";
-                    document.getElementById("manageStudent").style.display = "block";
-                    document.getElementById("manageStaff").style.display = "block";
-                    document.getElementById("manageProductMoving").style.display = "block";
-                    document.getElementById("manageCategory").style.display = "block";
-                    document.getElementById("manageCampus").style.display = "block";
-                    document.getElementById("manageStorage").style.display = "block";
-                    document.getElementById("signout").style.display = "block";
-            }};
+      var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+      var accRole = sessionStorage.getItem("role");
+      console.log(accRole);
+      if (isLoggedIn === "true") {
+        if (accRole === "Staff") {
+          document.getElementById("homepageNav").style.display = "block";
+          document.getElementById("adminpageNav").style.display = "block";
+          document.getElementById("manageProductPostingNav").style.display =
+            "block";
+          document.getElementById("manageOrderNav").style.display = "block";
+          document.getElementById("manageTransactionNav").style.display =
+            "block";
+          document.getElementById("manageStudentNav").style.display = "none";
+          document.getElementById("manageStaffNav").style.display = "none";
+          document.getElementById("manageProductMovingNav").style.display =
+            "block";
+          document.getElementById("manageCategoryNav").style.display = "none";
+          document.getElementById("manageCampusNav").style.display = "none";
+          document.getElementById("manageStorageNav").style.display = "none";
+          document.getElementById("signoutNav").style.display = "block";
+        } else {
+          document.getElementById("homepage").style.display = "block";
+          document.getElementById("adminpage").style.display = "block";
+          document.getElementById("manageProductPosting").style.display =
+            "block";
+          document.getElementById("manageOrder").style.display = "block";
+          document.getElementById("manageTransaction").style.display = "block";
+          document.getElementById("manageStudent").style.display = "block";
+          document.getElementById("manageStaff").style.display = "block";
+          document.getElementById("manageProductMoving").style.display =
+            "block";
+          document.getElementById("manageCategory").style.display = "block";
+          document.getElementById("manageCampus").style.display = "block";
+          document.getElementById("manageStorage").style.display = "block";
+          document.getElementById("signout").style.display = "block";
+        }
+      }
 
-        function logout() {
+      function logout() {
         // Xóa các mục trong sessionStorage
-        sessionStorage.removeItem('isLoggedIn');
-        sessionStorage.removeItem('id');
+        sessionStorage.clear();
 
         // Điều hướng về trang homepage.html
-        window.location.href = 'homepage.html';
-        }
-      </script>
+        window.location.href = "homepage.html";
+      }
+    </script>
     <!-- ========================= Scripts ====================== -->
     <script src="js/ManageCategory.js"></script>
     <script src="js/AdminNavbar.js"></script>
     <!-- ========================== IonIcons =======================-->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
 </html>
