@@ -64,7 +64,7 @@ const renderProductsByCampusAndCategory = (products) => {
         list.innerHTML = '';
         const availableProducts = products.filter((result) => result.status === 'Còn hàng');
 
-        availableProducts.forEach((result) => {
+        availableProducts.forEach(async (result) => {
             const productId = result.id;
             const divItem = document.createElement('div');
             divItem.classList.add(`detail`);
@@ -80,6 +80,12 @@ const renderProductsByCampusAndCategory = (products) => {
             h3.innerText = result.price.toLocaleString();
             h3.classList.add('price');
 
+            const h4 = document.createElement("p");
+            const strong1 = document.createElement("strong");
+            strong1.innerText = "Bán tại: ";
+            h4.appendChild(strong1);
+            h4.appendChild(document.createTextNode(await getCampusNameById(result.sellcampusid)));
+
             const buytButton = document.createElement("button");
             buytButton.innerText = "Mua ngay";
             buytButton.classList.add("round-black-btn");
@@ -93,6 +99,7 @@ const renderProductsByCampusAndCategory = (products) => {
             divItem.appendChild(img);
             divItem.appendChild(h2);
             divItem.appendChild(h3);
+            divItem.appendChild(h4);
             divItem.appendChild(buytButton);
 
             list.appendChild(divItem);
