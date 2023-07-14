@@ -102,10 +102,10 @@
                     if(data.account.role = "Student"){
                       window.location.href = "homepage.html";
                     }
-                    else if(data.account.role = "Staff"){
+                    if(data.account.role = "Staff"){
                       window.location.href = "adminpage.html";
                     }
-                  } else {
+                    } else {
                     console.log(
                       "Tài khoản chưa tồn tại. Thêm vào cơ sở dữ liệu."
                     );
