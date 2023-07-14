@@ -99,9 +99,10 @@
                     );
                     // Hoặc hiển thị thông báo không thêm vào cơ sở dữ liệu
                     // ...
-                    if ((data.account.role = "Student"))
+                    if(data.account.role = "Student"){
                       window.location.href = "homepage.html";
-                    else if ((data.account.role = "Staff")) {
+                    }
+                    else if(data.account.role = "Staff"){
                       window.location.href = "adminpage.html";
                     }
                   } else {

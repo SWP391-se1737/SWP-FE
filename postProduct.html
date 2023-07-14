@@ -61,6 +61,7 @@
                 <button onclick="uploadImage()" id="uploadBtn" style="display: none;"></button>
                 <label></label>
         </div>
+        <div id="errorMessage" class="errorMessage"></div>
         <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
           <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
           <script>
@@ -175,6 +176,7 @@
                     window.location.href = 'sales.html';
                     // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
                   } else {
+                    errorMessage.textContent = "Không thể thực hiện. Vui lòng kiểm tra lại số dư";
                     console.error('Lỗi tạo sản phẩm');
                   }
                 })
