@@ -38,11 +38,16 @@ const renderProducts = async (product) => {
         p.appendChild(document.createTextNode(product.description));
         p.appendChild(document.createElement("br"));
 
+        const p5 = document.createElement("p");
+        const strong5 = document.createElement("strong");
+        strong5.innerText = "Phân loại: ";
+        p5.appendChild(strong5);
+        p5.appendChild(document.createTextNode(await getCategoryNameById(product.categoryid)));
+
         const p2 = document.createElement("p");
         const strong1 = document.createElement("strong");
         strong1.innerText = "Bán tại campus: ";
         p2.appendChild(strong1);
-        //p2.appendChild(document.createTextNode(product.sellcampusid));
         p2.appendChild(document.createTextNode(await getCampusNameById(product.sellcampusid)));
 
         const p3 = document.createElement("p");
@@ -65,6 +70,7 @@ const renderProducts = async (product) => {
         infoDiv.appendChild(h2);
         infoDiv.appendChild(h3);
         infoDiv.appendChild(p);
+        infoDiv.appendChild(p5);
         infoDiv.appendChild(p2);
         infoDiv.appendChild(p3);
         infoDiv.appendChild(document.createElement("br"));
@@ -86,6 +92,17 @@ const renderProducts = async (product) => {
 const getCampusNameById = async (campusId) => {
     try {
         const response = await axios.get(`http://localhost:8080/Campus/getCampusById?id=${campusId}`);
+        const filteredData = response.data;
+        return filteredData.name;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        throw error;
+    }
+};
+
+const getCategoryNameById = async (categoryId) => {
+    try {
+        const response = await axios.get(`http://localhost:8080/Category/getCategoryById/${categoryId}`);
         const filteredData = response.data;
         return filteredData.name;
     } catch (error) {
