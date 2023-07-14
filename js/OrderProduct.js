@@ -147,6 +147,14 @@ const orderProduct = async (productId) => {
 
     // Tạo chuỗi đại diện cho ngày tháng năm và thời gian hiện tại
     const BuyAt = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    const BuyAtDate = new Date(BuyAt);
+    const expireDate = new Date(BuyAtDate);
+    expireDate.setDate(BuyAtDate.getDate() + 3);
+    const dayexpire = expireDate.getDate();
+    const monthexpire = expireDate.getMonth() + 1;
+    const yearexpire = expireDate.getFullYear();
+    const shipAT = `${yearexpire}-${String(monthexpire).padStart(2, '0')}-${String(dayexpire).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     // Lấy thông tin từ các phần tử
     const price = document.querySelector('.product-info .price').innerText;
     const selectedCampus = document.getElementById('listCampuses').value;
@@ -154,7 +162,7 @@ const orderProduct = async (productId) => {
     // Tạo đối tượng orderData từ các thông tin đã lấy được
     const orderData = {
         buyAt: BuyAt,
-        shipAt: null,
+        shipAt: shipAT,
         status: "chờ nhận hàng",
         buyerid: parseInt(sessionStorage.getItem('id')),
         productId: productId,
@@ -162,6 +170,7 @@ const orderProduct = async (productId) => {
         quantity: 1,
         buycampusid: parseInt(selectedCampus)
     };
+    console.log(orderData);
     createOrderProduct(orderData)
 
     // Gửi request POST tới API /Order/createOrder

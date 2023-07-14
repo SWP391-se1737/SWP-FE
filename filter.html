@@ -37,7 +37,8 @@
         <a href="#" class="ping" id="menuTrigger"><i class="fas fa-user"></i></a>
         <div id="sidebar">
           <ul>
-            <li id="loginItem"><a href="login.html">Đăng nhập</a></li>
+            <li id="loginItem"><a href="login.html">Người dùng đăng nhập</a></li>
+            <li id="adminLoginItem" style="border-bottom: none"><a href="adminlogin.html">Admin đăng nhập</a></li>
             <li id="profileItem"><a href="profile.html">Thông tin cá nhân</a></li>
             <li id="walletItem"><a href="wallet.html">Ví</a></li>
             <li id="ordersItem"><a href="orders.html">Đơn đã mua</a></li>
@@ -68,6 +69,7 @@
               if (isLoggedIn === "true") {
                 // Đã đăng nhập
                 document.getElementById("loginItem").style.display = "none";
+                document.getElementById("adminLoginItem").style.display = "none";
                 document.getElementById("profileItem").style.display = "block";
                 document.getElementById("walletItem").style.display = "block";
                 document.getElementById("ordersItem").style.display = "block";
@@ -77,6 +79,7 @@
               } else {
                 // Chưa đăng nhập
                 document.getElementById("loginItem").style.display = "block";
+                document.getElementById("adminLoginItem").style.display = "block";
                 document.getElementById("profileItem").style.display = "none";
                 document.getElementById("walletItem").style.display = "none";
                 document.getElementById("ordersItem").style.display = "none";
@@ -92,9 +95,7 @@
 
           function logout() {
           // Xóa các mục trong sessionStorage
-          sessionStorage.removeItem('isLoggedIn');
-          sessionStorage.removeItem('id');
-
+          sessionStorage.clear()
           // Điều hướng về trang homepage.html
           window.location.href = 'homepage.html';
           }

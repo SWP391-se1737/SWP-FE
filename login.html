@@ -18,15 +18,6 @@
     <div>
       <div class="container">
         <div class="login">
-          <p>Quản trị viên</p>
-          <form id="loginForm">
-            <input type="text" name="username" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
-            <button type="submit">Login</button>
-            <div id="errorMessage" class="errorMessage"></div>
-          </form>
-        </div>
-        <div class="login">
           <p>Sinh viên, nhân viên</p>
           <button class="logingg2" id="logingg" style="width: 200px">
             Login with Google
@@ -108,9 +99,9 @@
                     );
                     // Hoặc hiển thị thông báo không thêm vào cơ sở dữ liệu
                     // ...
-                    if(data.account.role = "Student")
+                    if ((data.account.role = "Student"))
                       window.location.href = "homepage.html";
-                    else if(data.account.role = "Staff"){
+                    else if ((data.account.role = "Staff")) {
                       window.location.href = "adminpage.html";
                     }
                   } else {
@@ -161,45 +152,6 @@
             console.error("Lỗi đăng nhập:", error.code, error.message);
           });
       </script>
-
-<script>
-  // Lắng nghe sự kiện submit form
-  document.getElementById("loginForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Ngăn chặn việc gửi yêu cầu mặc định của form
-
-    // Lấy giá trị email và password từ form
-    var email = document.getElementsByName("username")[0].value;
-    var password = document.getElementsByName("password")[0].value;
-
-    // Xây dựng chuỗi query parameters
-    var queryParams = new URLSearchParams();
-    queryParams.set("Email", email);
-    queryParams.set("Password", password);
-
-    // Gửi yêu cầu POST đến API với query parameters
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/Account/login?" + queryParams.toString(), true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-  // Xử lý phản hồi thành công từ API
-  var response = xhr.responseText;
-  // Hiển thị thông báo thành công
-  document.getElementById("errorMessage").innerText = response;
-  window.location.href = "adminpage.html";
-}else {
-          // Xử lý phản hồi lỗi từ API
-          var errorResponse = JSON.parse(xhr.responseText);
-          // Hiển thị thông báo lỗi
-          document.getElementById("errorMessage").innerText = errorResponse;
-        }
-      }
-    };
-    xhr.send();
-  });
-</script>
-
     </div>
   </body>
   <footer style="position: absolute">
