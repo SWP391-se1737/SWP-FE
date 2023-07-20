@@ -41,13 +41,13 @@
                   <label for="photo" >
                     <img src="img/icon/uploadimg.png" id="profile-pic" style="width: 350px; height: 350px; margin: -45px 0px 0px -30px;">
                   </label> 
-                </div>      
-               
-                 
+                  <div id="images-container" class="images-container">
+
+                  </div>
+                </div>
+         
                   <input type="submit" name="submit" value="Tạo" class="button"/>
-                  
-               
-                 <a href="postProduct.html" class="button">
+                  <a href="postProduct.html" class="button">
                   <span class="button-text">
                      Hủy
                    </span>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div>
-                  <input type="file" accept="image/jpeg, image/png, image/jpg" id="photo" style="background-color: rgb(253, 253, 253); border: none; display: none;">
+                  <input type="file" accept="image/jpeg, image/png, image/jpg" id="photo" style="background-color: rgb(253, 253, 253); border: none; display: none;" multiple>
                 <button onclick="uploadImage()" id="uploadBtn" style="display: none;"></button>
                 <label></label>
         </div>
@@ -71,11 +71,25 @@
   
               // Your web app's Firebase configuration
           
-              let profilePic = document.getElementById("profile-pic");
               let photo = document.getElementById("photo");
+              let imagesContainer = document.getElementById("images-container");
+              let profilePic = document.getElementById("profile-pic");
+
               photo.onchange = function(){
-                profilePic.src = URL.createObjectURL(photo.files[0]);
-              }
+                  imagesContainer.innerHTML = ""; // Xóa nội dung hiện tại của container
+
+                  for (let i = 0; i < photo.files.length; i++) {
+                      let image = document.createElement("img");
+                      image.src = URL.createObjectURL(photo.files[i]);
+                      image.className = "uploaded-image";
+                      image.onclick = function() {
+                          profilePic.src = URL.createObjectURL(photo.files[i]);
+                      };
+
+                      imagesContainer.appendChild(image);
+                  }
+              };
+
 
               const firebaseConfig = {
                 apiKey: "AIzaSyCCvDizeCUo-CZIdI-G57gR9jyTS9rh-3w",
@@ -91,99 +105,126 @@
   
             </script>
             <script>
-            // Khai báo biến product ở ngoài hàm uploadAndCreatePost
-            let product = {};
-            
-            function uploadAndCreatePost(event) {
-              event.preventDefault(); // Ngăn chặn hành vi mặc định của submit
-            
-              // Tạo đối tượng Date để lấy ngày tháng năm và thời gian hiện tại
-              const currentDate = new Date();
-            
-              // Lấy thông tin ngày, tháng, năm và thời gian hiện tại
-              const day = currentDate.getDate();
-              const month = currentDate.getMonth() + 1; // Tháng trong JavaScript bắt đầu từ 0, nên cần cộng thêm 1
-              const year = currentDate.getFullYear();
-              const hours = currentDate.getHours();
-              const minutes = currentDate.getMinutes();
-              const seconds = currentDate.getSeconds();
-            
-              // Tạo chuỗi đại diện cho ngày tháng năm và thời gian hiện tại
-              const createAT = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            
-              const createATDate = new Date(createAT);
-              const expireDate = new Date(createATDate);
-              expireDate.setDate(createATDate.getDate() + 20);
-              const dayexpire = expireDate.getDate();
-              const monthexpire = expireDate.getMonth() + 1;
-              const yearexpire = expireDate.getFullYear();
-              const expire = `${yearexpire}-${String(monthexpire).padStart(2, '0')}-${String(dayexpire).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+              let product = {};
 
-              const listCategory = document.getElementById("optionCategory");
-              const selectedCategoryId = listCategory.value;
+              function uploadAndCreatePost(event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của submit
             
-              const listCampuses = document.getElementById("listCampuses");
+                const currentDate = new Date();
+                const day = currentDate.getDate();
+                const month = currentDate.getMonth() + 1;
+                const year = currentDate.getFullYear();
+                const hours = currentDate.getHours();
+                const minutes = currentDate.getMinutes();
+                const seconds = currentDate.getSeconds();
+            
+                const createAT = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                const createATDate = new Date(createAT);
+                const expireDate = new Date(createATDate);
+                expireDate.setDate(createATDate.getDate() + 20);
+                const dayexpire = expireDate.getDate();
+                const monthexpire = expireDate.getMonth() + 1;
+                const yearexpire = expireDate.getFullYear();
+                const expire = `${yearexpire}-${String(monthexpire).padStart(2, '0')}-${String(dayexpire).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+                const listCategory = document.getElementById("optionCategory");
+                const selectedCategoryId = listCategory.value;
+            
+                const listCampuses = document.getElementById("listCampuses");
                 const selectedCampusId = listCampuses.value;
             
-              const name = document.querySelector('input[name="name"]').value;
-              const description = document.querySelector('input[name="discriptions"]').value;
-              const price = parseInt(document.querySelector('input[name="price"]').value);
-              const seller_id = parseInt(sessionStorage.getItem('id'));
+                const name = document.querySelector('input[name="name"]').value;
+                const description = document.querySelector('input[name="discriptions"]').value;
+                const price = parseInt(document.querySelector('input[name="price"]').value);
+                const seller_id = parseInt(sessionStorage.getItem('id'));
             
-              product = {
-                name: name,
-                description: description,
-                price: price,
-                image: '', // Giá trị ban đầu của thuộc tính "image"
-                createAT: createAT,
-                expire: expire,
-                quantity: 1,
-                seller_id: seller_id,
-                sellcampusid: parseInt(selectedCampusId),
-                categoryid: parseInt(selectedCategoryId),
-                status: 'Chờ duyệt'
-              };
+                let product = {
+                  name: name,
+                  description: description,
+                  price: price,
+                  image: '', // Giá trị ban đầu của thuộc tính "image"
+                  createAT:"",
+                  expire: expire,
+                  quantity: 1,
+                  seller_id: parseInt(sessionStorage.getItem('id')),
+                  sellcampusid: parseInt(selectedCampusId),
+                  categoryid: parseInt(selectedCategoryId),
+                  status: 'Chờ duyệt'
+                };
             
-              const ref = firebaseApp.storage().ref();
-              const file = document.querySelector('#photo').files[0];
-              const metadata = {
-                contentType: file.type
-              };
-              const nameimg = file.name;
-              const uploadTask = ref.child(nameimg).put(file, metadata);
-              uploadTask
-                .then(snapshot => snapshot.ref.getDownloadURL())
-                .then(url => {
-                  product.image = url;
-                  createNewProduct(product);
-                  console.log(JSON.stringify(product, null, 2));
-                })
-                .catch(console.error);
-            }
+                const ref = firebaseApp.storage().ref();
+                const files = document.querySelector('#photo').files;
             
-            function createNewProduct(product) {
-              fetch("http://localhost:8080/product/createNewProduct", {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(product)
-              })
-                .then(response => {
-                  if (response.ok) {
-                    console.log('Tạo sản phẩm thành công');
-                    window.location.href = 'sales.html';
-                    // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
-                  } else {
-                    errorMessage.textContent = "Không thể thực hiện. Vui lòng kiểm tra lại số dư";
-                    console.error('Lỗi tạo sản phẩm');
+                // Hàm tải lên và lưu tất cả các hình ảnh
+                function uploadAllImagesAndSaveProduct(files) {
+                  const promises = [];
+                  console.log(files);
+            
+                  for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    console.log(file);
+                    const metadata = {
+                      contentType: file.type
+                    };
+                    const nameimg = file.name;
+            
+                    const uploadTask = ref.child(nameimg).put(file, metadata);
+                    const promise = uploadTask
+                      .then(snapshot => snapshot.ref.getDownloadURL())
+                      .then(url => {
+                        return url;
+                      })
+                      .catch(error => {
+                        console.error('Error uploading file:', error);
+                        return null;
+                      });
+            
+                    promises.push(promise);
                   }
-                })
-                .catch(error => {
-                  console.error('Lỗi tạo sản phẩm', error);
-                });
-            }
-          </script>
+            
+                  Promise.all(promises)
+                    .then(urls => {
+                      // Kết hợp các URL thành một chuỗi duy nhất
+                      const combinedUrl = urls.join(',');
+            
+                      // Lưu chuỗi duy nhất vào thuộc tính "image" của sản phẩm
+                      product.image = combinedUrl;
+                      createNewProduct(product);
+                      console.log(JSON.stringify(product, null, 2));
+                    })
+                    .catch(error => {
+                      console.error('Error uploading images:', error);
+                    });
+                }
+            
+                // Hàm tạo sản phẩm mới
+                function createNewProduct(product) {
+                  fetch("http://localhost:8080/product/createNewProduct", {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(product)
+                  })
+                    .then(response => {
+                      if (response.ok) {
+                        console.log('Tạo sản phẩm thành công');
+                        window.location.href = 'sales.html';
+                        // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
+                      } else {
+                        errorMessage.textContent = "Không thể thực hiện. Vui lòng kiểm tra lại số dư";
+                        console.error('Lỗi tạo sản phẩm');
+                      }
+                    })
+                    .catch(error => {
+                      console.error('Lỗi tạo sản phẩm', error);
+                    });
+                }
+            
+                // Gọi hàm uploadAllImagesAndSaveProduct để tải lên và lưu tất cả các hình ảnh
+                uploadAllImagesAndSaveProduct(files);
+              }
+            </script>
     </body>
     <footer>
       <div class="container-fluid footer">
