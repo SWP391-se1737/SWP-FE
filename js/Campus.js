@@ -57,14 +57,17 @@ const renderProductsByCampus = (products) => {
         list.innerHTML = '';
         const availableProducts = products.filter((result) => result.status === 'Còn hàng');
 
-        availableProducts.forEach((result) => {
+        availableProducts.forEach(async (result) => {
             const productId = result.id;
             const divItem = document.createElement('div');
             divItem.classList.add(`detail`);
             divItem.dataset.key = productId;
 
             const img = document.createElement('img');
-            img.src = result.image;
+            const imageUrls = result.image.split(",");
+            if (imageUrls.length > 0) {
+                img.src = imageUrls[0];
+            }
 
             const h2 = document.createElement('h5');
             h2.innerText = result.name;
@@ -73,8 +76,14 @@ const renderProductsByCampus = (products) => {
             h3.innerText = result.price.toLocaleString();
             h3.classList.add('price');
 
+            const h4 = document.createElement("p");
+            const strong1 = document.createElement("strong");
+            strong1.innerText = "Bán tại: ";
+            h4.appendChild(strong1);
+            h4.appendChild(document.createTextNode(await getCampusNameById(result.sellcampusid)));
+
             const addToCartButton = document.createElement("button");
-            addToCartButton.innerText = "Thêm vào giỏ hàng";
+            addToCartButton.innerText = "Mua ngay";
             addToCartButton.classList.add("round-black-btn");
 
             addToCartButton.addEventListener("click", () => {
@@ -86,6 +95,7 @@ const renderProductsByCampus = (products) => {
             divItem.appendChild(img);
             divItem.appendChild(h2);
             divItem.appendChild(h3);
+            divItem.appendChild(h4);
             divItem.appendChild(addToCartButton);
 
             list.appendChild(divItem);

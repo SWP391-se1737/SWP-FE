@@ -2,10 +2,11 @@
     margin-top: 80px; 
     font-family: 'Courier New', Courier, monospaces; 
     text-align: center;
-   
-    width: 400px;
+    background-color: #ffbc6e;
+    width: 550px;
     text-align: center;
-    margin-left: 550px;
+    margin-left: 500px;
+    height: 50px;
 }
 body{
     background-color: rgb(245, 245, 245);

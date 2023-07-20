@@ -89,11 +89,40 @@ const renderPost = async (product) => {
         list.innerHTML = "";
         const productId = product.id;
 
-        // Thẻ div chứa img
-        const imgDiv = document.createElement("div");
-        const img = document.createElement("img");
-        img.src = product.image;
-        imgDiv.appendChild(img);
+        const ImgDiv = document.createElement("div");
+        ImgDiv.classList.add("image");
+
+        // Thẻ div chứa hình ảnh lớn
+        const mainImgDiv = document.createElement("div");
+        mainImgDiv.classList.add("main-image");
+
+        // Thẻ div chứa danh sách hình ảnh nhỏ
+        const thumbnailImgDiv = document.createElement("div");
+        thumbnailImgDiv.classList.add("thumbnail-images");
+
+        // Thêm hình ảnh lớn đầu tiên
+        const mainImg = document.createElement("img");
+        const imageUrls = product.image.split(",");
+        if (imageUrls.length > 0) {
+            mainImg.src = imageUrls[0];
+            mainImgDiv.appendChild(mainImg);
+        }
+
+        // Thêm các hình ảnh nhỏ
+        imageUrls.forEach((url, index) => {
+            if (index >= 0) {
+                const thumbnailImg = document.createElement("img");
+                thumbnailImg.src = url;
+                thumbnailImgDiv.appendChild(thumbnailImg);
+
+                // Thêm sự kiện lắng nghe cho hình ảnh nhỏ
+                thumbnailImg.addEventListener("click", () => {
+                    mainImg.src = url;
+                });
+            }
+        });
+        ImgDiv.appendChild(mainImgDiv);
+        ImgDiv.appendChild(thumbnailImgDiv);
 
         // Thẻ div chứa các thuộc tính còn lại
         const infoDiv = document.createElement("div");
@@ -164,21 +193,21 @@ const renderPost = async (product) => {
             fetch(`http://localhost:8080/product/deleteProductByStudent?id=${productId}`, {
                 method: 'PUT'
             })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                }
-                throw new Error('Error deleting product');
-            })
-            .then(data => {
-                // Xử lý phản hồi từ máy chủ sau khi xóa thành công
-                window.location.href = "sales.html";
-                console.log(data);
-            })
-            .catch(error => {
-                // Xử lý lỗi nếu có
-                console.error(error);
-            });
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Error deleting product');
+                })
+                .then(data => {
+                    // Xử lý phản hồi từ máy chủ sau khi xóa thành công
+                    window.location.href = "sales.html";
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Xử lý lỗi nếu có
+                    console.error(error);
+                });
         }
 
         infoDiv.appendChild(h2);
@@ -199,7 +228,7 @@ const renderPost = async (product) => {
         const divItem = document.createElement("div");
         divItem.classList.add("detail", "d-flex");
         divItem.dataset.key = productId;
-        divItem.appendChild(imgDiv);
+        divItem.appendChild(ImgDiv);
         divItem.appendChild(infoDiv);
 
         list.appendChild(divItem);

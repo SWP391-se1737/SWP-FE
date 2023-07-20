@@ -23,7 +23,13 @@
      <!-- navbar -->
   <nav class="navbar">
     <div class="container-fluid">
-      <a class="navbar-brand" href="homepage.html">Flea Shop</a>
+      <a id="homepageLink" class="navbar-brand" href="homepage.html" onclick="clearSelectedCategory()">Flea Shop</a>
+      <script>
+        function clearSelectedCategory() {
+            // Xóa trạng thái đã chọn khỏi localStorage
+            localStorage.removeItem("selectedCategory");
+        }
+        </script>
       <form class="d-flex" role="search">    
         <input id="searchbar" onkeyup="search_animal()"  name="search" class="form-control me-2" type="search" placeholder="Tìm sản phẩm" aria-label="Search">
         <a href="searchproduct.html" class="btn"><i class="fa-solid fa-magnifying-glass"></i></a>
@@ -47,7 +53,6 @@
             <li id="logoutItem" style="display: none;"><a href="#" onclick="logout(); return false;">Đăng xuất</a></li>
           </ul>
         </div>
-
         <script>
           // Lấy phần tử nút trigger và phần tử menu dọc
           const menuTrigger = document.getElementById("menuTrigger");

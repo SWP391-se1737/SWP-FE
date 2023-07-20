@@ -365,7 +365,7 @@
  div#productDetail{
     margin-top: 90px;
  }
-  #listCategories {
+ #listCategories {
     display: flex;
     list-style: none;
     padding: 0;
@@ -387,10 +387,15 @@
     border-radius: 4px;
     color: #000000;
   }
-  
-  .category-item a:hover {
-    background-color: #e0e0e0;
-  }
+  .category-item a.selected {
+    background-color: #e0e0e0; /* Đổi màu nền cho nút đã chọn */
+    color: #000000; /* Đổi màu chữ cho nút đã chọn */
+}
+
+.category-item a:hover,
+.category-item a.selected:hover {
+    background-color: #e0e0e0; /* Giữ màu nền khi di chuột qua nút */
+}
   #listCampuses {
     float: right;
     margin-right: 100px;
@@ -398,7 +403,7 @@
     white-space: nowrap;
   }
   #sidebar {
-    width: 200px;
+    width: 220px;
     max-height: 0;
     overflow: hidden;
     position: fixed;

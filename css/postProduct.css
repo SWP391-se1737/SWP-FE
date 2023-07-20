@@ -69,16 +69,28 @@ form input{
     font-size: 15px;
     background-color: #e7e5e5;
 }
+.content-2 {
+   margin-right: 300px;
+   margin-left: 200px;
+}
+.images-container {
+   display: flow-root;
+   flex-wrap: wrap;
+   width: 570px;
+   margin-right: 50px;
+}
+.uploaded-image {
+   width: 100px;
+   height: 100px;
+   margin: 5px;
+   cursor: pointer;
+   border: 2px solid #c8c8c8;
+}
 
  .content-1{
     display: flex;
     flex-direction: column;
  }
-
- .content-2{
-    margin-left:20rem;
- }
-
  body > div.container > div > form > input{
     position: absolute;
     top: 32rem;

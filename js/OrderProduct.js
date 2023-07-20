@@ -17,8 +17,11 @@ const renderProducts = async (product) => {
         // Thẻ div chứa img
         const imgDiv = document.createElement("div");
         const img = document.createElement("img");
-        img.src = product.image;
-        imgDiv.appendChild(img);
+        const imageUrls = product.image.split(",");
+        if (imageUrls.length > 0) {
+            img.src = imageUrls[0];
+            imgDiv.appendChild(img);
+        }
 
         // Thẻ div chứa các thuộc tính còn lại
         const infoDiv = document.createElement("div");
@@ -185,7 +188,7 @@ const orderProduct = async (productId) => {
         })
             .then(response => {
                 if (response.ok) {
-                    
+
                     console.log('Đặt hàng thành công!');
                     window.location.href = 'orders.html';
                     // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công

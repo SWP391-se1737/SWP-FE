@@ -43,7 +43,10 @@ async function getProductByName() {
         divItem.dataset.key = productId;
 
         const img = document.createElement('img');
-        img.src = result.image;
+        const imageUrls = result.image.split(",");
+        if (imageUrls.length > 0) {
+          img.src = imageUrls[0];
+        }
 
         const h2 = document.createElement('h5');
         h2.innerText = result.name;

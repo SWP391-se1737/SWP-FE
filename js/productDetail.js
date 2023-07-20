@@ -14,11 +14,40 @@ const renderProducts = async (product) => {
         list.innerHTML = "";
         const productId = product.id;
 
-        // Thẻ div chứa img
-        const imgDiv = document.createElement("div");
-        const img = document.createElement("img");
-        img.src = product.image;
-        imgDiv.appendChild(img);
+        const ImgDiv = document.createElement("div");
+        ImgDiv.classList.add("image");
+
+        // Thẻ div chứa hình ảnh lớn
+        const mainImgDiv = document.createElement("div");
+        mainImgDiv.classList.add("main-image");
+
+        // Thẻ div chứa danh sách hình ảnh nhỏ
+        const thumbnailImgDiv = document.createElement("div");
+        thumbnailImgDiv.classList.add("thumbnail-images");
+
+        // Thêm hình ảnh lớn đầu tiên
+        const mainImg = document.createElement("img");
+        const imageUrls = product.image.split(",");
+        if (imageUrls.length > 0) {
+            mainImg.src = imageUrls[0];
+            mainImgDiv.appendChild(mainImg);
+        }
+
+        // Thêm các hình ảnh nhỏ
+        imageUrls.forEach((url, index) => {
+            if (index >= 0) {
+                const thumbnailImg = document.createElement("img");
+                thumbnailImg.src = url;
+                thumbnailImgDiv.appendChild(thumbnailImg);
+
+                // Thêm sự kiện lắng nghe cho hình ảnh nhỏ
+                thumbnailImg.addEventListener("click", () => {
+                    mainImg.src = url;
+                });
+            }
+        });
+        ImgDiv.appendChild(mainImgDiv);
+        ImgDiv.appendChild(thumbnailImgDiv);
 
         // Thẻ div chứa các thuộc tính còn lại
         const infoDiv = document.createElement("div");
@@ -64,7 +93,6 @@ const renderProducts = async (product) => {
             // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
             // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
             buyProduct(productId);
-
         });
 
         infoDiv.appendChild(h2);
@@ -72,6 +100,7 @@ const renderProducts = async (product) => {
         infoDiv.appendChild(p);
         infoDiv.appendChild(p5);
         infoDiv.appendChild(p2);
+        infoDiv.appendChild(document.createElement("br"));
         infoDiv.appendChild(p3);
         infoDiv.appendChild(document.createElement("br"));
         infoDiv.appendChild(buyButton);
@@ -80,7 +109,7 @@ const renderProducts = async (product) => {
         const divItem = document.createElement("div");
         divItem.classList.add("detail", "d-flex");
         divItem.dataset.key = productId;
-        divItem.appendChild(imgDiv);
+        divItem.appendChild(ImgDiv);
         divItem.appendChild(infoDiv);
 
         list.appendChild(divItem);

@@ -20,7 +20,10 @@ const renderProducts = (products) => {
             divItem.dataset.key = productId;
 
             const img = document.createElement('img');
-            img.src = result.image;
+            const imageUrls = result.image.split(",");
+            if (imageUrls.length > 0) {
+                img.src = imageUrls[0];
+            }
 
             const h2 = document.createElement('h5');
             h2.innerText = result.name;
@@ -97,7 +100,7 @@ async function getCategory() {
 const renderCategory = (categories) => {
     const list = document.getElementById("listCategories");
     if (list) {
-        list.innerHTML = ""; // Xóa bỏ các nút ấn cũ (nếu có)
+        list.innerHTML = "";
         const filteredCategories = categories.filter((category) => category.status === true);
 
         filteredCategories.forEach((result) => {
@@ -110,8 +113,23 @@ const renderCategory = (categories) => {
             listItem.className = "category-item";
             listItem.appendChild(a);
 
+            // Xử lý sự kiện click vào nút
+            a.addEventListener("click", () => {
+                // Lưu trạng thái đã chọn vào localStorage
+                localStorage.setItem("selectedCategory", category_id);
+            });
+
             list.appendChild(listItem);
         });
+
+        // Áp dụng lại trạng thái đã chọn sau khi trang được tải lại
+        const selectedCategory = localStorage.getItem("selectedCategory");
+        if (selectedCategory) {
+            const selectedButton = document.querySelector(`[href="filter.html?category_id=${encodeURIComponent(selectedCategory)}"]`);
+            if (selectedButton) {
+                selectedButton.classList.add("selected");
+            }
+        }
     } else {
         console.error("Phần tử listCategories không tồn tại.");
     }
