@@ -35,16 +35,15 @@ function changeStatus(id,status) {
 
     axios.put(`http://localhost:8080/order/updateOrderStatusById/${id}?status=${status}`)
     getOrderList();
-    getOrderList();
 }
 
 function reformatDate(dateStr) {
-    var dArr = dateStr.split(" "); // input yyyy-MM-ddTHH:mm:ss.SSSZ
+    var dArr = dateStr.split(" "); // input yyyy-MM-dd HH:mm:ss
     var dateStr = dArr[0];         // string yyyy-MM-dd
     dateArr = dateStr.split("-");
     var timeStr = dArr[1];         // string HH:mm:ss.SSSZ
     timeArr = timeStr.split(":");
-    return timeArr[0] + ":" + timeArr[1] + "/" + dateArr[2] + "/" + dateArr[1] + "/" + dateArr[0];
+    return timeArr[0] + ":" + timeArr[1] + "</br>" + dateArr[2] + "/" + dateArr[1] + "/" + dateArr[0];
 }
 
 const getProductNameById = async (productId) => {

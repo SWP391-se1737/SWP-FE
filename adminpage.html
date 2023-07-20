@@ -7,6 +7,8 @@
     <title>Admin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- =========================== Chart ============================== -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <!-- =========================== Style ============================== -->
     <link rel="stylesheet" href="css/adminpage.css" />
   </head>
@@ -141,8 +143,8 @@
 
         <!-- Add Charts -->
         <div class="graphBox">
-          <div class="box">
-            <canvas id="myChart">Category</canvas>
+          <div id="chart">
+            
           </div>
           <div class="box"></div>
         </div>
@@ -152,32 +154,7 @@
     <script src="js/AdminNavbar.js"></script>
     <script src="js/AdminPage.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-      const ctx = document.getElementById("myChart");
-
-      new Chart(ctx, {
-        type: "polarArea",
-        data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
       var isLoggedIn = sessionStorage.getItem("isLoggedIn");
       var accid = sessionStorage.getItem("id");
@@ -226,7 +203,6 @@
         window.location.href = "homepage.html";
       }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <!-- ========================== IonIcons =======================-->
     <script
       type="module"
