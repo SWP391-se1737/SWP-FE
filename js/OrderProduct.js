@@ -209,10 +209,10 @@ const orderProduct = async (productId) => {
     
     function showErrorMessage() {
         var errorMessage = document.getElementById('errorMessage');
-        errorMessage.textContent = "Đặt hàng thất bại, bạn hãy chọn Campus hoặc kiểm tra Số dư ví ";
+        errorMessage.textContent = "Đặt hàng thất bại, bạn hãy chọn Campus hoặc kiểm tra ";
     
         var backButton = document.createElement('button');
-        backButton.textContent = "Nạp tiền vào ví";
+        backButton.textContent = "Số dư ví";
         backButton.addEventListener('click', function() {
             window.location.href = 'wallet.html';
         });

@@ -80,8 +80,8 @@
   }
   .errorMessage button{
     display: inline-block;
-    padding: 8px 16px;
-    background-color: rgb(255, 151, 65);
+    padding: 1px 16px;
+    background-color: rgb(255, 197, 149);
     text-decoration: none;
-    border-radius: 20px;
+    border-radius: 10px;
   }
