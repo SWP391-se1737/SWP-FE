@@ -26,11 +26,13 @@
   
   #productDetail > div > div.product-info{
     height: 450px;
+    position: absolute;
+    margin-left: 50px;
   }
   #productDetail {
     position: relative;
-    width: 400px;;
-    margin: 0px 0px 100px 250px;
+    width: 400px;
+    padding: 0px 0px 100px 100px;
   }
   
   
@@ -69,8 +71,7 @@
   .image{
     display: flex;
     flex-direction: column;
-    margin-left: 150px;
-    margin-right: 50px;
+    margin-left: 130px;
   }
   .main-image img{
     width: 340px;

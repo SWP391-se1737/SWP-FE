@@ -20,10 +20,11 @@ const renderSales = async (product) => {
             const productId = product.id;
 
             // Thẻ div chứa img
-            const imgDiv = document.createElement("div");
-            const img = document.createElement("img");
-            img.src = product.image;
-            imgDiv.appendChild(img);
+            const img = document.createElement('img');
+            const imageUrls = product.image.split(",");
+            if (imageUrls.length > 0) {
+                img.src = imageUrls[0];
+            }
 
             // Thẻ div chứa các thuộc tính còn lại
             const infoDiv = document.createElement("div");
@@ -37,26 +38,41 @@ const renderSales = async (product) => {
             h3.classList.add('price');
 
             const p = document.createElement("p");
+            const strong = document.createElement("strong");
+            strong.innerText = "Mô tả: ";
+            p.appendChild(strong);
+            p.appendChild(document.createTextNode(product.description));
+            p.appendChild(document.createElement("br"));
+
+            const p1 = document.createElement("p");
             const strong2 = document.createElement("strong");
             strong2.innerText = "Số lượng: ";
-            p.appendChild(strong2);
-            p.appendChild(document.createTextNode(product.quantity));
+            p1.appendChild(strong2);
+            p1.appendChild(document.createTextNode(product.quantity));
 
-            const p1 = document.createElement('p');
-            p1.innerText = product.status;
-            p1.classList.add('status');
+            const p3 = document.createElement("p");
+            const strong3 = document.createElement("strong");
+            strong3.innerText = "Ngày tạo bài đăng: ";
+            p3.appendChild(strong3);
+            p3.appendChild(document.createTextNode(product.createAT));
+
+            const p4 = document.createElement('p');
+            p4.innerText = product.status;
+            p4.classList.add('status');
 
             infoDiv.appendChild(h2);
             infoDiv.appendChild(h3);
             infoDiv.appendChild(p);
             infoDiv.appendChild(p1);
+            infoDiv.appendChild(p3);
+            infoDiv.appendChild(p4);
 
 
             // Thêm các thẻ div vào list
             const divItem = document.createElement("div");
             divItem.classList.add("detail", "d-flex");
             divItem.dataset.key = productId;
-            divItem.appendChild(imgDiv);
+            divItem.appendChild(img);
             divItem.appendChild(infoDiv);
 
             list.appendChild(divItem);

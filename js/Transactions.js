@@ -1,55 +1,61 @@
-async function getWalletIdByAccId() {
-    var accid = sessionStorage.getItem('id');
+const getData = async () => {
+    const accid = sessionStorage.getItem('id');
+    console.log(accid);
 
     try {
-        const response = await axios.get(`http://localhost:8080/Account/updateAccount/${accid}`);
+        const response = await axios.get(`http://localhost:8080/transaction/getListByWallet_user/${accid}`);
         const filteredData = response.data;
-        renderProfile(filteredData);
+        renderTransactions(filteredData);
     } catch (error) {
         console.error("Error fetching account:", error);
     }
-}
-const renderProfile = (account) => {
-    const select = document.getElementById("profileDetail");
+};
+getData();
+const renderTransactions = async (product) => {
+    const list = document.getElementById("listTransaction");
+    if (list) {
+        list.innerHTML = "";
 
-    if (select) {
-        select.innerHTML = ""; // Xóa bỏ các tùy chọn cũ (nếu có)
-        const divItem = document.createElement('div');
-        divItem.classList.add(`detail`);
+        product.forEach((product) => {
 
-        const p = document.createElement("p");
-        const strong1 = document.createElement("strong");
-        strong1.innerText = "Email: ";
-        p3.appendChild(strong1);
-        p3.appendChild(document.createTextNode(account.email));
+            // Thẻ div chứa các thuộc tính còn lại
+            const infoDiv = document.createElement("div");
+            infoDiv.classList.add("product-info");
 
-        const p1 = document.createElement("p");
-        const strong2 = document.createElement("strong");
-        strong2.innerText = "Email: ";
-        p3.appendChild(strong2);
-        p3.appendChild(document.createTextNode(account.phone));
+            const p = document.createElement("p");
+            p.innerText = product.status;
 
-        const changeButton = document.createElement("button");
-        changeButton.innerText = "Sửa thông tin";
-        changeButton.classList.add("change-btn");
+            const p2 = document.createElement("p");
+            const buyAt = new Date(product.transaction_datetime);
+            const year = buyAt.getFullYear();
+            const month = buyAt.getMonth() + 1; // Tháng bắt đầu từ 0, nên cộng thêm 1
+            const day = buyAt.getDate();
+            const hour = buyAt.getHours();
+            const minute = buyAt.getMinutes();
+            const second = buyAt.getSeconds();
 
-        changeButton.addEventListener("click", () => {
-            // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
-            // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
-            changeButton(account.id);
+            const dateString = `${year}-${month < 10 ? "0" + month : month}-${day < 10 ? "0" + day : day}`;
+            const timeString = `${hour < 10 ? "0" + hour : hour}:${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}`;
+            p2.appendChild(document.createTextNode(`${dateString} ${timeString}`));
+
+            const h3 = document.createElement('p');
+            const priceText = (product.status === 'Nạp tiền' || product.status === 'Hủy hàng') ? `+${product.amount.toLocaleString()}` : `-${product.amount.toLocaleString()}`;
+            h3.innerText = priceText;
+            h3.classList.add('price');
+
+            infoDiv.appendChild(p);
+            infoDiv.appendChild(p2);
+            infoDiv.appendChild(h3);
+
+
+            // Thêm các thẻ div vào list
+            const divItem = document.createElement("div");
+            divItem.classList.add("detail", "d-flex");
+            divItem.appendChild(infoDiv);
+
+            list.appendChild(divItem);
         });
-
-
-
-        divItem.appendChild(p);
-        divItem.appendChild(p1);
-        divItem.appendChild(changeButton);
-
-        list.appendChild(divItem);
-
     } else {
-        console.error("Phần tử profileDetail không tồn tại.");
+        console.error("Phần tử listOrder không tồn tại.");
     }
 };
-getWalletIdByAccId()
-

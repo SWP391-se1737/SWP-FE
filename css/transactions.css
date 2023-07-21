@@ -12,7 +12,36 @@ body{
     background-color: rgb(245, 245, 245);
     margin: 0;
     padding: 0;
-    display: grid;
-    grid-template-rows: 1fr auto;
     min-height: 100vh;
 } 
+.detail {
+    width: 950px;
+    height: 80px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5);
+    background-color: white;
+    margin-left: 280px;
+    margin-bottom: 20px;
+}
+.product-info{
+    display: flex;
+    align-items: center; /* Căn giữa các thông tin theo chiều dọc */
+    justify-content: space-between;
+    margin-right: 40px;
+}
+.price{
+    color: #ffa845; 
+    font-weight: bold;
+    margin-bottom: 3px;
+    margin-top: -6px;
+}
+.column {
+    display: flex;
+    justify-content: space-between; /* Cách đều các phần tử trong cùng một hàng */
+    align-items: center; /* Căn giữa các phần tử theo chiều dọc (tuỳ chọn) */
+    margin: 20px 300px 20px 300px; /* Khoảng cách dưới cùng */
+
+  }
+  .column h5 {
+    margin: 0; /* Loại bỏ margin mặc định */
+  }
