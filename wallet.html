@@ -228,7 +228,7 @@
               {
               deposit_id: depositId, // Gán ID của Deposit vào trường deposit_id của transactionData
               wallet_user: parseInt(sessionStorage.getItem('id')),
-              amount: amount,
+              amount: amount / 1000,
               status: "Nạp Tiền",
               transaction_datetime: "" // Đặt giá trị ngày giờ giao dịch ở đây
             };
