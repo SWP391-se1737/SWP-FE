@@ -15,7 +15,7 @@
   top: -70px;
   padding: 0 15px 0 0;
   text-align: left;
-  height: 450px;
+  margin-left: 50px;
 }
 
 #productDetail > div > div.product-info > p:nth-child(6){
@@ -77,6 +77,13 @@
   margin-left: 8px;
   height: 110px;
   width: 110px;
+}
+.notice{
+  margin-top: -100px;
+}
+.notice p{
+  margin-left: 850px;
+  margin-top: -20px;
 }
 
 
