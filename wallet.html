@@ -110,16 +110,16 @@
 <section class="container">
   <div class="imgage">
     <a href="#" class="paymentLink" data-amount="100000" onclick="displayPaymentButton(50000, this, 'wallet.html')">
-      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128803641327878144/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+      <img src="https://cdn.discordapp.com/attachments/942080741469216798/1128863695615832176/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
     <a href="#" class="paymentLink" data-amount="200000" onclick="displayPaymentButton(100000, this, 'wallet.html')">
-      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128804144539516948/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+      <img src="https://cdn.discordapp.com/attachments/942080741469216798/1128863706395201667/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
-    <a href="#" class="paymentLink" data-amount="300000" onclick="displayPaymentButton(150000, this, 'wallet.html')">
-      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128804468041977927/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    <a href="#" class="paymentLink" data-amount="300000" onclick="displayPaymentButton(200000, this, 'wallet.html')">
+      <img src="https://cdn.discordapp.com/attachments/942080741469216798/1128863749701386240/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
-    <a href="#" class="paymentLink" data-amount="400000" onclick="displayPaymentButton(200000, this, 'wallet.html')">
-      <img src="https://cdn.discordapp.com/attachments/961630510084395009/1128804594655432764/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
+    <a href="#" class="paymentLink" data-amount="400000" onclick="displayPaymentButton(300000, this, 'wallet.html')">
+      <img src="https://cdn.discordapp.com/attachments/942080741469216798/1128863792810442864/image.png" alt="Gói 52 Xu" fetchpriority="high" loading="lazy">
     </a>
   </div>
   <div id="paymentButtonContainer" class="payment">
@@ -157,7 +157,7 @@
 </script>
 <script>
   var accid = sessionStorage.getItem('id');
-
+ 
   function displayPaymentButton(amount, element, returnUrl) {
     // Xóa các nút thanh toán hiện có
     var paymentContainer = document.getElementById("paymentButtonContainer");
@@ -167,7 +167,7 @@
 
     // Tạo nút thanh toán và chuyển hướng khi được nhấp
     var paymentButton = document.createElement("button");
-    paymentButton.innerHTML = "Xác nhận thanh toán ";
+    paymentButton.innerHTML = "Xác nhận thanh toán";
     paymentButton.onclick = function() {
       var xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
@@ -179,7 +179,6 @@
           } else {
             console.error("Lỗi khi gọi API: " + xhr.status);
           }
-          
         }
       };
       xhr.open("GET", "http://localhost:8080/wallet/getWalletBalanceByUserId/" + accid, true);
@@ -193,52 +192,74 @@
 
     paymentContainer.appendChild(paymentButton);
 
-    // Gọi API để lấy balance
+    // Gọi API để lấy balance và thêm deposit sau khi thanh toán hoàn tất
     paymentButton.onclick = function() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var paymentLink = response.url;
-                    // Redirect to the payment link
-                    window.location.href = paymentLink;
-                } else {
-                    console.error("Lỗi khi gọi API: " + xhr.status);
-                }
-            }
-        };
-        xhr.open("GET", "http://localhost:8080/payment/createPayment?id=" + accid + "&amount=" + amount, true);
-        xhr.send();
-        
+      var paymentXhr = new XMLHttpRequest();
+      paymentXhr.onreadystatechange = function() {
+        if (paymentXhr.readyState === 4) {
+          if (paymentXhr.status === 200) {
+            var response = JSON.parse(paymentXhr.responseText);
+            var paymentLink = response.url;
+            // Redirect to the payment link
+            window.location.href = paymentLink;
+
+            // After payment is completed and successful, add the deposit
+            var exchangeProvider = "vnpay";
+            var depositUrl = "http://localhost:8080/Deposits/addDeposits";
+            var depositData = {
+            currency_from: amount,
+            currency_to: amount / 1000,
+            user_id: parseInt(sessionStorage.getItem('id')),
+            exchangeProvider: exchangeProvider
+          };
+            var depositXhr = new XMLHttpRequest();
+            depositXhr.open("POST", depositUrl, true);
+            depositXhr.setRequestHeader("Content-Type", "application/json");
+
+            depositXhr.onreadystatechange = function () {
+          if (depositXhr.readyState === XMLHttpRequest.DONE) {
+             if (depositXhr.status === 200) {
+               var depositId = parseInt(depositXhr.responseText); // Parse the response as an integer
+                console.log("Deposit ID:", depositId); // Kiểm tra depositId
+
+      // Tiếp tục thực hiện yêu cầu AJAX tới API Transaction và sử dụng depositId trong transactionData
+              var transactionUrl = "http://localhost:8080/transaction/addTransaction";
+              var transactionData = 
+              {
+              deposit_id: depositId, // Gán ID của Deposit vào trường deposit_id của transactionData
+              wallet_user: parseInt(sessionStorage.getItem('id')),
+              amount: amount,
+              status: "Nạp Tiền",
+              transaction_datetime: "" // Đặt giá trị ngày giờ giao dịch ở đây
+            };
+
+      var transactionXhr = new XMLHttpRequest();
+      transactionXhr.open("POST", transactionUrl, true);
+      transactionXhr.setRequestHeader("Content-Type", "application/json");
+      transactionXhr.send(JSON.stringify(transactionData));
+    } else {
+      console.error("Failed to add deposit");
+    }
+  }
+};
+
+// Xử lý phản hồi từ yêu cầu AJAX đến API Deposit
+    depositXhr.send(JSON.stringify(depositData));
+    
+  
+          } else {
+            console.error("Lỗi khi gọi API: " + paymentXhr.status);
+            
+          }
+        }
+      };
+      paymentXhr.open("GET", "http://localhost:8080/payment/createPayment?id=" + accid + "&amount=" + amount, true);
+      paymentXhr.send();
     };
-    var accid = sessionStorage.getItem('id');
-    var exchangprovider = "vnpay";
-var url = "http://localhost:8080/Deposits/addDeposits";
-
-var data = {
-  currency_from: amount,
-  currency_to: amount/1000,
-  user_id: parseInt(sessionStorage.getItem('id')),
-  exchangeProvider: exchangprovider
-};
-console.log(data);
-var xhr = new XMLHttpRequest();
-xhr.open("POST", url, true);
-xhr.setRequestHeader("Content-Type", "application/json");
-
-xhr.onreadystatechange = function() {
-  if (xhr.readyState === 4 && xhr.status === 200) {
-    // Xử lý phản hồi thành công từ server (nếu cần)
-    console.log(xhr.responseText);
   }
-};
-
-xhr.send(JSON.stringify(data));
- 
-  }
-
+  
 </script>
+
 
 <script src="js/Sales.js"></script>
 
