@@ -33,6 +33,7 @@ body{
     border-left: 10px solid var(--orange);
     transition: 0.5s;
     overflow: hidden;
+    overflow-y: auto;
 }
 
 .navigation.active{
@@ -271,6 +272,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .students{
@@ -281,6 +283,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .staffs{
@@ -291,6 +294,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .productMoving{
@@ -301,6 +305,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .transactions{
@@ -311,6 +316,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .categories{
@@ -321,6 +327,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .campuses{
@@ -331,6 +338,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .orders{
@@ -341,6 +349,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.18);
     border-radius: 20px;
+    overflow-x: auto;
 }
 
 .details .cardHeader{

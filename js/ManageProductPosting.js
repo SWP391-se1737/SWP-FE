@@ -1,5 +1,5 @@
 async function getProductList() {
-  const response = await axios.get('http://localhost:8080/product/getListProduct');
+  const response = await axios.get('http://localhost:8080/product/getProductByCreateAtDesc');
   products = response.data;
   console.log(products);
   let tableData1 = "";
@@ -23,8 +23,12 @@ async function getProductList() {
       tableData1 += "<td><button value='product.status' class='btn btn-danger' onclick='acceptPosting(`" + product.id +
         "` , `" + product.name + "`  , `" + product.image + "` , `" + product.description + "` , `" + product.price +
         "` , `" + product.expire + "`  , `" + product.expire + "` , `" + product.quantity + "` , `" + product.categoryid +
-        "` , `" + product.seller_id + "`  , `" + product.buycampus_id + "` , `" + product.sellcampusid + "` , `" + product.status + "`)'>Chờ duyệt</button></td>";
-      tableData1 += "</tr>";
+        "` , `" + product.seller_id + "`  , `" + product.buycampus_id + "` , `" + product.sellcampusid + "` , `" + product.status + "`)'>Duyệt</button></td>";
+        tableData1 += "<td><button value='product.status' class='btn btn-danger' onclick='declinePosting(`" + product.id +
+        "` , `" + product.name + "`  , `" + product.image + "` , `" + product.description + "` , `" + product.price +
+        "` , `" + product.expire + "`  , `" + product.expire + "` , `" + product.quantity + "` , `" + product.categoryid +
+        "` , `" + product.seller_id + "`  , `" + product.buycampus_id + "` , `" + product.sellcampusid + "` , `" + product.status + "`)'>Không duyệt</button></td>";
+        tableData1 += "</tr>";
     }
     else {
       tableData2 += "<tr>"
@@ -66,7 +70,7 @@ function reformatImage(image){
 }
 
 function acceptPosting(id, name, image, description, price, createAT, expire, quantity, categoryid, seller_id, buycampus_id, sellcampusid) {
-  status1 = "Còn hàng";
+  stt = "Còn hàng";
   console.log(id, name, image, description, price, createAT, expire, quantity, seller_id, buycampus_id, sellcampusid, categoryid);
   axios.put('http://localhost:8080/product/updateProductById?id=' + id, {
     id: id,
@@ -81,7 +85,29 @@ function acceptPosting(id, name, image, description, price, createAT, expire, qu
     buycampus_id: buycampus_id,
     sellcampusid: sellcampusid,
     categoryid: categoryid,
-    status: status1
+    status: stt
+  })
+  getProductList();
+  getProductList();
+}
+
+function declinePosting(id, name, image, description, price, createAT, expire, quantity, categoryid, seller_id, buycampus_id, sellcampusid) {
+  stt = "Không duyệt";
+  console.log(id, name, image, description, price, createAT, expire, quantity, seller_id, buycampus_id, sellcampusid, categoryid);
+  axios.put('http://localhost:8080/product/updateProductById?id=' + id, {
+    id: id,
+    name: name,
+    image: image,
+    description: description,
+    price: price,
+    createAT: createAT,
+    expire: expire,
+    quantity: quantity,
+    seller_id: seller_id,
+    buycampus_id: buycampus_id,
+    sellcampusid: sellcampusid,
+    categoryid: categoryid,
+    status: stt
   })
   getProductList();
   getProductList();
