@@ -18,6 +18,8 @@ async function getStaffList() {
                 tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + staff.email + 
                 "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Active</button></td>";
             }
+            tableData += "<td><button class='btn btn-danger' onclick='demoteRole(`" + staff.email + "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Demote</button></td>";
+
             tableData += "<tr>";
         }
     });
@@ -42,6 +44,17 @@ function setStatusActive(email, id, phone, role) {
         email : email,
         phone : phone,
         role : role,
+        status : true
+    })
+    getStaffList();
+    getStaffList();
+}
+
+function demoteRole(email, id, phone, role) {
+    axios.put('http://localhost:8080/Account/updateAccount/' +id, {
+        email : email,
+        phone : phone,
+        role : 'Student',
         status : true
     })
     getStaffList();
