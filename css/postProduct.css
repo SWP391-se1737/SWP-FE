@@ -127,4 +127,11 @@ form input{
  .notice p{
    margin-left: 90px;
    margin-top: -17px;
+}
+ .errorMessage button{
+   display: inline-block;
+    padding: 1px 16px;
+    background-color: rgb(255, 197, 149);
+    text-decoration: none;
+    border-radius: 10px;
  }

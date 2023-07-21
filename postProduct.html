@@ -35,11 +35,11 @@
                     <select id="listCampuses" style="font-family: 'Courier New', Courier, monospace">
 
                     </select>
-                    <input type="text" name="price" placeholder="Giá">
+                    <input type="number" id="priceInput" name="price" placeholder="Giá" min="0">
                   </div>
                 <div class="content-2">
                   <label for="photo" >
-                    <img src="img/icon/uploadimg.png" id="profile-pic" style="width: 350px; height: 350px; margin: -45px 0px 0px -30px;">
+                    <img src="img/icon/uploadimg.png" id="profile-pic" style="width: 500px; height: 350px; margin: -45px 0px 0px -30px;">
                   </label> 
                   <div id="images-container" class="images-container">
 
@@ -70,7 +70,27 @@
               // https://firebase.google.com/docs/web/setup#available-libraries
   
               // Your web app's Firebase configuration
-          
+              const priceInput = document.getElementById("priceInput");
+
+priceInput.addEventListener("input", () => {
+  const amount = parseFloat(priceInput.value);
+
+  if (isNaN(amount) || amount <= 0) {
+    priceInput.setCustomValidity("Số tiền không hợp lệ");
+  } else {
+    priceInput.setCustomValidity(""); // Reset custom validation message
+  }
+});
+
+// Optional: If you want to prevent form submission when the input is invalid
+const form = document.querySelector("form");
+
+form.addEventListener("submit", (event) => {
+  if (!form.checkValidity()) {
+    event.preventDefault(); // Prevent form submission if input is invalid
+    priceInput.reportValidity(); // Show validation message
+  }
+});
               let photo = document.getElementById("photo");
               let imagesContainer = document.getElementById("images-container");
               let profilePic = document.getElementById("profile-pic");
@@ -212,7 +232,7 @@
                         window.location.href = 'sales.html';
                         // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
                       } else {
-                        errorMessage.textContent = "Không thể thực hiện. Vui lòng kiểm tra lại số dư";
+                        showErrorMessage();
                         console.error('Lỗi tạo sản phẩm');
                       }
                     })
@@ -224,6 +244,21 @@
                 // Gọi hàm uploadAllImagesAndSaveProduct để tải lên và lưu tất cả các hình ảnh
                 uploadAllImagesAndSaveProduct(files);
               }
+              
+    function showErrorMessage() {
+        var errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = "Vui lòng điền đầy đủ thông tin hoặc Kiểm tra ";
+    
+        var backButton = document.createElement('button');
+        backButton.textContent = "Số dư ví";
+        backButton.addEventListener('click', function() {
+            window.location.href = 'wallet.html';
+        });
+    
+        // Clear the error message element and append the back button
+       
+        errorMessage.appendChild(backButton);
+    }
             </script>
             <div class="notice">
             <p>* Hãy chắc chắn mọi thông tin bạn nhập là chính xác.</p>

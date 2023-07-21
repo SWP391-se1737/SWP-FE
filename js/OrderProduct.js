@@ -67,6 +67,10 @@ const renderProducts = async (product) => {
         orderButton.classList.add("round-black-btn");
         orderButton.classList.add("price");
 
+        const errorMessageDiv = document.createElement("div");
+        errorMessageDiv.id = "errorMessage";
+        errorMessageDiv.classList.add("errorMessage");
+
         orderButton.addEventListener("click", () => {
             // Thực hiện các hành động khi nhấp vào nút "Mua hàng"
             // Ví dụ: Gọi hàm mua sản phẩm
@@ -82,6 +86,7 @@ const renderProducts = async (product) => {
         infoDiv.appendChild(campusText);
         infoDiv.appendChild(selectCategory);
         infoDiv.appendChild(orderButton);
+        infoDiv.appendChild(errorMessageDiv);
 
         // Thêm các thẻ div vào list
         const divItem = document.createElement("div");
@@ -186,19 +191,34 @@ const orderProduct = async (productId) => {
             },
             body: JSON.stringify(orderData)
         })
-            .then(response => {
-                if (response.ok) {
-
-                    console.log('Đặt hàng thành công!');
-                    window.location.href = 'orders.html';
-                    // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
-                } else {
-                    errorMessage.textContent = "Đặt hàng thất bại, bạn hãy kiểm tra lại số dư";
-                    console.error('Đặt hàng thất bại.');
-                }
-            })
-            .catch(error => {
-                console.error('Đã xảy ra lỗi:', error);
-            });
-    };
+        .then(response => {
+            if (response.ok) {
+                console.log('Đặt hàng thành công!');
+                window.location.href = 'orders.html';
+                // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
+            } else {
+                console.error('Đặt hàng thất bại.');
+                showErrorMessage();
+            }
+        })
+        .catch(error => {
+            console.error('Đã xảy ra lỗi:', error);
+            showErrorMessage();
+        });
+    }
+    
+    function showErrorMessage() {
+        var errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = "Đặt hàng thất bại, bạn hãy chọn Campus hoặc kiểm tra ";
+    
+        var backButton = document.createElement('button');
+        backButton.textContent = "Số dư ví";
+        backButton.addEventListener('click', function() {
+            window.location.href = 'wallet.html';
+        });
+    
+        // Clear the error message element and append the back button
+       
+        errorMessage.appendChild(backButton);
+    }
 }
