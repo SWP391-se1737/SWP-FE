@@ -50,3 +50,10 @@ button {
     box-shadow: 1px 3px 5px 0px rgba(111, 109, 109, 0.5);
     background-color: white;
 }
+.notice{
+    margin-top: -330px;
+    margin-left: 420px;
+  }
+  .notice p{
+    margin-top: -10px;
+  }

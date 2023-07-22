@@ -39,7 +39,7 @@ const renderTransactions = async (product) => {
             p2.appendChild(document.createTextNode(`${dateString} ${timeString}`));
 
             const h3 = document.createElement('p');
-            const priceText = (product.status === 'Nạp tiền' || product.status === 'Hủy hàng') ? `+${product.amount.toLocaleString()}` : `-${product.amount.toLocaleString()}`;
+            const priceText = (product.status === 'nạp tiền' || product.status === 'hủy hàng') ? `+${product.amount.toLocaleString()}` : `-${product.amount.toLocaleString()}`;
             h3.innerText = priceText;
             h3.classList.add('price');
 

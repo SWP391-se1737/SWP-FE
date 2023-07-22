@@ -77,6 +77,7 @@
   }
   .errorMessage{
     margin-top: 20px;
+    color: red;
   }
   .errorMessage button{
     display: inline-block;
@@ -84,4 +85,11 @@
     background-color: rgb(255, 197, 149);
     text-decoration: none;
     border-radius: 10px;
+  }
+  .notice{
+    margin-top: -40px;
+    margin-left: 760px;
+  }
+  .notice p{
+    margin-top: -23px;
   }

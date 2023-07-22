@@ -1,137 +1,145 @@
 .post{
-    border: 1px none grey;
-    width: 430px;
-    height: 380px;
-    text-align: center;
+   border: 1px none grey;
+   width: 430px;
+   height: 380px;
+   text-align: center;
 }
 h1{
-    background-color: #ffbc6e;
+   background-color: #ffbc6e;
 }
 body{
-    background-color: rgb(255, 255, 255);
+   background-color: rgb(255, 255, 255);
 }
 .header a{
-    text-decoration: none;
-    color: #ffbc6e;
-    font-size: 30px;
-    font-weight:600;
-    padding-left: 100px;
+   text-decoration: none;
+   color: #ffbc6e;
+   font-size: 30px;
+   font-weight:600;
+   padding-left: 100px;
 }
 
 
 form select{
-    background-color: #e7e5e5;
-    width: 430px;
-    height: 35px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    padding-left: 20px;
-    font-size: 15px;
-    font-family: 'Amatic SC', cursive;
-    text-transform: uppercase;
-    color: grey;
+   background-color: #e7e5e5;
+   width: 430px;
+   height: 35px;
+   margin-bottom: 15px;
+   border-radius: 5px;
+   border: 1px solid grey;
+   padding-left: 20px;
+   font-size: 15px;
+   font-family: 'Amatic SC', cursive;
+   text-transform: uppercase;
+   color: grey;
 }
 .container{
-  display: flex;
-  margin-top: 20px;
-  margin-left: 180px;
-  height: 550px;
-  margin-right: 890px;
-  min-height:350px;
+ display: flex;
+ margin-top: 20px;
+ margin-left: 180px;
+ height: 550px;
+ margin-right: 890px;
+ min-height:350px;
 }
 a.button{
-    margin-top: 10px;
-    margin-left: 50px;
-    display: inline-block;
-    color:red;
-    background-color: #e7e5e5;
-    text-decoration: none;
-    margin-right: 30px;
-    border: 1px solid grey;
- }
- span.button-text{
-    color: #000000;
- }
+   margin-top: 10px;
+   margin-left: 50px;
+   display: inline-block;
+   color:red;
+   background-color: #e7e5e5;
+   text-decoration: none;
+   margin-right: 30px;
+   border: 1px solid grey;
+}
+span.button-text{
+   color: #000000;
+}
 
- form{
-    display: flex;
-    
- }
+form{
+   display: flex;
+   
+}
 
 form input{
-    width: 405px;
-    height: 30px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid grey;
-    padding-left: 20px;
-    font-size: 15px;
-    background-color: #e7e5e5;
+   width: 405px;
+   height: 30px;
+   margin-bottom: 15px;
+   border-radius: 5px;
+   border: 1px solid grey;
+   padding-left: 20px;
+   font-size: 15px;
+   background-color: #e7e5e5;
 }
 .content-2 {
-   margin-right: 300px;
-   margin-left: 200px;
+  margin-right: 300px;
+  margin-left: 200px;
 }
 .images-container {
-   display: flow-root;
-   flex-wrap: wrap;
-   width: 570px;
-   margin-right: 50px;
+  display: flow-root;
+  flex-wrap: wrap;
+  width: 570px;
+  margin-right: 50px;
 }
 .uploaded-image {
-   width: 100px;
-   height: 100px;
-   margin: 5px;
-   cursor: pointer;
-   border: 2px solid #c8c8c8;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  cursor: pointer;
+  border: 2px solid #c8c8c8;
 }
 
- .content-1{
-    display: flex;
-    flex-direction: column;
- }
- body > div.container > div > form > input{
-    position: absolute;
-    top: 32rem;
-    width: -3px;
-    width: 98px;
-    left: 17rem;
-    width: 5rem;
-    color: red;
-    padding-right: 1rem;
-    border-radius: none;
- }
+.content-1{
+   display: flex;
+   flex-direction: column;
+}
+body > div.container > div > form > input{
+   position: absolute;
+   top: 32rem;
+   width: -3px;
+   width: 98px;
+   left: 17rem;
+   width: 5rem;
+   color: red;
+   padding-right: 1rem;
+   border-radius: none;
+}
 
 
- body > div.container > div > form > a{
-    position: absolute;
-    width: 5rem;
-    left: 23rem;
-    width: 5rem;
-    color: red;;
-    background-color: e7e5e5;
-    border-radius:none ;
-    top: 31.4rem;
-    padding: 0.3rem;
- }
+body > div.container > div > form > a{
+   position: absolute;
+   width: 5rem;
+   left: 23rem;
+   width: 5rem;
+   color: red;;
+   background-color: e7e5e5;
+   border-radius:none ;
+   top: 31.4rem;
+   padding: 0.3rem;
+}
 
- body > div.container > div > form > a > span{
-    color:red;
-    
- }
+body > div.container > div > form > a > span{
+   color:red;
+   
+}
 
- input[type="submit"].button {
-    border-radius: 0;
- }
- .notice p{
+input[type="submit"].button {
+   border-radius: 0;
+}
+.notice{
+   margin-top: 30px;
+}
+.notice p{
+  margin-left: 90px;
+  margin-top: -17px;
+}
+.errorMessage{
    margin-left: 90px;
-   margin-top: -17px;
+   color: red;
+   margin-top: -40px;
 }
- .errorMessage button{
-   display: inline-block;
-    padding: 1px 16px;
-    background-color: rgb(255, 197, 149);
-    text-decoration: none;
-    border-radius: 10px;
- }
+.errorMessage button{
+  display: inline-block;
+   padding: 1px 16px;
+   background-color: rgb(255, 197, 149);
+   text-decoration: none;
+   border-radius: 10px;
+}

@@ -63,7 +63,7 @@
 .image{
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
+  margin-left: -20px;
 }
 .main-image img{
   width: 340px;
@@ -80,13 +80,8 @@
 }
 .notice{
   margin-top: -100px;
+  margin-left: 880px;
 }
 .notice p{
-  margin-left: 850px;
-  margin-top: -20px;
+  margin-top: -18px;
 }
-
-
-
-
-
