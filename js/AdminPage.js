@@ -21,6 +21,7 @@ async function getTotalProducts() {
 async function getDepositAmount() {
     const response = await axios.get('http://localhost:8080/transaction/getListTransaction');
     transactions = response.data;
+    console.log(transactions);
     var dateArr = getArrayOfDate();
     var totalDepositAmount = [];
     var i = 0;
@@ -28,10 +29,10 @@ async function getDepositAmount() {
         totalDepositAmount[i] = 0;
     }
     for (const transaction of transactions) {
-        if (transaction.status === "nạp tiền") {
+        if (transaction.status === "nạp tiền" && transaction.transaction_datetime != null) {
             for (i = 0; i < dateArr.length; i++) {
                 if (reformatDate(transaction.transaction_datetime) == dateArr[i]) {
-                    amount = transaction.amount * 10;
+                    amount = transaction.amount * 1000;
                     totalDepositAmount[i] += amount;
                 }
             }
@@ -152,6 +153,7 @@ async function renderProductsChart() {
         series: totalProducts,
         chart: {
             type: 'polarArea',
+            height: 350,
         },
         stroke: {
             colors: ['#fff']
@@ -186,83 +188,35 @@ async function renderDepositChart() {
     depositAmount.reverse();
     var options = {
         series: [{
-            name: 'Inflation',
-            data: depositAmount
-        }],
+        type: 'column',
+        data: depositAmount
+      }],
         chart: {
-            height: 350,
-            type: 'bar',
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 10,
-                dataLabels: {
-                    position: 'top', // top, center, bottom
-                },
-            }
-        },
-        dataLabels: {
-            enabled: true,
-            formatter: function (val) {
-                return val + "Đ";
-            },
-            offsetY: -20,
-            style: {
-                fontSize: '12px',
-                colors: ["#304758"]
-            }
-        },
-
-        xaxis: {
-            categories: dateArr,
-            position: 'top',
-            axisBorder: {
-                show: false
-            },
-            axisTicks: {
-                show: false
-            },
-            crosshairs: {
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        colorFrom: '#D8E3F0',
-                        colorTo: '#BED1E6',
-                        stops: [0, 100],
-                        opacityFrom: 0.4,
-                        opacityTo: 0.5,
-                    }
-                }
-            },
-            tooltip: {
-                enabled: true,
-            }
-        },
-        yaxis: {
-            axisBorder: {
-                show: false
-            },
-            axisTicks: {
-                show: false,
-            },
-            labels: {
-                show: false,
-                formatter: function (val) {
-                    return val + "Đ";
-                }
-            }
-
-        },
-        title: {
-            text: 'Deposit of last 10 days',
-            floating: true,
-            offsetY: 330,
-            align: 'center',
-            style: {
-                color: '#444'
-            }
-        }
-    };
+        height: 350,
+        type: 'line',
+      },
+      stroke: {
+        width: [0, 4]
+      },
+      title: {
+        text: 'Deposit amount'
+      },
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: [1]
+      },
+      labels: dateArr,
+      xaxis: {
+        type: 'datetime'
+      },
+      yaxis: [{
+        
+      
+      }, {
+        opposite: true,
+        
+      }]
+      };
 
     var chart = new ApexCharts(document.querySelector("#depositChart"), options);
     chart.render();
