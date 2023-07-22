@@ -252,15 +252,13 @@ const renderPost = async (orders) => {
         deleteOrder.classList.add("round-black-btn");
         if (product.status === 'Chờ nhận hàng') {
             deleteOrder.addEventListener("click", () => {
-                // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
-                // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
                 deleteOrders(postId);
 
             });
         }
         function deleteOrders(postId) {
-            fetch(`http://localhost:8080/product/deleteProductByStudent?id=${productId}`, {
-                method: 'PUT'
+            fetch(`http://localhost:8080/order/deleteOrderById/${postId}`, {
+                method: 'DELETE'
             })
                 .then(response => {
                     if (response.ok) {
@@ -270,7 +268,7 @@ const renderPost = async (orders) => {
                 })
                 .then(data => {
                     // Xử lý phản hồi từ máy chủ sau khi xóa thành công
-                    window.location.href = "sales.html";
+                    window.location.href = "orders.html";
                     console.log(data);
                 })
                 .catch(error => {
