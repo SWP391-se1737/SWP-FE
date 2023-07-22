@@ -199,8 +199,6 @@ const renderPost = async (product) => {
         deleteProduct.classList.add("round-black-btn");
         if (product.status === 'Còn hàng') {
             deleteProduct.addEventListener("click", () => {
-                // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
-                // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
                 deleteProductByUser(productId);
 
             });
