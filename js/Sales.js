@@ -54,6 +54,10 @@ const renderSales = async (product) => {
             p4.innerText = product.status;
             p4.classList.add('status');
 
+            if(product.status == "Còn hàng" || product.status == "Chờ duyệt"){
+                p4.classList.add('status', 'green-text');
+            }
+
             infoDiv.appendChild(h2);
             infoDiv.appendChild(h3);
             infoDiv.appendChild(p);

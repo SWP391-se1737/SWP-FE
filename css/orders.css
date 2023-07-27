@@ -64,3 +64,11 @@ body{
     margin-left: 450px;
     color: #ffa845;
 }
+.green-text {
+  color: rgb(62, 214, 48);
+}
+
+/* Define the CSS class for red text */
+.red-text {
+  color: red;
+}

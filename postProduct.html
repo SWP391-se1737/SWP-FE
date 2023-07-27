@@ -30,12 +30,12 @@
                     <select id="optionCategory" style="font-family: 'Courier New', Courier, monospace">
 
                     </select>
-                    <input type="text" name="name" placeholder="Tên sản phẩm">
-                    <input type="text" name="discriptions" placeholder="Mô tả sản phẩm" style="height: 120px;">
+                    <input type="text" name="name" placeholder="Tên sản phẩm" required>
+                    <input type="text" name="discriptions" placeholder="Mô tả sản phẩm" style="height: 120px;" required>
                     <select id="listCampuses" style="font-family: 'Courier New', Courier, monospace">
 
                     </select>
-                    <input type="number" id="priceInput" name="price" placeholder="Giá" min="0">
+                    <input type="number" id="priceInput" name="price" placeholder="Giá" min="0" required>
                   </div>
                 <div class="content-2">
                   <label for="photo" >
@@ -75,7 +75,7 @@
 priceInput.addEventListener("input", () => {
   const amount = parseFloat(priceInput.value);
 
-  if (isNaN(amount) || amount <= 0) {
+  if (isNaN(amount) || amount < 0) {
     priceInput.setCustomValidity("Số tiền không hợp lệ");
   } else {
     priceInput.setCustomValidity(""); // Reset custom validation message
@@ -110,6 +110,7 @@ form.addEventListener("submit", (event) => {
                   }
               };
 
+             
 
               const firebaseConfig = {
                 apiKey: "AIzaSyCCvDizeCUo-CZIdI-G57gR9jyTS9rh-3w",
@@ -130,6 +131,8 @@ form.addEventListener("submit", (event) => {
               function uploadAndCreatePost(event) {
                 event.preventDefault(); // Ngăn chặn hành vi mặc định của submit
             
+                    
+
                 const currentDate = new Date();
                 const day = currentDate.getDate();
                 const month = currentDate.getMonth() + 1;
@@ -157,7 +160,9 @@ form.addEventListener("submit", (event) => {
                 const description = document.querySelector('input[name="discriptions"]').value;
                 const price = parseInt(document.querySelector('input[name="price"]').value);
                 const seller_id = parseInt(sessionStorage.getItem('id'));
-            
+                
+ 
+
                 let product = {
                   name: name,
                   description: description,
@@ -216,7 +221,7 @@ form.addEventListener("submit", (event) => {
                       console.error('Error uploading images:', error);
                     });
                 }
-            
+                const file = document.querySelector('#photo').files;
                 // Hàm tạo sản phẩm mới
                 function createNewProduct(product) {
                   fetch("http://localhost:8080/product/createNewProduct", {
@@ -231,7 +236,16 @@ form.addEventListener("submit", (event) => {
                         console.log('Tạo sản phẩm thành công');
                         window.location.href = 'sales.html';
                         // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
-                      } else {
+                      }
+                      else if (file.length === 0){
+                        alert('Vui lòng tải lên ít nhất 1 hình ảnh.');
+                        return;
+                      }
+                      else if (files.length > 5){
+                        alert('Bạn chỉ được tải lên tối đa 5 hình ảnh.');
+                        return;
+                      }
+                      else {
                         showErrorMessage();
                         console.error('Lỗi tạo sản phẩm');
                       }

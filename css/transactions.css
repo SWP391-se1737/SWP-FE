@@ -45,3 +45,11 @@ body{
   .column h5 {
     margin: 0; /* Loại bỏ margin mặc định */
   }
+  .green-text {
+    color: rgb(62, 214, 48);
+}
+
+/* Define the CSS class for red text */
+.red-text {
+    color: red;
+}

@@ -92,6 +92,9 @@ const renderOrders = async (products) => {
             const p1 = document.createElement('p');
             p1.innerText = product.status;
             p1.classList.add('status');
+            if(product.status == "Chờ nhận hàng"){
+                p1.classList.add('status', 'green-text');
+            }
 
             infoContainer.appendChild(p2);
             infoContainer.appendChild(p4);

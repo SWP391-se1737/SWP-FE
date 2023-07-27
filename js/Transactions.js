@@ -43,6 +43,12 @@ const renderTransactions = async (product) => {
             h3.innerText = priceText;
             h3.classList.add('price');
 
+            if (product.status === 'nạp tiền' || product.status === 'hủy hàng') {
+                h3.classList.add('price', 'green-text');
+            } else {
+                h3.classList.add('price', 'red-text');
+            }
+
             infoDiv.appendChild(p);
             infoDiv.appendChild(p2);
             infoDiv.appendChild(h3);
