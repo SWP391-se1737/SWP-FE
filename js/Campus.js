@@ -82,21 +82,19 @@ const renderProductsByCampus = (products) => {
             h4.appendChild(strong1);
             h4.appendChild(document.createTextNode(await getCampusNameById(result.sellcampusid)));
 
-            const addToCartButton = document.createElement("button");
-            addToCartButton.innerText = "Mua ngay";
-            addToCartButton.classList.add("round-black-btn");
+            const buytButton = document.createElement("button");
+            buytButton.innerText = "Mua ngay";
+            buytButton.classList.add("round-black-btn");
 
-            addToCartButton.addEventListener("click", () => {
-                // Thực hiện các hành động khi nhấp vào nút "Add to Cart"
-                // Ví dụ: Gọi hàm thêm sản phẩm vào giỏ hàng
-                addToCart(productId);
+            buytButton.addEventListener("click", () => {
+                buyProduct(productId);
             });
 
             divItem.appendChild(img);
             divItem.appendChild(h2);
             divItem.appendChild(h3);
             divItem.appendChild(h4);
-            divItem.appendChild(addToCartButton);
+            divItem.appendChild(buytButton);
 
             list.appendChild(divItem);
 
