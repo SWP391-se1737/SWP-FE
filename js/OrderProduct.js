@@ -47,12 +47,6 @@ const renderProducts = async (product) => {
         p2.appendChild(strong1);
         p2.appendChild(document.createTextNode(await getCampusNameById(product.sellcampusid)));
 
-        const p3 = document.createElement("p");
-        const strong2 = document.createElement("strong");
-        strong2.innerText = "Số lượng: ";
-        p3.appendChild(strong2);
-        p3.appendChild(document.createTextNode(product.quantity));
-
         const campusText = document.createElement("p");
         const strong3 = document.createElement("strong");
         strong3.innerText = "Chọn campus nhận hàng: ";
@@ -62,14 +56,11 @@ const renderProducts = async (product) => {
         const selectCategory = document.createElement("select");
         selectCategory.id = "listCampuses";
 
+
         const orderButton = document.createElement("button");
         orderButton.innerText = "Xác nhận đặt hàng - " + product.price.toLocaleString(); // Thêm giá sản phẩm vào nút mua hàng
         orderButton.classList.add("round-black-btn");
         orderButton.classList.add("price");
-
-        const errorMessageDiv = document.createElement("div");
-        errorMessageDiv.id = "errorMessage";
-        errorMessageDiv.classList.add("errorMessage");
 
         orderButton.addEventListener("click", () => {
             // Thực hiện các hành động khi nhấp vào nút "Mua hàng"
@@ -77,15 +68,54 @@ const renderProducts = async (product) => {
             orderProduct(productId);
         });
 
+        const deleteButton = document.createElement("button");
+        deleteButton.innerText = "Xóa bài đăng"
+        deleteButton.classList.add("round-black-btn");
+
+        deleteButton.addEventListener("click", () => {
+            // Thực hiện các hành động khi nhấp vào nút "Mua hàng"
+            // Ví dụ: Gọi hàm mua sản phẩm
+            deleteProduct(productId);
+        });
+
+        function deleteProduct(productId) {
+            fetch(`http://localhost:8080/product/deleteProductByStudent?id=${productId}`, {
+                method: 'DELETE'
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Error deleting product');
+                })
+                .then(data => {
+                    // Xử lý phản hồi từ máy chủ sau khi xóa thành công
+                    window.location.href = "sales.html";
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Xử lý lỗi nếu có
+                    console.error(error);
+                });
+        }
+
+        const errorMessageDiv = document.createElement("div");
+        errorMessageDiv.id = "errorMessage";
+        errorMessageDiv.classList.add("errorMessage");
+
         infoDiv.appendChild(h2);
         infoDiv.appendChild(h3);
         infoDiv.appendChild(p);
         infoDiv.appendChild(p2);
-        infoDiv.appendChild(p3);
         infoDiv.appendChild(document.createElement("br"));
-        infoDiv.appendChild(campusText);
-        infoDiv.appendChild(selectCategory);
-        infoDiv.appendChild(orderButton);
+        if (sessionStorage.getItem("id") != product.seller_id) {
+            infoDiv.appendChild(campusText);
+            infoDiv.appendChild(selectCategory);
+
+            infoDiv.appendChild(orderButton);
+        }
+        else
+            infoDiv.appendChild(deleteButton);
         infoDiv.appendChild(errorMessageDiv);
 
         // Thêm các thẻ div vào list
@@ -178,7 +208,6 @@ const orderProduct = async (productId) => {
         quantity: 1,
         buycampusid: parseInt(selectedCampus)
     };
-    console.log(orderData);
     createOrderProduct(orderData)
 
     // Gửi request POST tới API /Order/createOrder
@@ -191,34 +220,34 @@ const orderProduct = async (productId) => {
             },
             body: JSON.stringify(orderData)
         })
-        .then(response => {
-            if (response.ok) {
-                console.log('Đặt hàng thành công!');
-                window.location.href = 'orders.html';
-                // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
-            } else {
-                console.error('Đặt hàng thất bại.');
+            .then(response => {
+                if (response.ok) {
+                    console.log('Đặt hàng thành công!');
+                    window.location.href = 'orders.html';
+                    // Thực hiện các hành động bổ sung sau khi tạo sản phẩm thành công
+                } else {
+                    console.error('Đặt hàng thất bại.');
+                    showErrorMessage();
+                }
+            })
+            .catch(error => {
+                console.error('Đã xảy ra lỗi:', error);
                 showErrorMessage();
-            }
-        })
-        .catch(error => {
-            console.error('Đã xảy ra lỗi:', error);
-            showErrorMessage();
-        });
+            });
     }
-    
+
     function showErrorMessage() {
         var errorMessage = document.getElementById('errorMessage');
         errorMessage.textContent = "Đặt hàng thất bại, bạn hãy chọn Campus hoặc kiểm tra ";
-    
+
         var backButton = document.createElement('button');
         backButton.textContent = "Số dư ví";
-        backButton.addEventListener('click', function() {
+        backButton.addEventListener('click', function () {
             window.location.href = 'wallet.html';
         });
-    
+
         // Clear the error message element and append the back button
-       
+
         errorMessage.appendChild(backButton);
     }
 }

@@ -79,12 +79,6 @@ const renderProducts = async (product) => {
         p2.appendChild(strong1);
         p2.appendChild(document.createTextNode(await getCampusNameById(product.sellcampusid)));
 
-        const p3 = document.createElement("p");
-        const strong2 = document.createElement("strong");
-        strong2.innerText = "Số lượng: ";
-        p3.appendChild(strong2);
-        p3.appendChild(document.createTextNode(product.quantity));
-
         const buyButton = document.createElement("button");
         buyButton.innerText = "Mua ngay";
         buyButton.classList.add("round-black-btn");
@@ -100,8 +94,6 @@ const renderProducts = async (product) => {
         infoDiv.appendChild(p);
         infoDiv.appendChild(p5);
         infoDiv.appendChild(p2);
-        infoDiv.appendChild(document.createElement("br"));
-        infoDiv.appendChild(p3);
         infoDiv.appendChild(document.createElement("br"));
         infoDiv.appendChild(buyButton);
 

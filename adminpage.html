@@ -179,69 +179,74 @@
           </div>
           
         </div>
+
       </div>
+
+      <!-- Add Charts -->
+      <div class="graphBox">
+        <div id="depositChart" class="box">
+
+        </div>
+        <div id="productChart" class="box">
+
+        </div>
+
+      </div>
+
     </div>
-    <!-- ========================= Scripts ====================== -->
-    <script src="js/AdminNavbar.js"></script>
-    <script src="js/AdminPage.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script>
-      var isLoggedIn = sessionStorage.getItem("isLoggedIn");
-      var accid = sessionStorage.getItem('id');
-      var accRole = sessionStorage.getItem("role");
-      console.log(accRole,accid);
-      if (isLoggedIn === "true") {
-        if (accRole === "Staff") {
-          document.getElementById("homepageNav").style.display = "block";
-          document.getElementById("adminpageNav").style.display = "block";
-          document.getElementById("manageProductPostingNav").style.display =
-            "block";
-          document.getElementById("manageOrderNav").style.display = "block";
-          document.getElementById("manageTransactionNav").style.display =
-            "block";
-          document.getElementById("manageStudentNav").style.display = "none";
-          document.getElementById("manageStaffNav").style.display = "none";
-          document.getElementById("manageProductMovingNav").style.display =
-            "block";
-          document.getElementById("manageCategoryNav").style.display = "none";
-          document.getElementById("manageCampusNav").style.display = "none";
-          document.getElementById("manageStorageNav").style.display = "none";
-          document.getElementById("signoutNav").style.display = "block";
-        } else {
-          document.getElementById("homepage").style.display = "block";
-          document.getElementById("adminpage").style.display = "block";
-          document.getElementById("manageProductPosting").style.display =
-            "block";
-          document.getElementById("manageOrder").style.display = "block";
-          document.getElementById("manageTransaction").style.display = "block";
-          document.getElementById("manageStudent").style.display = "block";
-          document.getElementById("manageStaff").style.display = "block";
-          document.getElementById("manageProductMoving").style.display =
-            "block";
-          document.getElementById("manageCategory").style.display = "block";
-          document.getElementById("manageCampus").style.display = "block";
-          document.getElementById("manageStorage").style.display = "block";
-          document.getElementById("signout").style.display = "block";
-        }
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script>
+    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var accid = sessionStorage.getItem("id");
+    var accRole = sessionStorage.getItem("role");
+    console.log(accRole);
+    if (isLoggedIn === "true") {
+      if (accRole === "Staff") {
+        document.getElementById("homepageNav").style.display = "block";
+        document.getElementById("adminpageNav").style.display = "block";
+        document.getElementById("manageProductPostingNav").style.display =
+          "block";
+        document.getElementById("manageOrderNav").style.display = "block";
+        document.getElementById("manageTransactionNav").style.display =
+          "block";
+        document.getElementById("manageStudentNav").style.display = "none";
+        document.getElementById("manageStaffNav").style.display = "none";
+        document.getElementById("manageProductMovingNav").style.display =
+          "block";
+        document.getElementById("manageCategoryNav").style.display = "none";
+        document.getElementById("manageCampusNav").style.display = "none";
+        document.getElementById("manageStorageNav").style.display = "none";
+        document.getElementById("signoutNav").style.display = "block";
+      } else {
+        document.getElementById("homepage").style.display = "block";
+        document.getElementById("adminpage").style.display = "block";
+        document.getElementById("manageProductPosting").style.display =
+          "block";
+        document.getElementById("manageOrder").style.display = "block";
+        document.getElementById("manageTransaction").style.display = "block";
+        document.getElementById("manageStudent").style.display = "block";
+        document.getElementById("manageStaff").style.display = "block";
+        document.getElementById("manageProductMoving").style.display =
+          "block";
+        document.getElementById("manageCategory").style.display = "block";
+        document.getElementById("manageCampus").style.display = "block";
+        document.getElementById("manageStorage").style.display = "block";
+        document.getElementById("signout").style.display = "block";
       }
+    }
 
-      function logout() {
-        // Xóa các mục trong sessionStorage
-        sessionStorage.clear();
+    function logout() {
+      // Xóa các mục trong sessionStorage
+      sessionStorage.clear();
 
-        // Điều hướng về trang homepage.html
-        window.location.href = "login.html";
-      }
-    </script>
-    <!-- ========================== IonIcons =======================-->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-    ></script>
-  </body>
+      // Điều hướng về trang homepage.html
+      window.location.href = "login.html";
+    }
+  </script>
+  <!-- ========================== IonIcons =======================-->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
 </html>

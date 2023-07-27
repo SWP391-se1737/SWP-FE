@@ -118,6 +118,7 @@ async function getTotalProductsBuyAt() {
 async function getDepositAmount() {
     const response = await axios.get('http://localhost:8080/transaction/getListTransaction');
     transactions = response.data;
+    console.log(transactions);
     var dateArr = getArrayOfDate();
     var totalDepositAmount = [];
     var i = 0;
@@ -125,10 +126,10 @@ async function getDepositAmount() {
         totalDepositAmount[i] = 0;
     }
     for (const transaction of transactions) {
-        if (transaction.status === "nạp tiền") {
+        if (transaction.status === "nạp tiền" && transaction.transaction_datetime != null) {
             for (i = 0; i < dateArr.length; i++) {
                 if (reformatDate(transaction.transaction_datetime) == dateArr[i]) {
-                    amount = transaction.amount * 10;
+                    amount = transaction.amount * 1000;
                     totalDepositAmount[i] += amount;
                 }
             }
@@ -249,6 +250,7 @@ async function renderProductsChart() {
         series: totalProducts,
         chart: {
             type: 'polarArea',
+            height: 350,
         },
         stroke: {
             colors: ['#fff']
@@ -338,9 +340,8 @@ async function renderDepositChart() {
         }
     };
 
-    var chart = new ApexCharts(document.querySelector("#depositChart"), options);
+    var chart = new ApexCharts(document.querySelector("#productLocationChart"), options);
     chart.render();
-
 }
 
 async function renderProductLocationChart() {
