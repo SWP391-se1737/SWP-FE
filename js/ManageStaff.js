@@ -12,13 +12,13 @@ async function getStaffList() {
             tableData += "<td>" + staff.role + "</td>";
             if (staff.status == true){
                 tableData += "<td><button class='btn btn-danger' onclick='setStatusInActive(`" + staff.email + 
-                "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Inactive</button></td>";
+                "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Chặn</button></td>";
             }
             else {
                 tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + staff.email + 
-                "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Active</button></td>";
+                "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Gỡ chặn</button></td>";
             }
-            tableData += "<td><button class='btn btn-danger' onclick='demoteRole(`" + staff.email + "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Demote</button></td>";
+            tableData += "<td><button class='btn btn-danger' onclick='demoteRole(`" + staff.email + "` , `" + staff.id + "`  , `" + staff.phone + "` , `" + staff.role + "` , `" + staff.status + "`)'>Giáng chức</button></td>";
 
             tableData += "<tr>";
         }

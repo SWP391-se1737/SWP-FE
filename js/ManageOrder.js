@@ -2,35 +2,35 @@ async function getOrderList() {
     const response = await axios.get('http://localhost:8080/order/getListOrder');
     orders = response.data;
     let tableData = "";
+    status1 = "Thành công";
+    status2 = "Thất bại";
     console.log(orders)
     for (const order of orders) {
         tableData += "<tr>"
         tableData += "<td>" + order.id + "</td>";
         tableData += "<td>" + reformatDate(order.buyAt) + "</td>";
         tableData += "<td>" + reformatDate(order.shipAt) + "</td>";
-        tableData += "<td>" + await getSellerNameById(order.buyerid).then((buyer) => buyer) + "</td>";
+        tableData += "<td>" + reformatEmail(await getSellerNameById(order.buyerid).then((buyer) => buyer)) + "</td>";
         tableData += "<td>" + await getProductNameById(order.productId).then((product) => product) + "</td>";
         tableData += "<td>" + order.totalamount + "</td>";
-        tableData += "<td>" + order.quantity + "</td>";
         tableData += "<td>" + await getCampusNameById(order.buycampusid).then((campus) => campus) + "</td>";
-        if (order.status == "chờ nhận hàng") {
-            tableData += "<td><button class='btn btn-danger' onclick='changeStatus(`" + order.id + "` , `" + order.status + "`)'>Chờ nhận hàng</button></td>";
+        tableData += "<td>" + order.status + "</td>";
+        if (order.status == "Chờ nhận hàng") {
+            tableData += "<td><button class='btn btn-danger' onclick='changeStatus(`" + order.id + "` , `" + status1 + "`)'>Nhận hàng thành công</button></td>";
+            tableData += "<td><button class='btn btn-danger' onclick='changeStatus(`" + order.id + "` , `" + status2 + "`)'>Nhận hàng thất bại</button></td>";
         }
-        else {
-            tableData += "<td><button class='btn btn-danger' onclick='changeStatus(`" + order.id + "` , `" + order.status + "`)'>Đã nhận hàng</button></td>";
-        }
-        tableData += "<tr>";
+        tableData += "</tr>";
     };
     document.getElementById("order-list").innerHTML = tableData;
 }
 getOrderList();
 
 function changeStatus(id,status) {
-    if (status == "chờ nhận hàng"){
-        status = "đã nhận hàng";
+    if (status == "Thành công"){
+        status = "Đã nhận hàng";
     }
     else {
-        status = "chờ nhận hàng";
+        status = "Hủy đơn hàng";
     }
 
     axios.put(`http://localhost:8080/order/updateOrderStatusById/${id}?status=${status}`)
@@ -63,3 +63,8 @@ const getSellerNameById = async (buyerid) => {
     const buyer = response.data;
     return buyer.email;
 };
+
+function reformatEmail(email){
+    const emailUrls = email.split("@");
+    return emailUrls[0] + "</br>" + "@" + emailUrls[1];
+  }

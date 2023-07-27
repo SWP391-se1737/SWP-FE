@@ -8,12 +8,12 @@ async function getCategoryList() {
     tableData += "<td>" + category.id + "</td>";
     tableData += "<td>" + category.name + "</td>";
     tableData += "<td>" + category.status + "</td>";
-    // if (category.status == true) {
-    //   tableData += "<td><button class='btn btn-danger' onclick='setStatusInActive(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Inactive</button></td>";
-    // }
-    // else {
-    //   tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Active</button></td>";
-    // }
+    if (category.status == false) {
+      tableData += "<td><button class='btn btn-danger' onclick='setStatus(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Không sử dụng nữa</button></td>";
+    }
+    else {
+      tableData += "<td><button class='btn btn-danger' onclick='setStatus(`" + category.id + "` , `" + category.name + "`  , `" + student.role + "` , `" + category.status + "`)'>Có thể sử dụng</button></td>";
+    }
     tableData += "</tr>";
   };
   document.getElementById("category-list").innerHTML = tableData;
