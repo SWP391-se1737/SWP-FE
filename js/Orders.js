@@ -67,12 +67,6 @@ const renderOrders = async (products) => {
             const timeString = `${hour < 10 ? "0" + hour : hour}:${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}`;
             p2.appendChild(document.createTextNode(`${dateString} ${timeString}`));
 
-            const p = document.createElement("p");
-            const strong2 = document.createElement("strong");
-            strong2.innerText = "Số lượng: ";
-            p.appendChild(strong2);
-            p.appendChild(document.createTextNode(product.quantity));
-
             const p4 = document.createElement("p");
             const strong4 = document.createElement("strong");
             strong4.innerText = "Hạn chót nhận hàng: ";
@@ -102,7 +96,6 @@ const renderOrders = async (products) => {
             infoContainer.appendChild(p2);
             infoContainer.appendChild(p4);
             infoContainer.appendChild(h3);
-            infoContainer.appendChild(p);
             infoContainer.appendChild(p5);
             infoContainer.appendChild(p1);
             infoDiv.dataset.key = postId;
@@ -213,12 +206,6 @@ const renderPost = async (orders) => {
         const timeString = `${hour < 10 ? "0" + hour : hour}:${minute < 10 ? "0" + minute : minute}:${second < 10 ? "0" + second : second}`;
         p2.appendChild(document.createTextNode(`${dateString} ${timeString}`));
 
-        const p = document.createElement("p");
-        const strong2 = document.createElement("strong");
-        strong2.innerText = "Số lượng: ";
-        p.appendChild(strong2);
-        p.appendChild(document.createTextNode(product.quantity));
-
         const p4 = document.createElement("p");
         const strong4 = document.createElement("strong");
         strong4.innerText = "Hạn chót nhận hàng: ";
@@ -280,7 +267,6 @@ const renderPost = async (orders) => {
         infoContainer.appendChild(p2);
         infoContainer.appendChild(p4);
         infoContainer.appendChild(h3);
-        infoContainer.appendChild(p);
         infoContainer.appendChild(p5);
         infoContainer.appendChild(p6);
         if (product.status === 'Chờ nhận hàng')

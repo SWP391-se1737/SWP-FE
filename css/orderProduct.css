@@ -26,7 +26,6 @@
     width: 350px;
   }
   
-  
   #orderDetail > div > div.product-info > p:nth-child(5),
   #orderDetail > div > div.product-info > p:nth-child(6){
     display: inline-block;
@@ -73,10 +72,12 @@
     text-decoration: none;
   }
   #listCampuses{
+    margin-left: 10px;
     margin-right: 0px;
+    margin-top: 0px;
   }
   .errorMessage{
-    margin-top: 20px;
+    margin-top: 5px;
     color: red;
   }
   .errorMessage button{

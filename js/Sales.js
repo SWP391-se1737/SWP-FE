@@ -44,12 +44,6 @@ const renderSales = async (product) => {
             p.appendChild(document.createTextNode(product.description));
             p.appendChild(document.createElement("br"));
 
-            const p1 = document.createElement("p");
-            const strong2 = document.createElement("strong");
-            strong2.innerText = "Số lượng: ";
-            p1.appendChild(strong2);
-            p1.appendChild(document.createTextNode(product.quantity));
-
             const p3 = document.createElement("p");
             const strong3 = document.createElement("strong");
             strong3.innerText = "Ngày tạo bài đăng: ";
@@ -63,7 +57,6 @@ const renderSales = async (product) => {
             infoDiv.appendChild(h2);
             infoDiv.appendChild(h3);
             infoDiv.appendChild(p);
-            infoDiv.appendChild(p1);
             infoDiv.appendChild(p3);
             infoDiv.appendChild(p4);
 
@@ -164,12 +157,6 @@ const renderPost = async (product) => {
         p1.appendChild(strong1);
         p1.appendChild(document.createTextNode(await getCampusNameById(product.sellcampusid)));
 
-        const p2 = document.createElement("p");
-        const strong2 = document.createElement("strong");
-        strong2.innerText = "Số lượng: ";
-        p2.appendChild(strong2);
-        p2.appendChild(document.createTextNode(product.quantity));
-
         const p3 = document.createElement("p");
         const strong3 = document.createElement("strong");
         strong3.innerText = "Ngày tạo bài đăng: ";
@@ -205,7 +192,7 @@ const renderPost = async (product) => {
         }
         function deleteProductByUser(productId) {
             fetch(`http://localhost:8080/product/deleteProductByStudent?id=${productId}`, {
-                method: 'PUT'
+                method: 'DELETE'
             })
                 .then(response => {
                     if (response.ok) {
@@ -230,7 +217,6 @@ const renderPost = async (product) => {
         infoDiv.appendChild(p);
         infoDiv.appendChild(p1);
         infoDiv.appendChild(document.createElement("br"));
-        infoDiv.appendChild(p2);
         infoDiv.appendChild(p3);
         infoDiv.appendChild(p4);
         infoDiv.appendChild(p6);

@@ -91,32 +91,36 @@
                   // Kiểm tra phản hồi từ máy chủ để xác định tài khoản đã tồn tại hay chưa
                   const exists = data.exists;
                   if (exists) {
-    const status = data.account.status;
-   
-    if (status) {
-      sessionStorage.setItem("isLoggedIn", "true");
-      sessionStorage.setItem("id", data.account.id);
-      sessionStorage.setItem("role", data.account.role);
-      console.log("Tài khoản đã tồn tại. Không thêm vào cơ sở dữ liệu.");
-      console.log(data.account.role);
-      // Hoặc hiển thị thông báo không thêm vào cơ sở dữ liệu
-      // ...
+                    const status = data.account.status;
 
-      if (data.account.role === "Student") {
-        window.location.href = "homepage.html";
-      }
-      if (data.account.role === "Staff") {
-        window.location.href = "adminpage.html";
-      }
-    } else {
-      console.error("Tài khoản không hợp lệ.");
-      errorMessage.textContent = "Địa chỉ email không hợp lệ.";
-    
-      // Display an error message or handle the situation where the account status is "false"
-      // For example, you could show an error message on the login page.
-    }
-  } else {
-    console.log("Tài khoản chưa tồn tại. Thêm vào cơ sở dữ liệu.");
+                    if (status) {
+                      sessionStorage.setItem("isLoggedIn", "true");
+                      sessionStorage.setItem("id", data.account.id);
+                      sessionStorage.setItem("role", data.account.role);
+                      console.log(
+                        "Tài khoản đã tồn tại. Không thêm vào cơ sở dữ liệu."
+                      );
+                      console.log(data.account.role);
+                      // Hoặc hiển thị thông báo không thêm vào cơ sở dữ liệu
+                      // ...
+
+                      if (data.account.role === "Student") {
+                        window.location.href = "homepage.html";
+                      }
+                      if (data.account.role === "Staff") {
+                        window.location.href = "adminpage.html";
+                      }
+                    } else {
+                      console.error("Tài khoản không hợp lệ.");
+                      errorMessage.textContent = "Địa chỉ email không hợp lệ.";
+
+                      // Display an error message or handle the situation where the account status is "false"
+                      // For example, you could show an error message on the login page.
+                    }
+                  } else {
+                    console.log(
+                      "Tài khoản chưa tồn tại. Thêm vào cơ sở dữ liệu."
+                    );
 
                     // Gọi API phía máy chủ để thêm tài khoản
                     const addAccountApiUrl =
