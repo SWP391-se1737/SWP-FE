@@ -156,8 +156,7 @@
     <script>
       var isLoggedIn = sessionStorage.getItem("isLoggedIn");
       var accRole = sessionStorage.getItem("role");
-      var accid = sessionStorage.getItem('id');
-      console.log(accid, accRole);
+      
       if (isLoggedIn === "true") {
         if (accRole === "Staff") {
           document.getElementById("homepageNav").style.display = "block";
