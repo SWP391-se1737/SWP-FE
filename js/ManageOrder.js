@@ -16,8 +16,8 @@ async function getOrderList() {
         tableData += "<td>" + await getCampusNameById(order.buycampusid).then((campus) => campus) + "</td>";
         tableData += "<td>" + order.status + "</td>";
         if (order.status == "Chờ nhận hàng") {
-            tableData += "<td><button class='btn btn-danger' onclick='changeStatus(`" + order.id + "` , `" + status1 + "`)'>Nhận hàng thành công</button></td>";
-            tableData += "<td><button class='btn btn-danger' onclick='changeStatus(`" + order.id + "` , `" + status2 + "`)'>Nhận hàng thất bại</button></td>";
+            tableData += "<td><button class='btn btn-danger' onclick='changeStatusSuccess(`" + order.id + "`)'>Nhận hàng thành công</button></td>";
+            tableData += "<td><button class='btn btn-danger' onclick='changeStatusFail(`" + order.id + "`)'>Nhận hàng thất bại</button></td>";
         }
         tableData += "</tr>";
     };
@@ -25,15 +25,17 @@ async function getOrderList() {
 }
 getOrderList();
 
-function changeStatus(id,status) {
-    if (status == "Thành công"){
-        status = "Đã nhận hàng";
-    }
-    else {
-        status = "Hủy đơn hàng";
-    }
+function changeStatusFail(id) {
+    status1 = "Không nhận hàng";
 
-    axios.put(`http://localhost:8080/order/updateOrderStatusById/${id}?status=${status}`)
+    axios.put(`http://localhost:8080/order/updateOrderStatusById/${id}?status=${status1}`)
+    getOrderList();
+}
+
+function changeStatusSuccess(id) {
+    status1 = "Đã nhận hàng";
+
+    axios.put(`http://localhost:8080/order/updateOrderStatusById/${id}?status=${status1}`)
     getOrderList();
 }
 
