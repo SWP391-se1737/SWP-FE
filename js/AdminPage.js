@@ -340,7 +340,7 @@ async function renderDepositChart() {
         }
     };
 
-    var chart = new ApexCharts(document.querySelector("#productLocationChart"), options);
+    var chart = new ApexCharts(document.querySelector("#depositChart"), options);
     chart.render();
 }
 
