@@ -1,3 +1,58 @@
+function loadAdminPage() {
+    getTotalStudents();
+    getTotalDeposits();
+    getTotalProductPosting();
+    getTotalOrders();
+    renderProductsChart();
+    renderDepositChart();
+    renderProductLocationChart();
+}
+loadAdminPage();
+
+async function getTotalStudents() {
+    const response = await axios.get('http://localhost:8080/Account/listAccount');
+    students = response.data;
+    var totalStudents = 0;
+    for (const student of students) {
+        if (student.role == ("Student")) {
+            totalStudents += 1;
+        }
+    }
+    document.getElementById("totalStudents").innerHTML = totalStudents;
+}
+
+async function getTotalDeposits() {
+    const response = await axios.get('http://localhost:8080/transaction/getListTransaction');
+    transactions = response.data;
+    var totalDeposits = 0;
+    for (const transaction of transactions) {
+        if (transaction.status === "nạp tiền") {
+            totalDeposits += transaction.amount * 1000;
+        }
+    };
+    document.getElementById("totalDeposits").innerHTML = totalDeposits;
+}
+
+async function getTotalProductPosting() {
+    const response = await axios.get('http://localhost:8080/product/getListProduct');
+    products = response.data;
+    var totalProductPosting = 0;
+    for (const product of products) {
+        totalProductPosting += 1;
+    }
+    document.getElementById("totalProductPosting").innerHTML = totalProductPosting;
+}
+
+async function getTotalOrders(){
+    const response = await axios.get('http://localhost:8080/order/getListOrder');
+    orders = response.data;
+    var totalOrders = 0;
+    for (const order of orders) {
+        totalOrders += 1;
+    }
+    document.getElementById("totalOrders").innerHTML = totalOrders;
+}
+
 async function getTotalProducts() {
     const response = await axios.get('http://localhost:8080/product/getListProduct');
     products = response.data;
@@ -16,6 +71,48 @@ async function getTotalProducts() {
         }
     }
     return totalProducts;
+}
+
+async function getTotalProductsSellAt() {
+    const response = await axios.get('http://localhost:8080/product/getListProduct');
+    products = response.data;
+    var totalProductsSellAt = [2];
+    var i = 0;
+    for (i = 0; i < 2; i++) {   // Gán giá trị 0 vào tất cả vị trí trong array
+        totalProductsSellAt[i] = 0;
+    }
+    for (const product of products) {
+        for (i = 0; i < 2; i++) {
+            if (product.sellcampusid === 1) {
+                totalProductsSellAt[0] += 1;
+            }
+            if (product.sellcampusid === 2) {
+                totalProductsSellAt[1] += 1;
+            }
+        }
+    }
+    return totalProductsSellAt;
+}
+
+async function getTotalProductsBuyAt() {
+    const response = await axios.get('http://localhost:8080/order/getListOrder');
+    orders = response.data;
+    var totalProductsBuyAt = [2];
+    var i = 0;
+    for (i = 0; i < 2; i++) {   // Gán giá trị 0 vào tất cả vị trí trong array
+        totalProductsBuyAt[i] = 0;
+    }
+    for (const order of orders) {
+        for (i = 0; i < 2; i++) {
+            if (order.buycampusid === 1) {
+                totalProductsBuyAt[0] += 1;
+            }
+            if (order.buycampusid === 2) {
+                totalProductsBuyAt[1] += 1;
+            }
+        }
+    }
+    return totalProductsBuyAt;
 }
 
 async function getDepositAmount() {
@@ -114,7 +211,7 @@ function getArrayOfDate() {
                 break;
         }
 
-        dateArr[i] = day + " " + monthString + " " + year ;
+        dateArr[i] = day + " " + monthString + " " + year;
 
         day -= 1;
 
@@ -159,7 +256,18 @@ async function renderProductsChart() {
             colors: ['#fff']
         },
         title: {
-            text: 'Type of Products'
+            text: 'Số lượng sản phẩm theo phân loại',
+            align: 'left',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                color: '#263238'
+            },
         },
         fill: {
             opacity: 0.8
@@ -188,43 +296,110 @@ async function renderDepositChart() {
     depositAmount.reverse();
     var options = {
         series: [{
-        type: 'column',
-        data: depositAmount
-      }],
+            name: 'Tiền nạp vào hệ thống',
+            data: depositAmount
+        }],
         chart: {
-        height: 350,
-        type: 'line',
-      },
-      stroke: {
-        width: [0, 4]
-      },
-      title: {
-        text: 'Deposit amount'
-      },
-      dataLabels: {
-        enabled: true,
-        enabledOnSeries: [1]
-      },
-      labels: dateArr,
-      xaxis: {
-        type: 'datetime'
-      },
-      yaxis: [{
-        
-      
-      }, {
-        opposite: true,
-        
-      }]
-      };
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: dateArr,
+        },
+        title: {
+            text: 'Số tiền nạp vào hệ thống gần đây',
+            align: 'left',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                color: '#263238'
+            },
+        },
+        fill: {
+            opacity: 1
+        }
+    };
 
-    var chart = new ApexCharts(document.querySelector("#depositChart"), options);
+    var chart = new ApexCharts(document.querySelector("#productLocationChart"), options);
     chart.render();
-
 }
 
-renderProductsChart();
-renderDepositChart()
+async function renderProductLocationChart() {
+    var totalProductsSellAt = await getTotalProductsSellAt();
+    var totalProductsBuyAt = await getTotalProductsBuyAt();
+    campus = ["Xavalo", "NVH Sinh viên"];
+    var options = {
+        series: [{
+            name: 'Sản phẩm được mua',
+            data: totalProductsBuyAt
+        }, {
+            name: 'Sản phẩm được bán',
+            data: totalProductsSellAt
+        }],
+        chart: {
+            type: 'bar',
+            height: 350
+        },
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: campus,
+        },
+        title: {
+            text: 'Số lượng sản phẩm được mua và bán',
+            align: 'left',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+                fontSize: '14px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                color: '#263238'
+            },
+        },
+        fill: {
+            opacity: 1
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#productLocationChart"), options);
+    chart.render();
+}
 
 function reformatDate(dateStr) {
     var dArr = dateStr.split(" "); // input yyyy-MM-dd HH:mm:ss
@@ -273,5 +448,5 @@ function reformatDate(dateStr) {
         default:
             break;
     }
-    return  day + " " + monthString + " " + year ;
+    return day + " " + monthString + " " + year;
 }

@@ -22,20 +22,20 @@ async function getCampusList() {
 }
 getCampusList();
 
-document.querySelector("#campus-form").addEventListener("click", (e)=>{
-  target = e.target;
-  if(target.classList.contains("add")){
-    const addCampusForm = document.getElementById("campus-form");
-    const campusName = addCampusForm.elements.campusName.value;
-    const campusAddress = addCampusForm.elements.campusAddress.value;
-    const campusLongitude = addCampusForm.elements.campusLongitude.value;
-    const campusLatitude = addCampusForm.elements.campusLatitude.value;
-    axios.post('http://localhost:8080/Campus/addCampus', {
-      name : campusName,
-      address : campusAddress,
-      longitude : campusLongitude,
-      latitude : campusLatitude
-  })
-  }
-  getCampusList();
-});
+// document.querySelector("#campus-form").addEventListener("click", (e)=>{
+//   target = e.target;
+//   if(target.classList.contains("add")){
+//     const addCampusForm = document.getElementById("campus-form");
+//     const campusName = addCampusForm.elements.campusName.value;
+//     const campusAddress = addCampusForm.elements.campusAddress.value;
+//     const campusLongitude = addCampusForm.elements.campusLongitude.value;
+//     const campusLatitude = addCampusForm.elements.campusLatitude.value;
+//     axios.post('http://localhost:8080/Campus/addCampus', {
+//       name : campusName,
+//       address : campusAddress,
+//       longitude : campusLongitude,
+//       latitude : campusLatitude
+//   })
+//   }
+//   getCampusList();
+// });

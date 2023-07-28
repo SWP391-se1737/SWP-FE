@@ -1,15 +1,24 @@
 async function getProductMoving() {
     const response = await axios.get('http://localhost:8080/productMoving/getListProductMoving');
     productMovings = response.data;
+    console.log(productMovings);
     let tableData = "";
     for (const productMoving of productMovings) {
         tableData += "<tr>"
         tableData += "<td>" + productMoving.movingId + "</td>";
         tableData += "<td>" + await getCampusNameById(productMoving.fromLocation).then((campus) => campus) + "</td>";
         tableData += "<td>" + await getCampusNameById(productMoving.toLocation).then((campus) => campus) + "</td>";
-        tableData += "<td>" + reformatDate(productMoving.movingDate) + "</td>";
-        tableData += "<td>" + reformatDate(productMoving.arrivalDate) + "</td>";
-        tableData += "<td>" + await getShipperNameById(productMoving.shipperId).then((shipper) => shipper) + "</td>";
+        // tableData += "<td>" + reformatDate(productMoving.movingDate) + "</td>";
+        // if (productMoving.arrivalDate != null) {
+        //     tableData += "<td>" + reformatDate(productMoving.arrivalDate) + "</td>";
+        // }
+        // else {tableData += "<td>" + "Chưa đến" + "</td>";}
+        tableData += "<td>" + productMoving.MovingDate + "</td>";
+        tableData += "<td>" + productMoving.ArrivalDate + "</td>";
+        if(productMoving.shipperId == null){
+            tableData += "<td>" + productMoving.shipperId + "</td>";
+        }
+        else {tableData += "<td>" + await getShipperNameById(productMoving.shipperId).then((shipper) => shipper) + "</td>";}
         if (productMoving.status == "Đang chuyển") {
             tableData += "<td><button class='btn btn-success' onclick='changeStatus(`" + productMoving.fromLocation +
                 "` , `" + productMoving.toLocation + "`  , `" + productMoving.arrivalDate + "` , `" + productMoving.shipperId +
@@ -38,7 +47,7 @@ function changeStatus(fromLocation, toLocation, arrivalDate, shipperId, movingDa
 }
 
 function reformatDate(dateStr) {
-    var dArr = dateStr.split("T"); // input yyyy-MM-dd HH:mm:ss
+    var dArr = dateStr.split(" "); // input yyyy-MM-dd HH:mm:ss
     var dateStr = dArr[0];         // string yyyy-MM-dd
     dateArr = dateStr.split("-");
     var timeStr = dArr[1];         // string HH:mm:ss.SSSZ
@@ -57,3 +66,11 @@ const getShipperNameById = async (shipperId) => {
     const shipper = response.data;
     return shipper.email;
 };
+
+//http://localhost:8080/MovingItems/listItems
+const getProductIDByMovingID = async (productID) => {
+    const response = await axios.get(`http://localhost:8080/MovingItems/listItems`);
+    const product = response.data;
+  
+    return product.productID;
+  }

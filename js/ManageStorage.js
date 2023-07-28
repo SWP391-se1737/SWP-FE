@@ -18,7 +18,6 @@ async function getProductList() {
           tableData1 += "<td>" + await getSellerNameById(product.seller_id).then((email) => email) + "</td>";
           tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
           tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
-          tableData1 += "<td>" + product.quantity + "</td>";
           tableData1 += "<td>" + product.status + "</td>";
           tableData1 += "</tr>";
           
@@ -35,7 +34,6 @@ async function getProductList() {
           tableData2 += "<td>" + await getSellerNameById(product.seller_id).then((email) => email) + "</td>";
           tableData2 += "<td>" + reformatDate(product.createAT) + "</td>";
           tableData2 += "<td>" + reformatDate(product.expire) + "</td>";
-          tableData2 += "<td>" + product.quantity + "</td>";
           tableData2 += "<td>" + product.status + "</td>";
           tableData2 += "</tr>";
         }

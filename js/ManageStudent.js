@@ -11,12 +11,12 @@ async function getStudentList() {
             tableData += "<td>" + student.phone + "</td>";
             tableData += "<td>" + student.role + "</td>";
             if (student.status == true){
-                tableData += "<td><button class='btn btn-danger' onclick='setStatusInActive(`" + student.email + "` , `" + student.id + "`  , `" + student.phone + "` , `" + student.role + "` , `" + student.status + "`)'>Inactive</button></td>";
+                tableData += "<td><button class='btn btn-danger' onclick='setStatusInActive(`" + student.email + "` , `" + student.id + "`  , `" + student.phone + "` , `" + student.role + "` , `" + student.status + "`)'>Chặn</button></td>";
             }
             else {
-                tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + student.email + "` , `" + student.id + "`  , `" + student.phone + "` , `" + student.role + "` , `" + student.status + "`)'>Active</button></td>";
+                tableData += "<td><button class='btn btn-danger' onclick='setStatusActive(`" + student.email + "` , `" + student.id + "`  , `" + student.phone + "` , `" + student.role + "` , `" + student.status + "`)'>Gỡ chặn</button></td>";
             }
-            tableData += "<td><button class='btn btn-danger' onclick='promoteRole(`" + student.email + "` , `" + student.id + "`  , `" + student.phone + "` , `" + student.role + "` , `" + student.status + "`)'>Promote</button></td>";
+            tableData += "<td><button class='btn btn-danger' onclick='promoteRole(`" + student.email + "` , `" + student.id + "`  , `" + student.phone + "` , `" + student.role + "` , `" + student.status + "`)'>Thăng chức</button></td>";
 
             tableData += "</tr>";
         }   

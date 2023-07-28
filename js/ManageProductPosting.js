@@ -16,10 +16,9 @@ async function getProductList() {
       tableData1 += "<td>" + product.description + "</td>";
       tableData1 += "<td>" + await getCategoryNameByID(product.categoryid).then((category) => category) + "</td>";
       tableData1 += "<td>" + await getCampusNameById(product.sellcampusid).then((campus) => campus) + "</td>";
-      tableData1 += "<td>" + await getSellerNameById(product.seller_id).then((email) => email) + "</td>";
+      tableData1 += "<td>" + reformatEmail(await getSellerNameById(product.seller_id).then((email) => email)) + "</td>";
       tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
       tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
-      tableData1 += "<td>" + product.quantity + "</td>";
       tableData1 += "<td><button value='product.status' class='btn btn-danger' onclick='acceptPosting(`" + product.id +
         "` , `" + product.name + "`  , `" + product.image + "` , `" + product.description + "` , `" + product.price +
         "` , `" + product.expire + "`  , `" + product.expire + "` , `" + product.quantity + "` , `" + product.categoryid +
@@ -39,10 +38,9 @@ async function getProductList() {
       tableData2 += "<td>" + product.description + "</td>";
       tableData2 += "<td>" + await getCategoryNameByID(product.categoryid).then((category) => category) + "</td>";
       tableData2 += "<td>" + await getCampusNameById(product.sellcampusid).then((campus) => campus) + "</td>";
-      tableData2 += "<td>" + await getSellerNameById(product.seller_id).then((email) => email) + "</td>";
+      tableData2 += "<td>" + reformatEmail(await getSellerNameById(product.seller_id).then((email) => email)) + "</td>";
       tableData2 += "<td>" + reformatDate(product.createAT) + "</td>";
       tableData2 += "<td>" + reformatDate(product.expire) + "</td>";
-      tableData2 += "<td>" + product.quantity + "</td>";
       tableData2 += "<td>" + product.status + "</td>";
       tableData2 += "</tr>";
     }
@@ -67,6 +65,11 @@ function reformatDate(dateStr) {
 function reformatImage(image){
   const imageUrls = image.split(",");
   return imageUrls[0];
+}
+
+function reformatEmail(email){
+  const emailUrls = email.split("@");
+  return emailUrls[0] + "</br>" + "@" + emailUrls[1];
 }
 
 function acceptPosting(id, name, image, description, price, createAT, expire, quantity, categoryid, seller_id, buycampus_id, sellcampusid) {

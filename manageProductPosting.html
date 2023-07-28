@@ -44,7 +44,7 @@
               <span class="icon">
                 <ion-icon name="bag-outline"></ion-icon>
               </span>
-              <span class="title">Product Posting</span>
+              <span class="title">Bài đăng</span>
             </a>
           </li>
           <li id="manageOrderNav">
@@ -52,7 +52,7 @@
               <span class="icon">
                 <ion-icon name="bag-outline"></ion-icon>
               </span>
-              <span class="title">Order</span>
+              <span class="title">Đơn hàng</span>
             </a>
           </li>
           <li id="manageTransactionNav">
@@ -60,7 +60,7 @@
               <span class="icon">
                 <ion-icon name="wallet-outline"></ion-icon>
               </span>
-              <span class="title">Transaction</span>
+              <span class="title">Giao dịch</span>
             </a>
           </li>
           <li id="manageStudentNav">
@@ -68,7 +68,7 @@
               <span class="icon">
                 <ion-icon name="person-outline"></ion-icon>
               </span>
-              <span class="title">Student</span>
+              <span class="title">Sinh viên</span>
             </a>
           </li>
           <li id="manageStaffNav">
@@ -76,7 +76,7 @@
               <span class="icon">
                 <ion-icon name="person-outline"></ion-icon>
               </span>
-              <span class="title">Staff</span>
+              <span class="title">Nhân viên</span>
             </a>
           </li>
           <li id="manageProductMovingNav">
@@ -84,7 +84,7 @@
               <span class="icon">
                 <ion-icon name="bus-outline"></ion-icon>
               </span>
-              <span class="title">Product Moving</span>
+              <span class="title">Vận chuyển sản phẩm</span>
             </a>
           </li>
           <li id="manageCategoryNav">
@@ -92,7 +92,7 @@
               <span class="icon">
                 <ion-icon name="reorder-three-outline"></ion-icon>
               </span>
-              <span class="title">Category</span>
+              <span class="title">Phân loại</span>
             </a>
           </li>
           <li id="manageCampusNav">
@@ -108,7 +108,7 @@
               <span class="icon">
                 <ion-icon name="archive-outline"></ion-icon>
               </span>
-              <span class="title">Storage</span>
+              <span class="title">Kho</span>
             </a>
           </li>
           <li id="signoutNav">
@@ -116,7 +116,7 @@
               <span class="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
               </span>
-              <span class="title">Sign Out</span>
+              <span class="title">Đăng xuất</span>
             </a>
           </li>
         </ul>
@@ -127,37 +127,26 @@
           <div class="toggle">
             <ion-icon name="menu-outline"></ion-icon>
           </div>
-          <!-- <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search Here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div> -->
-          <div class="user">
-            <img src="" alt="" />
-          </div>
         </div>
         <div class="details">
           <div class="products">
             <div class="cardHeader">
-              <h2>Product Posting chờ duyệt</h2>
+              <h2>Bài đăng chờ duyệt</h2>
             </div>
 
             <table>
               <thead>
                 <tr>
                   <td>ID</td>
-                  <td>Name</td>
-                  <td>Image</td>
-                  <td>Price</td>
-                  <td>Description</td>
-                  <td>Category</td>
-                  <td>Store at</td>
-                  <td>Seller</td>
-                  <td>Create At</td>
-                  <td>Exprire Day</td>
-                  <td>Quantity</td>
-                  <td>Status</td>
+                  <td>Tên</td>
+                  <td>Ảnh</td>
+                  <td>Giá</td>
+                  <td>Mô tả</td>
+                  <td>Phân loại</td>
+                  <td>Lưu trữ</td>
+                  <td>Người bán</td>
+                  <td>Thời gian tạo</td>
+                  <td>Thời gian hết hạn</td>
                 </tr>
               </thead>
               <tbody id="product-list1"></tbody>
@@ -167,24 +156,23 @@
         <div class="details">
           <div class="products">
             <div class="cardHeader">
-              <h2>Danh sách Product</h2>
+              <h2>Bài đăng</h2>
             </div>
 
             <table>
               <thead>
                 <tr>
                   <td>ID</td>
-                  <td>Name</td>
-                  <td>Image</td>
-                  <td>Price</td>
-                  <td>Description</td>
-                  <td>Category</td>
-                  <td>Store at</td>
-                  <td>Seller</td>
-                  <td>Create At</td>
-                  <td>Exprire Day</td>
-                  <td>Quantity</td>
-                  <td>Status</td>
+                  <td>Tên</td>
+                  <td>Ảnh</td>
+                  <td>Giá</td>
+                  <td>Mô tả</td>
+                  <td>Phân loại</td>
+                  <td>Lưu trữ</td>
+                  <td>Người bán</td>
+                  <td>Thời gian tạo</td>
+                  <td>Thời gian hết hạn</td>
+                  <td>Trạng thái</td>
                 </tr>
               </thead>
               <tbody id="product-list2"></tbody>
@@ -196,7 +184,8 @@
     <script>
       var isLoggedIn = sessionStorage.getItem("isLoggedIn");
       var accRole = sessionStorage.getItem("role");
-      console.log(accRole);
+      var accID = sessionStorage.getItem("id");
+      console.log(accRole,accID);
       if (isLoggedIn === "true") {
         if (accRole === "Staff") {
           document.getElementById("homepageNav").style.display = "block";
