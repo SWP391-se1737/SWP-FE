@@ -10,12 +10,12 @@ async function getProductList() {
           tableData1 += "<tr>"
           tableData1 += "<td>" + product.id + "</td>";
           tableData1 += "<td>" + product.name + "</td>";
-          tableData1 += "<td>" + `<img src="${product.image}"/>` + "</td>";
+          tableData1 += "<td>" + `<img src="${reformatImage(product.image)}"/>` + "</td>";
           tableData1 += "<td>" + product.price + "</td>";
           tableData1 += "<td>" + product.description+"</td>";
           tableData1 += "<td>" + await getCategoryNameByID(product.categoryid).then((category) => category) + "</td>";
           tableData1 += "<td>" + await getCampusNameById(product.sellcampusid).then((campus) => campus) + "</td>";
-          tableData1 += "<td>" + await getSellerNameById(product.seller_id).then((email) => email) + "</td>";
+          tableData1 += "<td>" + reformatEmail(await getSellerNameById(product.seller_id).then((email) => email)) + "</td>";
           tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
           tableData1 += "<td>" + reformatDate(product.expire) + "</td>";
           tableData1 += "<td>" + product.status + "</td>";
@@ -26,12 +26,12 @@ async function getProductList() {
           tableData2 += "<tr>"
           tableData2 += "<td>" + product.id + "</td>";
           tableData2 += "<td>" + product.name + "</td>";
-          tableData2 += "<td>" + `<img src="${product.image}"/>` + "</td>";
+          tableData2 += "<td>" + `<img src="${reformatImage(product.image)}"/>` + "</td>";
           tableData2 += "<td>" + product.price + "</td>";
           tableData2 += "<td>" + product.description+"</td>";
           tableData2 += "<td>" + await getCategoryNameByID(product.categoryid).then((category) => category) + "</td>";
           tableData2 += "<td>" + await getCampusNameById(product.sellcampusid).then((campus) => campus) +"</td>";
-          tableData2 += "<td>" + await getSellerNameById(product.seller_id).then((email) => email) + "</td>";
+          tableData2 += "<td>" + reformatEmail(await getSellerNameById(product.seller_id).then((email) => email)) + "</td>";
           tableData2 += "<td>" + reformatDate(product.createAT) + "</td>";
           tableData2 += "<td>" + reformatDate(product.expire) + "</td>";
           tableData2 += "<td>" + product.status + "</td>";
@@ -53,6 +53,16 @@ async function getProductList() {
     var timeStr = dArr[1];         // string HH:mm:ss.SSSZ
     timeArr = timeStr.split(":");
     return timeArr[0] + ":" + timeArr[1] + "</br>" + dateArr[2] + "/" + dateArr[1] + "/" + dateArr[0];
+  }
+
+  function reformatImage(image){
+    const imageUrls = image.split(",");
+    return imageUrls[0];
+  }
+  
+  function reformatEmail(email){
+    const emailUrls = email.split("@");
+    return emailUrls[0] + "</br>" + "@" + emailUrls[1];
   }
   
   const getCategoryNameByID = async (categoryid) => {

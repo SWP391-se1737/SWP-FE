@@ -40,14 +40,14 @@ getProductMoving();
 
 function startMoving(fromLocation, toLocation, ArrivalDate, accid, MovingDate, movingId) {
     var MovingDate = getCurretDateTime();
-    axios.put('http://localhost:8080/productMoving/updateProductMovingByMovingId?MovingId=' + movingId, {
-        fromLocation: fromLocation,
-        toLocation: toLocation,
-        ArrivalDate: ArrivalDate,
-        shipperId: accid,
+    axios.put('http://localhost:8080/productMoving/updateProductMovingByMovingId/' + movingId, {
         MovingDate: MovingDate,
+        ArrivalDate: ArrivalDate,
+        status: "Đang chuyển",
         movingId: movingId,
-        status: "Đang chuyển"
+        shipperId: accid,
+        fromLocation: fromLocation,
+        toLocation: toLocation
     })
     getProductMoving();
     getProductMoving();
@@ -55,14 +55,14 @@ function startMoving(fromLocation, toLocation, ArrivalDate, accid, MovingDate, m
 
 function finishMoving(fromLocation, toLocation, ArrivalDate, shipperId, MovingDate, movingId) {
     var ArrivalDate = getCurretDateTime();
-    axios.put('http://localhost:8080/productMoving/updateProductMovingByMovingId?MovingId=' + movingId, {
-        fromLocation: fromLocation,
-        toLocation: toLocation,
-        ArrivalDate: ArrivalDate,
-        shipperId: shipperId,
+    axios.put('http://localhost:8080/productMoving/updateProductMovingByMovingId/' + movingId, {
         MovingDate: MovingDate,
+        ArrivalDate: ArrivalDate,
+        status: "Chuyển thành công",
         movingId: movingId,
-        status: "Đang chuyển"
+        shipperId: shipperId,
+        fromLocation: fromLocation,
+        toLocation: toLocation
     })
     getProductMoving();
     getProductMoving();
@@ -97,10 +97,19 @@ const getProductIDByMovingID = async (productID) => {
 };
 
 function getCurretDateTime() {
-    var today = new Date();
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date + ' ' + time;
+    var currentDate = new Date();
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    var hours = currentDate.getHours();
+    var minutes = currentDate.getMinutes();
+    var seconds = currentDate.getSeconds();
+
+    var dateTime = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')} ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+    console.log(dateTime);
     return dateTime;
 }
+
+getCurretDateTime();
 
