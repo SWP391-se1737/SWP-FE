@@ -44,6 +44,7 @@ body{
 .payment img{
     width: 400px;
     height: 100px;
+
 }
 .paymentLink img{
     width: 400px;
@@ -66,4 +67,7 @@ body{
   }
   .notice p{
     margin-top: -23px;
+  }
+  .payment button{
+    
   }

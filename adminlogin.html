@@ -14,57 +14,68 @@
   <body>
     <div class="header">
       <a class="title1" href="homepage.html">Flea Shop</a>
-    </div>
-    <div>
-      <div class="container">
+  </div>
+  <div>
+    <div class="container">
         <div class="login">
-          <p>Quản trị viên</p>
-          <form id="loginForm">
-            <input type="text" name="username" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
-            <button type="submit">Login</button>
-            <div id="errorMessage" class="errorMessage"></div>
-          </form>
+            <p>Quản trị viên</p>
+            <form id="loginForm" action="javascript:void(0)">
+                <input type="text" id="email" placeholder="Email" />
+                <input type="password" id="password" placeholder="Password" />
+                <button type="button" onclick="login()">Login</button>
+                <div id="errorMessage" class="errorMessage"></div>
+            </form>
         </div>
-
+    </div>
+</div>
 <script>
-  // Lắng nghe sự kiện submit form
-  document.getElementById("loginForm").addEventListener("submit", function (event) {
-    event.preventDefault(); // Ngăn chặn việc gửi yêu cầu mặc định của form
+  function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
 
-    // Lấy giá trị email và password từ form
-    var email = document.getElementsByName("username")[0].value;
-    var password = document.getElementsByName("password")[0].value;
+      // Clear any previous error message
+      errorMessage.textContent = '';
 
-    // Xây dựng chuỗi query parameters
-    var queryParams = new URLSearchParams();
-    queryParams.set("Email", email);
-    queryParams.set("Password", password);
-
-    // Gửi yêu cầu POST đến API với query parameters
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/Account/login?" + queryParams.toString(), true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-  // Xử lý phản hồi thành công từ API
-  var response = xhr.responseText;
-  // Hiển thị thông báo thành công
-  document.getElementById("errorMessage").innerText = response;
-  sessionStorage.setItem("role", "Admin");
-  window.location.href = "adminpage.html";
-}else {
-          // Xử lý phản hồi lỗi từ API
-          var errorResponse = JSON.parse(xhr.responseText);
-          // Hiển thị thông báo lỗi
-          document.getElementById("errorMessage").innerText = errorResponse;
-        }
-      }
-    };
-    xhr.send();
-  });
+      // Make an AJAX request to the login API
+      fetch('http://localhost:8080/Account/login?Email='+email+'&Password='+password , {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              Email: email,
+              Password: password,
+          }),
+      })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              return response.json();
+          })
+          .then((data) => {
+              if (data) {
+                  // Login successful
+                  if (data.role === 'Admin') {
+                      // Redirect to admin page or perform other actions
+                      sessionStorage.setItem("role","Admin");
+                      sessionStorage.setItem("id",data.id)
+                      window.location.href = 'adminpage.html'; // Change this to your admin page URL
+                  } else {
+                      errorMessage.textContent = 'You do not have admin privileges.';
+                  }
+              } else {
+                  errorMessage.textContent = 'Invalid email or password.';
+              }
+          })
+          .catch((error) => {
+              errorMessage.textContent = 'Invalid email or password.';
+              console.error('Error:', error);
+          });
+  }
 </script>
+
 
     </div>
   </body>
